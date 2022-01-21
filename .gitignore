@@ -11,6 +11,7 @@ build/
 
 # misc
 .DS_Store
+*.cql
 .env
 .env.local
 .env.development.local
