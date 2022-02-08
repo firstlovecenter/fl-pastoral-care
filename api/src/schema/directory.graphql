@@ -1,0 +1,569 @@
+##Church Types##
+interface Church @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID @id
+  name: String!
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  members: [Member]
+  memberSearch(key: String!, limit: Int!): [Member]
+  memberCount: Int
+  pastorCount: Int
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+}
+
+type GatheringService implements Church {
+  id: ID @id
+  name: String!
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  streams: [Stream] @relationship(type: "HAS", direction: OUT)
+  councils: [Council]
+    @cypher(
+      statement: "MATCH (this)-[:HAS*2]->(councils:Council) RETURN councils"
+    )
+  constituencies: [Constituency]
+    @cypher(
+      statement: "MATCH (this)-[:HAS*3]->(constituencies:Constituency) RETURN constituencies"
+    )
+  bacentas: [Bacenta]
+    @cypher(
+      statement: "MATCH (this)-[:HAS*4]->(bacenta:Bacenta) RETURN bacenta"
+    )
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN DISTINCT members
+      """
+    )
+  memberSearch(key: String!, limit: Int!): [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members LIMIT $limit
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  pastorCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Fellowship)<-[:BELONGS_TO]-(pastors:Member)-[:HAS_TITLE]->(:Title)
+      RETURN COUNT(DISTINCT pastors)
+      """
+    )
+  streamCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS]->(stream:Stream) RETURN COUNT(stream)"
+    )
+  councilCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*2]->(council:Council) RETURN COUNT(council)"
+    )
+  constituencyCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*3]->(constituency:Constituency) RETURN COUNT(constituency)"
+    )
+  bacentaCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*4]->(bacentas:Bacenta) RETURN COUNT(DISTINCT bacentas)"
+    )
+  fellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*5]->(fellowships:Fellowship) RETURN COUNT(DISTINCT fellowships)"
+    )
+  fellowshipSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(fellowship:Fellowship)
+      WHERE toLower(fellowship.name) CONTAINS toLower($key)
+      RETURN DISTINCT fellowship LIMIT $limit
+      """
+    )
+  activeFellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*5]->(fellowships:ActiveFellowship) RETURN COUNT(DISTINCT fellowships)"
+    )
+  bacentaSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(bacenta:Bacenta)
+      WHERE toLower(bacenta.name) CONTAINS toLower($key)
+      RETURN DISTINCT bacenta LIMIT $limit
+      """
+    )
+  admin: Member @relationship(type: "IS_ADMIN_FOR", direction: IN)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+}
+
+type Stream implements Church {
+  id: ID @id
+  name: String!
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  councils: [Council] @relationship(type: "HAS", direction: OUT)
+  gatheringService: GatheringService @relationship(type: "HAS", direction: IN)
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this:Stream)
+      RETURN DISTINCT toLower(this.name)
+      """
+    )
+  constituencies: [Constituency]
+    @cypher(
+      statement: "MATCH (this)-[:HAS*2]->(constituencies:Constituency) RETURN constituencies"
+    )
+  bacentas: [Bacenta]
+    @cypher(
+      statement: "MATCH (this)-[:HAS*3]->(bacenta:Bacenta) RETURN bacenta"
+    )
+
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN DISTINCT members
+      """
+    )
+  memberSearch(key: String!, limit: Int!): [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members LIMIT $limit
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  pastorCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(:Fellowship)<-[:BELONGS_TO]-(pastors:Member)-[:HAS_TITLE]->(:Title)
+      RETURN COUNT(DISTINCT pastors)
+      """
+    )
+  councilCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS]->(council:Council) RETURN COUNT(council)"
+    )
+  constituencyCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*2]->(constituency:Constituency) RETURN COUNT(constituency)"
+    )
+  bacentaCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*3]->(bacentas:Bacenta) RETURN COUNT(DISTINCT bacentas)"
+    )
+  bacentaSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(bacenta:Bacenta)
+      WHERE toLower(bacenta.name) CONTAINS toLower($key)
+      RETURN DISTINCT bacenta LIMIT $limit
+      """
+    )
+  fellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*4]->(fellowships:Fellowship) RETURN COUNT(DISTINCT fellowships)"
+    )
+  fellowshipSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(fellowship:Fellowship)
+      WHERE toLower(fellowship.name) CONTAINS toLower($key)
+      RETURN DISTINCT fellowship LIMIT $limit
+      """
+    )
+  activeFellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*4]->(fellowships:ActiveFellowship) RETURN COUNT(DISTINCT fellowships)"
+    )
+  admin: Member @relationship(type: "IS_ADMIN_FOR", direction: IN)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceRecord: [ServiceRecord]
+    @relationship(type: "HAS_SERVICE", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+}
+
+type Council implements Church {
+  id: ID @id
+  name: String!
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(stream:Stream)
+      RETURN DISTINCT toLower(stream.name)
+      """
+    )
+  stream: Stream @relationship(type: "HAS", direction: IN)
+  bacentas: [Bacenta]
+    @cypher(
+      statement: "MATCH (this)-[:HAS*1..2]->(bacenta:Bacenta) RETURN bacenta"
+    )
+  constituencies: [Constituency] @relationship(type: "HAS", direction: OUT)
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN DISTINCT members
+      """
+    )
+  memberSearch(key: String!, limit: Int!): [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members LIMIT $limit
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  pastorCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(pastors:Member)-[:HAS_TITLE]->(:Title)
+      RETURN COUNT(DISTINCT pastors)
+      """
+    )
+  constituencyCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS]->(constituency:Constituency) RETURN COUNT(constituency)"
+    )
+  bacentaCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*2]->(bacentas:Bacenta) RETURN COUNT(DISTINCT bacentas)"
+    )
+  bacentaSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(bacenta:Bacenta)
+      WHERE toLower(bacenta.name) CONTAINS toLower($key)
+      RETURN DISTINCT bacenta LIMIT $limit
+      """
+    )
+  fellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*3]->(fellowships:Fellowship) RETURN COUNT(DISTINCT fellowships)"
+    )
+  fellowshipSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(fellowship:Fellowship)
+      WHERE toLower(fellowship.name) CONTAINS toLower($key)
+      RETURN DISTINCT fellowship LIMIT $limit
+      """
+    )
+  activeFellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS*3]->(fellowships:ActiveFellowship) RETURN COUNT(DISTINCT fellowships)"
+    )
+  admin: Member @relationship(type: "IS_ADMIN_FOR", direction: IN)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceRecord: [ServiceRecord]
+    @relationship(type: "HAS_SERVICE", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+}
+
+type Constituency implements Church {
+  id: ID @id
+  name: String!
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS*2]-(stream:Stream)
+      RETURN DISTINCT toLower(stream.name)
+      """
+    )
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(fellowship:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN DISTINCT members
+      """
+    )
+  memberSearch(key: String!, limit: Int!): [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members LIMIT $limit
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(fellowship:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  pastorCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Fellowship)<-[:BELONGS_TO]-(pastors:Member)-[:HAS_TITLE]->(:Title)
+      RETURN COUNT(DISTINCT pastors)
+      """
+    )
+  fellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS]-(:Bacenta)-[:HAS]->(fellowship:Fellowship) RETURN COUNT(fellowship)"
+    )
+  fellowshipSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]-(:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      WHERE toLower(fellowship.name) CONTAINS toLower($key)
+      RETURN DISTINCT fellowship LIMIT $limit
+      """
+    )
+  bacentaSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)
+      WHERE toLower(bacenta.name) CONTAINS toLower($key)
+      RETURN DISTINCT bacenta LIMIT $limit
+      """
+    )
+  activeFellowshipCount: Int
+    @cypher(
+      statement: "MATCH (this)-[:HAS]-(:Bacenta)-[:HAS]->(fellowship:ActiveFellowship) RETURN COUNT(fellowship)"
+    )
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  sontas: [Sonta] @relationship(type: "HAS_SONTA", direction: OUT)
+  bacentas: [Bacenta] @relationship(type: "HAS", direction: OUT)
+  council: Council @relationship(type: "HAS", direction: IN)
+
+  #Arrivals in the Constituency
+  arrivalsAdmin: Member @relationship(type: "IS_ARRIVALS_FOR", direction: IN)
+
+  admin: Member @relationship(type: "IS_ADMIN_FOR", direction: IN)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceRecord: [ServiceRecord]
+    @relationship(type: "HAS_SERVICE", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+}
+
+type Bacenta implements Church {
+  id: ID @id
+  name: String!
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS*3]-(stream:Stream)
+      RETURN DISTINCT toLower(stream.name)
+      """
+    )
+  labels: [String]
+    @cypher(
+      statement: """
+      MATCH (this)
+      RETURN labels(this)
+      """
+    )
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(fellowship:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN DISTINCT members
+      """
+    )
+  memberSearch(key: String!, limit: Int!): [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members LIMIT $limit
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(fellowship:Fellowship)<-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  pastorCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Fellowship)<-[:BELONGS_TO]-(pastors:Member)-[:HAS_TITLE]->(:Title)
+      RETURN COUNT(DISTINCT pastors)
+      """
+    )
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  fellowships: [Fellowship] @relationship(type: "HAS", direction: OUT)
+  fellowshipSearch(key: String!, limit: Int!): [Fellowship]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(fellowship:Fellowship)
+      WHERE toLower(fellowship.name) CONTAINS toLower($key)
+      RETURN DISTINCT fellowship LIMIT $limit
+      """
+    )
+  constituency: Constituency @relationship(type: "HAS", direction: IN)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  services(limit: Int! = 4): [ServiceRecord]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(services:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT services, date
+      RETURN services ORDER BY date.date DESC LIMIT $limit
+      """
+    )
+
+  council: Council
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS*2]-(council:Council)
+      RETURN council
+      """
+    )
+}
+
+# Shared Units: Fellowship, Fellowship, Sonta
+type Fellowship implements Church {
+  id: ID @id
+  bankingCode: Int
+  name: String!
+  location: Point
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS*4]-(stream:Stream)
+      RETURN DISTINCT toLower(stream.name)
+      """
+    )
+  bacenta: Bacenta @relationship(type: "HAS", direction: IN)
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  members: [Member] @relationship(type: "BELONGS_TO", direction: IN)
+  memberSearch(key: String!, limit: Int!): [Member]
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members LIMIT $limit
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  pastorCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(pastors:Member)-[:HAS_TITLE]->(:Title)
+      RETURN COUNT(DISTINCT pastors)
+      """
+    )
+  meetingDay: ServiceDay @relationship(type: "MEETS_ON", direction: OUT)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  services(limit: Int!): [ServiceRecord]
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT records,date
+      RETURN records ORDER BY date.date DESC LIMIT $limit
+      """
+    )
+  labels: [String]
+    @cypher(
+      statement: """
+      MATCH (this)
+      RETURN labels(this)
+      """
+    )
+  council: Council
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS*3]-(council:Council)
+      RETURN council
+      """
+    )
+}
+
+# Member Church Leadership or ServantHood Details
+extend type Member {
+  leadsFellowship: [Fellowship] @relationship(type: "LEADS", direction: OUT)
+  leadsFellowshipCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS]->(fellowships:Fellowship)
+      RETURN COUNT(fellowships)
+      """
+    )
+  leadsBacenta: [Bacenta] @relationship(type: "LEADS", direction: OUT)
+  leadsBacentaCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS]->(bacentas:Bacenta)
+      RETURN COUNT(bacentas)
+      """
+    )
+  leadsMinistry: [Ministry] @relationship(type: "LEADS", direction: OUT)
+  leadsSonta: [Sonta] @relationship(type: "LEADS", direction: OUT)
+  leadsConstituency: [Constituency] @relationship(type: "LEADS", direction: OUT)
+  leadsConstituencyCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|IS_ADMIN_FOR]->(constituency:Constituency)
+      RETURN COUNT(DISTINCT constituency)
+      """
+    )
+  leadsCouncil: [Council] @relationship(type: "LEADS", direction: OUT)
+  leadsCouncilCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR]->(council:Council)
+      RETURN COUNT(DISTINCT council)
+      """
+    )
+  leadsStream: [Stream] @relationship(type: "LEADS", direction: OUT)
+  leadsStreamCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|IS_ADMIN_FOR]->(stream:Stream)
+      RETURN COUNT(DISTINCT stream)
+      """
+    )
+  leadsGatheringService: [GatheringService]
+    @relationship(type: "LEADS", direction: OUT)
+  leadsGatheringServiceCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR]->(gatheringService:GatheringService)
+      RETURN COUNT(DISTINCT gatheringService)
+      """
+    )
+  isAdminForGatheringService: [GatheringService]
+    @relationship(type: "IS_ADMIN_FOR", direction: OUT)
+  isAdminForStream: [Stream] @relationship(type: "IS_ADMIN_FOR", direction: OUT)
+  isAdminForCouncil: [Council]
+    @relationship(type: "IS_ADMIN_FOR", direction: OUT)
+  isAdminForConstituency: [Constituency]
+    @relationship(type: "IS_ADMIN_FOR", direction: OUT)
+
+  isAdminForCouncilArrivals: [Council]
+    @relationship(type: "IS_ARRIVALS_FOR", direction: OUT)
+  isAdminForConstituencyArrivals: [Constituency]
+    @relationship(type: "IS_ARRIVALS_FOR", direction: OUT)
+}
