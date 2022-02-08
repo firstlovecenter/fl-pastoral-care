@@ -1,0 +1,24 @@
+type Ministry {
+  id: ID @id
+  name: String
+  sonta: [Sonta] @relationship(type: "HAS", direction: OUT)
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  members: [Member] @relationship(type: "BELONGS_TO", direction: IN)
+}
+
+type Sonta {
+  id: ID @id
+  name: String
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS*4]-(stream:Stream)
+      RETURN DISTINCT toLower(stream.name)
+      """
+    )
+  leader: Member @relationship(type: "LEADS", direction: IN)
+  ministry: Ministry @relationship(type: "HAS", direction: IN)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  constituency: Constituency @relationship(type: "HAS", direction: IN)
+  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+}

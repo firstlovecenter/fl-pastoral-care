@@ -1,4 +1,4 @@
-type Member {
+type Member @auth(rules: [{ isAuthenticated: true }]) {
   id: ID!
   auth_id: String
   firstName: String #@search
@@ -9,4 +9,119 @@ type Member {
   phoneNumber: String
   whatsappNumber: String
   pictureUrl: String
+  gender: Gender @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
+  title: [Title]
+    @relationship(type: "HAS_TITLE", properties: "HasTitle", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  stream_name: String
+    @cypher(
+      statement: """
+      MATCH (this)-[:BELONGS_TO]->(:Fellowship)<-[:HAS*4]-(stream:Stream)
+      RETURN DISTINCT toLower(stream.name)
+      """
+    )
+  # Church Details
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members)
+      RETURN DISTINCT members
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  basontaMembers: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members)
+      MATCH (members)-[:BELONGS_TO]->(:Ministry)
+      RETURN DISTINCT members
+      """
+    )
+  basontaMembershipCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members)
+      MATCH (members)-[:BELONGS_TO]->(:Ministry)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  loggedHistory: [HistoryLog] @relationship(type: "LOGGED_BY", direction: IN)
+  fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Gender @auth(rules: [{ isAuthenticated: true }]) {
+  gender: String
+  members: [Member] @relationship(type: "HAS_GENDER", direction: IN)
+}
+
+type MaritalStatus @auth(rules: [{ isAuthenticated: true }]) {
+  status: String
+  members: [Member] @relationship(type: "HAS_MARITAL_STATUS", direction: IN)
+}
+
+type Occupation @auth(rules: [{ isAuthenticated: true }]) {
+  occupation: String
+  members: [Member] @relationship(type: "HAS_OCCUPATION", direction: IN)
+}
+
+type Title @auth(rules: [{ isAuthenticated: true }]) {
+  title: String! #Pastor, Reverend, Apostle, Bishop (Mother)
+  members: [Member]
+    @relationship(type: "HAS_TITLE", properties: "HasTitle", direction: IN)
+}
+
+interface HasTitle @relationshipProperties {
+  date: Date
+}
+
+type TimeGraph @auth(rules: [{ isAuthenticated: true }]) {
+  date: Date
+  memberDob: Member @relationship(type: "WAS_BORN_ON", direction: IN)
+  # titleAppointmentDate: Member @relationship(type: "APPOINTED_ON", direction: IN)
+  leaderHistoryStartDate: Member
+    @relationship(type: "LEADER_STARTED_ON", direction: OUT)
+  leaderHistoryEndDate: TimeGraph
+    @relationship(type: "LEADER_ENDED_ON", direction: OUT)
+  historyDate: Member @relationship(type: "RECORDED_ON", direction: OUT)
+  serviceDate: [ServiceRecord]
+    @relationship(type: "SERVICE_HELD_ON", direction: IN)
+}
+
+type HistoryLog @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID @id
+  timeStamp: DateTime
+  historyRecord: String #leader was transferred to
+  created_at: TimeGraph @relationship(type: "RECORDED_ON", direction: OUT)
+  loggedBy: Member @relationship(type: "LOGGED_BY", direction: OUT)
+  leaders: [Member] @relationship(type: "HAS_HISTORY", direction: IN)
+  fellowship: [Fellowship] @relationship(type: "HAS_HISTORY", direction: IN)
+  bacenta: [Bacenta] @relationship(type: "HAS_HISTORY", direction: IN)
+  constituency: [Constituency] @relationship(type: "HAS_HISTORY", direction: IN)
+  sonta: [Sonta] @relationship(type: "HAS_HISTORY", direction: IN)
+}
+
+
+#Query Definitions
+type Query {
+  currentUser(id: ID): Member
+    @cypher(
+      statement: "MATCH (member:Member {auth_id: $auth.jwt.sub}) RETURN member"
+    )
+    @auth(rules: [{ isAuthenticated: true }])
+
+  memberByEmail(email: String!): Member
+    @cypher(
+      statement: "MATCH (member:Member {email:$email}) RETURN member LIMIT 1"
+    )
 }

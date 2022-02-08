@@ -1,0 +1,50 @@
+type ServiceLog @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID
+  historyRecord: String #leader was transferred to
+  created_at: TimeGraph @relationship(type: "RECORDED_ON", direction: OUT)
+  loggedBy: Member @relationship(type: "LOGGED_BY", direction: OUT)
+  serviceRecords: [ServiceRecord]
+    @relationship(type: "HAS_SERVICE", direction: OUT)
+  leaders: [Member] @relationship(type: "HAS_HISTORY", direction: IN)
+  fellowship: [Fellowship] @relationship(type: "HAS_HISTORY", direction: IN)
+  bacenta: [Bacenta] @relationship(type: "HAS_HISTORY", direction: IN)
+  # bacentaFellowshipRecords(bacentaId: ID!): [BacentaFellowshipServiceRecords]
+  constituency: [Constituency] @relationship(type: "HAS_HISTORY", direction: IN)
+  council: [Council] @relationship(type: "HAS_HISTORY", direction: IN)
+  sonta: [Sonta] @relationship(type: "HAS_HISTORY", direction: IN)
+}
+
+type ServiceDay @auth(rules: [{ isAuthenticated: true }]) {
+  day: String!
+  dayNumber: Int
+  fellowship: Fellowship @relationship(type: "MEETS_ON", direction: IN)
+}
+
+interface Record {
+  id: ID!
+  created_at: Date!
+  created_by: Member! @relationship(type: "LOGGED_BY", direction: OUT)
+}
+
+type ServiceRecord implements Record @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  created_at: Date!
+  created_by: Member!
+  serviceDate: TimeGraph @relationship(type: "SERVICE_HELD_ON", direction: OUT)
+  week: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      RETURN date(date.date).week
+      """
+    )
+  attendance: Int
+  income: Float
+  foreignCurrency: String
+  servicePicture: String
+  treasurerSelfie: String
+  bankingSlip: String
+  treasurers: [Member]! @relationship(type: "WAS_TREASURER_FOR", direction: IN)
+  serviceLog: ServiceLog @relationship(type: "HAS_SERVICE", direction: IN)
+  noServiceReason: String
+}
