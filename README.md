@@ -1,216 +1,42 @@
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://grandstack.io/deploy-starter-netlify) [![Deploy to Vercel](https://vercel.com/button)](https://grandstack.io/deploy-starter-vercel) [![Provision Neo4j](https://grandstack.io/img/provision-neo4j.png)](https://sandbox.neo4j.com/?usecase=blank-sandbox)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3fc1e26f-bccb-4196-ba57-705d3b09bb82/deploy-status)](https://app.netlify.com/sites/flcadmin/deploys)
 
-# GRANDstack Starter
+This project was built using [GRANDstack](https://grandstack.io) (GraphQL, React, Apollo, Neo4j Database) application.
+<br/><br/>
 
-```
-npx create-grandstack-app myNewApp
-```
+# [![First Love Logo](/img/fl-logo.png)](https://www.firstlovecenter.com) Pastoral Care Application
 
-This project is a starter for building a [GRANDstack](https://grandstack.io) (GraphQL, React, Apollo, Neo4j Database) application. There are two components to the starter, the web frontend application (in React and Angular flavors) and the API app (GraphQL server).
+Please find attached the rough UI Design by clicking this link.
+https://xd.adobe.com/view/f5d8900f-8d05-47b4-946e-4d7f315ae6a2-a08b/
 
-The starter represents a **business reviews dashboard**. You need to adjust the GraphQL schema, the seed data, database index creation, and the UI components for your use-case.
+## Definition of Key Terms
 
-[![Hands On With The GRANDstack Starter](http://img.youtube.com/vi/rPC71lUhK_I/0.jpg)](http://www.youtube.com/watch?v=1JLs166lPcA 'Hands On With The GRANDstack Starter')
+**Bacenta Leader**: A leader in charge of a smaller weekly fellowship. This person will also be accountable for tracking the attendance of the members who are assigned to him.
+**CO/Constituency Overseer**: A CO has a number of Bacenta Leaders that he oversees in a designated location which is known as a constituency. He will need to be able to monitor the work of Bacenta Leaders under him.
+**Bishop**:** A Bishop Oversees a number of constituencies. Because of this he will also need to be able to monitor the work of constituency overseers as well as Bacenta Leaders under him.
+**Resident Bishop**: Our senior pastor in charge of the church. He oversees all bishops, constituency overseers and Bacenta Leaders in the church.
+**Sheep Seeking Admin**: This is a type of administrator who is responsible for the registration of members. They should also maintain the ability to delete members.
+**Super Admin**: This admin has the ability to create accounts for the different types of leaders (bishops, COs, Bacenta Leaders, Sheep Seeking Admin), as well as updating when there are changes.
 
-_Hands On With The GRANDstack Starter Video_
 
-## Quickstart
+## Pastoral Responsibilities
+Our church pastoral care runs on four basic activities that a pastor is supposed to do for his assigned members. This is in the form of an acronym PVCI
+Prayer, Visitation, Counselling, Interaction
 
-The easiest way to get started with the GRANDstack Starter is to create a Neo4j Sandbox instance and use the `create-grandstack-app` command line tool.
+## Pastoral Cycles
+Each leader is supposed to routinely perform his duties of PVCI during what we call a pastoral cycle.
+For a Bacenta leader his pastoral cycle resets **every month**. This means that he is supposed to pray for, visit, counsel and interact (through phone calls) for each of his members every month.
+The pastoral cycle for a Bacenta leader is **one month**.
+The pastoral cycle for a constituency overseer is **3 months**. The pastoral cycle for a bishop is **6 months**.
 
-(If you have a running Neo4j database on localhost via Neo4j Desktop or a Neo4j server installation, change the password in `api/.env`)
 
-### 1. Create A Neo4j Instance
+## What We Expect to Achieve Using the Application
 
-#### Option :one: - Sandbox
-
-[Neo4j Sandbox](https://neo4j.com/sandbox) allows you to create a free hosted Neo4j instance private to you that can be used for development.
-
-After signing in to Neo4j Sandbox, click the `+ New Project` button and select the "Blank Sandbox" option. In the next step we'll use the connection credentials from the "Connection details" tab to connect our GraphQL API to this Neo4j instance.
-
-![Neo4j Sandbox connection details](img/neo4j-sandbox.png)
-
-#### Option :two: - Desktop
-
-If you instead would like to use [Neo4j Desktop](https://neo4j.com/download/). The process will be almost the same with a minor detour. Install Neo4j Desktop for your chosen OS and then make a new blank graph for your project. It will require you to put in a password and username. Remember those.
-
-Next you need to go to open the manage screen from the options in the 3 dot stack menu
-
-![New desktop graph, manage tab](img/desktop-new-graph.png)
-
-And install the apoc plugin, green button at the top of the list.
-
-![Plugins](img/apoc-install.png)
-
-After that you can return to setting up your app with the credentials from the prior steps.
-
-### 2. Run the `create-grandstack-app` CLI
-
-```
-npx create-grandstack-app myNewApp
-```
-
-or with Yarn
-
-```
-yarn create grandstack-app myNewApp
-```
-
-![create grandstack app output](img/create-grandstack-app.png)
-
-This will create a new directory `myNewApp`, download the latest release of the GRANDstack Starter, install dependencies and prompt for your connection credentials for Neo4j to connect to the GraphQL API.
-
-### 3. Seed the database (optional)
-
-Make sure your application is running locally with `npm start` or `yarn start`, open another terminal and run
-
-```
-npm run seedDb
-```
-
-or with Yarn
-
-```
-yarn run seedDb
-```
-
-### 4. Open In Browser
-
-![Grandstack app running in browser](img/grandstack-app.png)
-
-## <a name="overview"></a> Overview
-
-The GRANDstack Starter is a monorepo that includes a GraphQL API application and client web applications for React (default) and Angular for a business reviews dashboard.
-
-### `/` - Project Root
-
-The root directory contains some global configuration and scripts:
-
-- `npm run start` and `npm run build`
-- ESLint (.eslintrc.json) for code linting
-- Prettier (.prettierrc.json) for code formatting
-- Git hooks for applying formatting on commit
-
-### [`/api`](./api)
-
-![](img/graphql-playground.png)
-
-This directory contains the GraphQL API application using Apollo Server and the Neo4j GraphQL Library.
-
-- Change environment variable settings in `.env`:
-
-```
-# Use this file to set environment variables with credentials and configuration options
-# This file is provided as an example and should be replaced with your own values
-# You probably don't want to check this into version control!
-
-NEO4J_URI=bolt://localhost:7687
-NEO4J_USER=neo4j
-NEO4J_PASSWORD=letmein
-
-# Uncomment this line to enable encrypted driver connection for Neo4j
-#NEO4J_ENCRYPTED=true
-
-# Uncomment this line to specify a specific Neo4j database (v4.x+ only)
-#NEO4J_DATABASE=neo4j
-
-GRAPHQL_SERVER_HOST=0.0.0.0
-GRAPHQL_SERVER_PORT=4001
-GRAPHQL_SERVER_PATH=/graphql
-
-```
-
-### [`/web-react`](./web-react)
-
-![](img/grandstack-app.png)
-
-The frontend React web application is found in this directory.
-
-It includes:
-
-- Material UI
-- React router
-- Apollo Client / React Hooks
-- Create React App
-
-### [`/web-angular`](./web-angular)
-
-![](web-angular/img/angular-ui.jpg)
-
-A UI built with [Angular](https://angular.io), [Apollo](https://www.apollographql.com/docs/angular/) and the [Clarity Design System](https://clarity.design) is also available.
-
-_Start the Angular UI server_
-
-```
-cd ./web-angular && npm start
-```
-
-### [`/mobile_client_flutter`](./mobile_client_flutter)
-
-![](img/grandstack-flutter.png)
-
-A mobile client built with [Flutter](https://flutter.dev) which supports Android, iOS, and web. See the [README](./mobile_client_flutter/README.md) for detailed setup instructions.
-
-```
-cd ./mobile_client_flutter && flutter run
-```
-
-### [`/web-react-ts`](./web-react-ts)
-
-A UI built with [CRA](https://reactjs.org/docs/create-a-new-react-app.html)
-
-_Start the React dev server_
-
-```
-cd ./web-react-ts && npm start
-```
-
-## Deployment
-
-### Netlify
-
-This monorepo can be deployed to Netlify. The frontend application will be served over Netlify's CDN and the GraphQL API will be provisioned as a serverless GraphQL API lambda function deployed to AWS (via Netlify). A netlify.toml file is included with the necessary build configurations. The following environment variables must be set in Netlify (either via the Netlify web UI or via the command line tool)
-
-```
-NEO4J_URI
-NEO4J_USER
-NEO4J_PASSWORD
-```
-
-See the "Hands On With The GRANDStack Starter" video linked at the beginning of this README for a walkthrough of deploying to Netlify.
-
-### Vercel
-
-Vercel can be used with monorepos such as grand-stack-starter. [`vercel.json`](https://github.com/grand-stack/grand-stack-starter/blob/master/vercel.json) defines the configuration for deploying with Vercel.
-
-1. get [vercel cli](https://vercel.com/download)
-2. Set the vercel secrets for your Neo4j instance:
-
-```
-vercel secret add grand_stack_starter_neo4j_uri bolt://<YOUR_NEO4J_INSTANCE_HERE>
-vercel secret add grand_stack_starter_neo4j_user <YOUR_DATABASE_USERNAME_HERE>
-vercel secret add grand_stack_starter_neo4j_password <YOUR_DATABASE_USER_PASSWORD_HERE>
-```
-
-3. Run `vercel`
-
-## Docker Compose
-
-You can quickly start via:
-
-```
-docker-compose up -d
-```
-
-If you want to load the example DB after the services have been started:
-
-```
-docker-compose run api npm run seedDb
-```
-
-See [the project releases](https://github.com/grand-stack/grand-stack-starter/releases) for the changelog.
-
-You can find instructions for other ways to use Neo4j (Neo4j Desktop, Neo4j Aura, and other cloud services) in the [Neo4j directory README.](./neo4j)
-
-This project is licensed under the Apache License v2.
-Copyright (c) 2020 Neo4j, Inc.
+1. Sheep seeking admins should be able to register members and assign them to bacentas which will connect them to leaders.
+2. Bacenta Leaders should receive a notification at the end of each week alerting them about their newly assigned members which should then go into a special list called “First Timers and New Converts”. Each bacenta leader should have ticked this by the end of the week.
+3. Every Bacenta leader should be able to tick attendances for each member assigned to them both on Sunday and during the weekday fellowship meeting.
+4. Each member should be classified based on their attendance record. If a member is regular in church, they should be classified as sheep. If they miss four consecutive weeks, they should be classified as goats, missing 8 consecutive weeks will change their classification to deer.
+5. All pastoral duties will apply only for sheep and goats. Deer will be left out of everything.
+6. There should be a large timer showing the countdown for each individuals pastoral cycle.
+7. The leaders (bishops, COs, Bacenta Leaders) should be able to tick for each of their pastoral care duties as well as add a comment (256 max character limit) for each interaction with a member. This history should only be viewed by the bishop.
+8. At the end of each pastoral cycle, emails should be sent to all supervisors (bishops, constituency overseers) showing a summary of the work of the leaders under them.
+9. Super Admin should be able to create accounts and delete them for each type of user. If possible account creation should be automatically done.
