@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "./node_modules/.bin/nodemon --watch src --ext js,graphql --exec babel-node  src/index.js",
-    "build": "babel src --out-dir build && shx cp .env build 2>/dev/null || : && shx cp src/schema.graphql build",
-    "now-build": "babel src --out-dir build && shx cp src/schema.graphql build",
+    "start:dev": "./node_modules/.bin/nodemon --watch src --ext js,graphql --delay 3 --exec babel-node  src/index.js",
+    "build": "babel src --out-dir build && shx cp .env build 2>/dev/null || : && shx cp -r src/schema build",
+    "now-build": "babel src --out-dir build && shx cp -r src/schema build",
     "start": "npm run build && node build/index.js",
     "seedDb": "./node_modules/.bin/babel-node src/seed/seed-db.js"
   },
@@ -37,7 +37,7 @@
     "babel-plugin-auto-import": "^1.0.5",
     "babel-plugin-module-resolver": "^4.0.0",
     "cross-env": "^7.0.2",
-    "nodemon": "^1.19.1",
+    "nodemon": "^2.0.15",
     "shx": "^0.3.2"
   }
 }

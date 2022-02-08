@@ -1,9 +1,10 @@
-import { typeDefs } from './graphql-schema'
+/* eslint-disable import/no-extraneous-dependencies */
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 import neo4j from 'neo4j-driver'
 import { Neo4jGraphQL } from '@neo4j/graphql'
 import dotenv from 'dotenv'
+import typeDefs from './schema/graphql-schema'
 
 // set environment variables from .env
 dotenv.config()
@@ -39,6 +40,11 @@ const neoSchema = new Neo4jGraphQL({ typeDefs, driver })
  * generated resolvers to connect to the database.
  */
 
+// Specify host, port and path for GraphQL endpoint
+const port = process.env.GRAPHQL_SERVER_PORT || 4001
+const path = process.env.GRAPHQL_SERVER_PATH || '/graphql'
+const host = process.env.GRAPHQL_SERVER_HOST || '0.0.0.0'
+
 const startServer = async () => {
   const server = new ApolloServer({
     context: ({ req }) => req,
@@ -49,11 +55,6 @@ const startServer = async () => {
   await server.start()
   server.applyMiddleware({ app, path })
 }
-
-// Specify host, port and path for GraphQL endpoint
-const port = process.env.GRAPHQL_SERVER_PORT || 4001
-const path = process.env.GRAPHQL_SERVER_PATH || '/graphql'
-const host = process.env.GRAPHQL_SERVER_HOST || '0.0.0.0'
 
 /*
  * Optionally, apply Express middleware for authentication, etc

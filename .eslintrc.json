@@ -5,6 +5,7 @@
     "node": true
   },
   "extends": [
+    "airbnb",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
@@ -22,7 +23,8 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    "react/prop-types": "off"
+    "prettier/prettier": "warn",
+    "react/prop-types": "off",
+    "no-console": "warn"
   }
 }

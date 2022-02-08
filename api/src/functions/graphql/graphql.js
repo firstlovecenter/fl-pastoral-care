@@ -1,12 +1,15 @@
 // This module can be used to serve the GraphQL endpoint
 // as a lambda function
 
-const { ApolloServer } = require('apollo-server-lambda')
 import { Neo4jGraphQL } from '@neo4j/graphql'
+
+const { ApolloServer } = require('apollo-server-lambda')
+
 const neo4j = require('neo4j-driver')
 
 // This module is copied during the build step
 // Be sure to run `npm run build`
+// eslint-disable-next-line
 const { typeDefs } = require('./graphql-schema')
 
 const driver = neo4j.driver(
@@ -26,6 +29,7 @@ const server = new ApolloServer({
 
 const apolloHandler = server.createHandler()
 
+// eslint-disable-next-line import/prefer-default-export
 export const handler = (event, context, ...args) => {
   return apolloHandler(
     {

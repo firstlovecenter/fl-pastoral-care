@@ -6,8 +6,10 @@ import path from 'path'
  * fallback to schema.graphql if GRAPHQL_SCHEMA environment variable is not set
  */
 
-export const typeDefs = fs
+const schema = fs
   .readFileSync(
     process.env.GRAPHQL_SCHEMA || path.join(__dirname, 'schema.graphql')
   )
   .toString('utf-8')
+
+export default schema
