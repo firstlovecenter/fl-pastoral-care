@@ -10,7 +10,8 @@ const neo4j = require('neo4j-driver')
 // This module is copied during the build step
 // Be sure to run `npm run build`
 // eslint-disable-next-line
-const { typeDefs } = require('./graphql-schema')
+const { typeDefs } = require('./schema/graphql-schema')
+// const { resolvers } = require('../../resolvers/resolvers.js')
 
 const driver = neo4j.driver(
   process.env.NEO4J_URI || 'bolt://localhost:7687',
