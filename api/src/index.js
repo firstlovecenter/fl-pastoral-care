@@ -31,8 +31,17 @@ const driver = neo4j.driver(
  * https://neo4j.com/docs/graphql-manual/current/
  */
 
-const neoSchema = new Neo4jGraphQL({ typeDefs, driver })
-
+const neoSchema = new Neo4jGraphQL({
+  typeDefs,
+  // resolvers: { ...resolvers, ...serviceResolvers, ...arrivalsResolvers },
+  driver,
+  config: {
+    jwt: {
+      secret: process.env.JWT_SECRET,
+      rolesPath: 'https://flcadmin\\.netlify\\.app/roles',
+    },
+  },
+})
 /*
  * Create a new ApolloServer instance, serving the GraphQL schema
  * created using makeAugmentedSchema above and injecting the Neo4j driver
