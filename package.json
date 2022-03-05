@@ -2,6 +2,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
+    "@types/styled-components": "^5.1.24",
     "concurrently": "^6.5.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.19.0",
@@ -52,5 +53,9 @@
     "url": "git://github.com/firstlovecenter/fl-pastoral-care.git"
   },
   "license": "Apache-2.0",
-  "version": "0.3.7"
+  "version": "0.3.7",
+  "dependencies": {
+    "@types/react": "^17.0.39",
+    "styled-components": "^5.3.3"
+  }
 }
