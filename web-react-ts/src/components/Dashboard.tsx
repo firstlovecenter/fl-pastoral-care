@@ -1,7 +1,13 @@
-import React from 'react'
+import { Container } from '@chakra-ui/react'
+import Login from './Login'
 
 const Dashboard = () => {
-  return <div>Dashboard</div>
+  return (
+    <Container>
+      Dashboard
+      <Login />
+    </Container>
+  )
 }
 
 export default Dashboard
