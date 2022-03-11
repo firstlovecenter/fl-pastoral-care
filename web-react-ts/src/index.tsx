@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import { EnvProvider } from './context/env.context'
 
-const uri = process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:4001/graphql'
+const uri = 'http://localhost:4001/graphql'
 const cache = new InMemoryCache()
 
 const client = new ApolloClient({
