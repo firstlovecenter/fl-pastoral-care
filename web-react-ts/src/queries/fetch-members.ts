@@ -1,8 +1,8 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const GET_MEMBERS = gql`
   {
-    members(where: { email: "londonfldata@gmail.com" }) {
+    members(where: { email: "jaedagy@gmail.com" }) {
       members {
         firstName
         lastName

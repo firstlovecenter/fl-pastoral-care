@@ -1,30 +1,82 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { ChakraProvider } from '@chakra-ui/react'
 import { EnvProvider } from './context/env.context'
+import { useAuth0 } from '@auth0/auth0-react'
+import { Auth0ProviderWithHistory } from './auth0-provider-with-history'
 
-const uri = 'http://localhost:4001/graphql'
-const cache = new InMemoryCache()
+const AppWithSetUp = () => {
+  const [accessToken, setAccessToken] = useState('')
+  const { getAccessTokenSilently } = useAuth0()
 
-const client = new ApolloClient({
-  uri,
-  cache,
-})
+  const getAccessToken = useCallback(async () => {
+    try {
+      const token = await getAccessTokenSilently({
+        audience: 'https://flcadmin.netlify.app/graphql',
+        scope: 'read:current_user',
+      })
+      console.log(token)
+
+      setAccessToken(token)
+      sessionStorage.setItem('token', token)
+    } catch (err) {
+      // eslint-disable-next-line
+      console.error(err)
+    }
+  }, [getAccessTokenSilently])
+
+  useEffect(() => {
+    getAccessToken()
+  }, [getAccessToken])
+
+  const httpLink = createHttpLink({
+    uri: 'http://localhost:4001/graphql', //process.env.REACT_APP_GRAPHQL_URI || '/graphql',
+  })
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = sessionStorage.getItem('token') || accessToken
+
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  })
+
+  const client = new ApolloClient({
+    uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  })
+
+  return (
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <ChakraProvider>
-        <EnvProvider>
-          <App />
-        </EnvProvider>
-      </ChakraProvider>
-    </ApolloProvider>
+    <ChakraProvider>
+      <EnvProvider>
+        <Router>
+          <Auth0ProviderWithHistory>
+            <AppWithSetUp />
+          </Auth0ProviderWithHistory>
+        </Router>
+      </EnvProvider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
