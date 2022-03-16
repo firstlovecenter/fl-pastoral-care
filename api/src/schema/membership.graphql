@@ -1,0 +1,84 @@
+##Church Types##
+interface Person @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  auth_id: String
+  firstName: String #@search
+  middleName: String
+  lastName: String
+  fullName: String @ignore
+  email: String
+  phoneNumber: String
+  whatsappNumber: String
+  pictureUrl: String
+  gender: Gender @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Sheep implements Person {
+  id: ID!
+  auth_id: String
+  firstName: String #@search
+  middleName: String
+  lastName: String
+  fullName: String @ignore
+  email: String
+  phoneNumber: String
+  whatsappNumber: String
+  pictureUrl: String
+  gender: Gender @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Goat implements Person {
+  id: ID!
+  auth_id: String
+  firstName: String #@search
+  middleName: String
+  lastName: String
+  fullName: String @ignore
+  email: String
+  phoneNumber: String
+  whatsappNumber: String
+  pictureUrl: String
+  gender: Gender @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Deer implements Person {
+  id: ID!
+  auth_id: String
+  firstName: String #@search
+  middleName: String
+  lastName: String
+  fullName: String @ignore
+  email: String
+  phoneNumber: String
+  whatsappNumber: String
+  pictureUrl: String
+  gender: Gender @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
+}

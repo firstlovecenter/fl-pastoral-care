@@ -1,4 +1,4 @@
-type Member @auth(rules: [{ isAuthenticated: true }]) {
+type Member implements Person @auth(rules: [{ isAuthenticated: true }]) {
   id: ID!
   auth_id: String
   firstName: String #@search
@@ -110,7 +110,6 @@ type HistoryLog @auth(rules: [{ isAuthenticated: true }]) {
   constituency: [Constituency] @relationship(type: "HAS_HISTORY", direction: IN)
   sonta: [Sonta] @relationship(type: "HAS_HISTORY", direction: IN)
 }
-
 
 #Query Definitions
 type Query {

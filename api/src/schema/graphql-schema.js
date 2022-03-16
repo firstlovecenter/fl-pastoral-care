@@ -13,22 +13,19 @@ const schema = fs
   .toString('utf-8')
 
 const directory = fs
-  .readFileSync(
-    process.env.GRAPHQL_SCHEMA || path.join(__dirname, 'directory.graphql')
-  )
+  .readFileSync(path.join(__dirname, 'directory.graphql'))
   .toString('utf-8')
 
 const directorySonta = fs
-  .readFileSync(
-    process.env.GRAPHQL_SCHEMA ||
-      path.join(__dirname, 'directory-sonta.graphql')
-  )
+  .readFileSync(path.join(__dirname, 'directory-sonta.graphql'))
   .toString('utf-8')
 
 const services = fs
-  .readFileSync(
-    process.env.GRAPHQL_SCHEMA || path.join(__dirname, 'services.graphql')
-  )
+  .readFileSync(path.join(__dirname, 'services.graphql'))
   .toString('utf-8')
 
-export default `${schema} ${directory} ${directorySonta} ${services}`
+const membership = fs
+  .readFileSync(path.join(__dirname, 'membership.graphql'))
+  .toString('utf-8')
+
+export default `${schema} ${directory} ${directorySonta} ${services} ${membership}`
