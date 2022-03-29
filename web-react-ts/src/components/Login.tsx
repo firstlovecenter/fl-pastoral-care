@@ -1,29 +1,23 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Button } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
-import { GET_MEMBERS } from '../queries/fetch-members'
-import { member, members } from '../queries/member-types'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const { loading, error, data } = useQuery(GET_MEMBERS)
-  console.log(data)
+  let navigate = useNavigate()
 
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0()
+  function navigateDash() {
+    navigate('/landing-page')
+  }
 
-  if (loading) return <h1>Loading...</h1>
-  if (error) return <h1>Something went wrong! {error.message}</h1>
-
-  // data?.getMembers.map((member: member) => <h1> {member.firstName}</h1>)
+  const { loginWithRedirect, isAuthenticated } = useAuth0()
+  console.log('test', isAuthenticated)
 
   return (
     <div>
       {!isAuthenticated ? (
         <Button onClick={() => loginWithRedirect()}>Login</Button>
       ) : (
-        <>
-          <h1>{user?.email}</h1>
-          <Button onClick={() => logout()}>Log Out</Button>
-        </>
+        { navigateDash }
       )}
     </div>
   )

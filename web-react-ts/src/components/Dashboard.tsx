@@ -3,8 +3,10 @@ import Login from './Login'
 import CloudinaryImage from './CloudinaryImage'
 
 const Dashboard = () => {
+  console.log('Dashboard')
+
   return (
-    <Container>
+    <Container style={{ backgroundColor: 'black' }}>
       Dashboard
       <CloudinaryImage />
       <Login />
