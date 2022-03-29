@@ -22,7 +22,7 @@ const AppWithSetUp = () => {
         audience: 'https://flcadmin.netlify.app/graphql',
         scope: 'read:current_user',
       })
-      console.log(token)
+      // console.log(token)
 
       setAccessToken(token)
       sessionStorage.setItem('token', token)
