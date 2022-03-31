@@ -21,6 +21,7 @@
     "apollo-server-lambda": "^3.5.0",
     "csv-parse": "^5.0.3",
     "dotenv": "^10.0.0",
+    "graphql": "^16.3.0",
     "neo4j-driver": "^4.3.1",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1"

@@ -76,5 +76,6 @@ const startServer = async () => {
 startServer()
 
 app.listen({ host, port, path }, () => {
+  // eslint-disable-next-line
   console.log(`GraphQL server ready at http://${host}:${port}${path}`)
 })
