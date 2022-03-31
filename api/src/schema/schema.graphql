@@ -4,7 +4,7 @@ type Member implements Person @auth(rules: [{ isAuthenticated: true }]) {
   firstName: String #@search
   middleName: String
   lastName: String
-  fullName: String @ignore
+  fullName: String @computed
   email: String
   phoneNumber: String
   whatsappNumber: String
@@ -13,7 +13,7 @@ type Member implements Person @auth(rules: [{ isAuthenticated: true }]) {
   maritalStatus: MaritalStatus
     @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
   dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
-  title: [Title]
+  title: [Title!]!
     @relationship(type: "HAS_TITLE", properties: "HasTitle", direction: OUT)
   ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
   occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
@@ -55,29 +55,29 @@ type Member implements Person @auth(rules: [{ isAuthenticated: true }]) {
       RETURN COUNT(DISTINCT members)
       """
     )
-  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
-  loggedHistory: [HistoryLog] @relationship(type: "LOGGED_BY", direction: IN)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  loggedHistory: [HistoryLog!]! @relationship(type: "LOGGED_BY", direction: IN)
   fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
 }
 
 type Gender @auth(rules: [{ isAuthenticated: true }]) {
   gender: String
-  members: [Member] @relationship(type: "HAS_GENDER", direction: IN)
+  members: [Member!]! @relationship(type: "HAS_GENDER", direction: IN)
 }
 
 type MaritalStatus @auth(rules: [{ isAuthenticated: true }]) {
   status: String
-  members: [Member] @relationship(type: "HAS_MARITAL_STATUS", direction: IN)
+  members: [Member!]! @relationship(type: "HAS_MARITAL_STATUS", direction: IN)
 }
 
 type Occupation @auth(rules: [{ isAuthenticated: true }]) {
   occupation: String
-  members: [Member] @relationship(type: "HAS_OCCUPATION", direction: IN)
+  members: [Member!]! @relationship(type: "HAS_OCCUPATION", direction: IN)
 }
 
 type Title @auth(rules: [{ isAuthenticated: true }]) {
   title: String! #Pastor, Reverend, Apostle, Bishop (Mother)
-  members: [Member]
+  members: [Member!]!
     @relationship(type: "HAS_TITLE", properties: "HasTitle", direction: IN)
 }
 
@@ -94,7 +94,7 @@ type TimeGraph @auth(rules: [{ isAuthenticated: true }]) {
   leaderHistoryEndDate: TimeGraph
     @relationship(type: "LEADER_ENDED_ON", direction: OUT)
   historyDate: Member @relationship(type: "RECORDED_ON", direction: OUT)
-  serviceDate: [ServiceRecord]
+  serviceDate: [ServiceRecord!]!
     @relationship(type: "SERVICE_HELD_ON", direction: IN)
 }
 
@@ -104,11 +104,12 @@ type HistoryLog @auth(rules: [{ isAuthenticated: true }]) {
   historyRecord: String #leader was transferred to
   created_at: TimeGraph @relationship(type: "RECORDED_ON", direction: OUT)
   loggedBy: Member @relationship(type: "LOGGED_BY", direction: OUT)
-  leaders: [Member] @relationship(type: "HAS_HISTORY", direction: IN)
-  fellowship: [Fellowship] @relationship(type: "HAS_HISTORY", direction: IN)
-  bacenta: [Bacenta] @relationship(type: "HAS_HISTORY", direction: IN)
-  constituency: [Constituency] @relationship(type: "HAS_HISTORY", direction: IN)
-  sonta: [Sonta] @relationship(type: "HAS_HISTORY", direction: IN)
+  leaders: [Member!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  fellowship: [Fellowship!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  bacenta: [Bacenta!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  constituency: [Constituency!]!
+    @relationship(type: "HAS_HISTORY", direction: IN)
+  sonta: [Sonta!]! @relationship(type: "HAS_HISTORY", direction: IN)
 }
 
 #Query Definitions

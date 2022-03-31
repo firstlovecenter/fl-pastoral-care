@@ -2,10 +2,8 @@
 // as a lambda function
 
 import { Neo4jGraphQL } from '@neo4j/graphql'
-
-const { ApolloServer } = require('apollo-server-lambda')
-
-const neo4j = require('neo4j-driver')
+import { ApolloServer } from 'apollo-server-lambda'
+import neo4j from 'neo4j-driver'
 
 // This module is copied during the build step
 // Be sure to run `npm run build`
