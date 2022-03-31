@@ -10,24 +10,24 @@ https://xd.adobe.com/view/f5d8900f-8d05-47b4-946e-4d7f315ae6a2-a08b/
 
 ## Definition of Key Terms
 
-**Bacenta Leader**: A leader in charge of a smaller weekly fellowship. This person will also be accountable for tracking the attendance of the members who are assigned to him.
-**CO/Constituency Overseer**: A CO has a number of Bacenta Leaders that he oversees in a designated location which is known as a constituency. He will need to be able to monitor the work of Bacenta Leaders under him.
-**Bishop**:** A Bishop Oversees a number of constituencies. Because of this he will also need to be able to monitor the work of constituency overseers as well as Bacenta Leaders under him.
-**Resident Bishop**: Our senior pastor in charge of the church. He oversees all bishops, constituency overseers and Bacenta Leaders in the church.
-**Sheep Seeking Admin**: This is a type of administrator who is responsible for the registration of members. They should also maintain the ability to delete members.
-**Super Admin**: This admin has the ability to create accounts for the different types of leaders (bishops, COs, Bacenta Leaders, Sheep Seeking Admin), as well as updating when there are changes.
-
+- **Bacenta Leader**: A leader in charge of a smaller weekly fellowship. This person will also be accountable for tracking the attendance of the members who are assigned to him.
+- **CO/Constituency Overseer**: A CO has a number of Bacenta Leaders that he oversees in a designated location which is known as a constituency. He will need to be able to monitor the work of Bacenta Leaders under him.
+- **Bishop**: A Bishop Oversees a number of constituencies. Because of this he will also need to be able to monitor the work of constituency overseers as well as Bacenta Leaders under him.
+- **Resident Bishop**: Our senior pastor in charge of the church. He oversees all bishops, constituency overseers and Bacenta Leaders in the church.
+- **Sheep Seeking Admin**: This is a type of administrator who is responsible for the registration of members. They should also maintain the ability to delete members.
+- **Super Admin**: This admin has the ability to create accounts for the different types of leaders (bishops, COs, Bacenta Leaders, Sheep Seeking Admin), as well as updating when there are changes.
 
 ## Pastoral Responsibilities
+
 Our church pastoral care runs on four basic activities that a pastor is supposed to do for his assigned members. This is in the form of an acronym PVCI
 Prayer, Visitation, Counselling, Interaction
 
 ## Pastoral Cycles
+
 Each leader is supposed to routinely perform his duties of PVCI during what we call a pastoral cycle.
 For a Bacenta leader his pastoral cycle resets **every month**. This means that he is supposed to pray for, visit, counsel and interact (through phone calls) for each of his members every month.
 The pastoral cycle for a Bacenta leader is **one month**.
 The pastoral cycle for a constituency overseer is **3 months**. The pastoral cycle for a bishop is **6 months**.
-
 
 ## What We Expect to Achieve Using the Application
 
