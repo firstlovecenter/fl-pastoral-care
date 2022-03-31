@@ -3,6 +3,7 @@
 
 import { Neo4jGraphQL } from '@neo4j/graphql'
 import { ApolloServer } from 'apollo-server-lambda'
+import { Neo4jGraphQLAuthJWTPlugin } from '@neo4j/graphql-plugin-auth'
 import neo4j from 'neo4j-driver'
 
 // This module is copied during the build step
@@ -19,11 +20,24 @@ const driver = neo4j.driver(
   )
 )
 
-const neoSchema = new Neo4jGraphQL({ typeDefs, driver })
+const neoSchema = new Neo4jGraphQL({
+  typeDefs,
+  // resolvers: { ...resolvers, ...serviceResolvers, ...arrivalsResolvers },
+  driver,
+  plugins: {
+    auth: new Neo4jGraphQLAuthJWTPlugin({
+      secret: process.env.JWT_SECRET,
+      rolesPath: 'https://flcadmin\\.netlify\\.app/roles',
+    }),
+  },
+})
+
+const schema = await neoSchema.getSchema()
 
 const server = new ApolloServer({
-  schema: neoSchema.schema,
-  context: { driver, neo4jDatabase: process.env.NEO4J_DATABASE },
+  context: ({ event }) => ({ req: event }),
+  introspection: true,
+  schema,
 })
 
 const apolloHandler = server.createHandler()
