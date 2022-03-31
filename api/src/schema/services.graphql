@@ -56,3 +56,16 @@ extend type Member {
   attendedServices: [ServiceRecord!]!
     @relationship(type: "ATTENDED_SERVICE", direction: OUT)
 }
+
+type Mutation {
+  recordMemberAttendance: Member
+    @cypher(
+      statement: """
+      MATCH (member:Member {id: $id})
+      MATCH (service {id: $id}) WHERE service:ServiceRecord OR service:BussingRecord
+      MERGE (member)-[:ATTENDED_SERVICE]->(service)
+
+      RETURN member
+      """
+    )
+}

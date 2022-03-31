@@ -2,8 +2,9 @@
 
 This project was built using [GRANDstack](https://grandstack.io) (GraphQL, React, Apollo, Neo4j Database) application.
 <br/><br/>
+[![First Love Logo](/img/flc-logo-small.png)](https://www.firstlovecenter.com)
 
-# [![First Love Logo](/img/fl-logo.png)](https://www.firstlovecenter.com) Pastoral Care Application
+# Pastoral Care Application
 
 Please find attached the rough UI Design by clicking this link.
 https://xd.adobe.com/view/f5d8900f-8d05-47b4-946e-4d7f315ae6a2-a08b/
