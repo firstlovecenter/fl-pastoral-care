@@ -9,18 +9,19 @@ const Login = () => {
   let navigate = useNavigate()
 
   function navigateDash() {
+    console.log('preparing to navigate')
     navigate('/landing-page')
   }
 
   const { loginWithRedirect, isAuthenticated } = useAuth0()
-  console.log('test', isAuthenticated)
-
+  if (!isAuthenticated) {
+  }
   return (
     <div>
       {!isAuthenticated ? (
         <Button onClick={() => loginWithRedirect()}>Login</Button>
       ) : (
-        { navigateDash }
+        <Button onClick={() => navigateDash()}>Proceed to Dashboard</Button>
       )}
     </div>
   )
