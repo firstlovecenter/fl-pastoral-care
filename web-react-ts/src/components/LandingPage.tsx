@@ -12,7 +12,6 @@ const LandingPage = () => {
   let navigate = useNavigate()
 
   function memberPage() {
-    console.log('memberpage called')
     navigate('/member-list')
   }
 
