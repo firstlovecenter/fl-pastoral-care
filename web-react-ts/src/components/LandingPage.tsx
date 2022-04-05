@@ -2,7 +2,8 @@ import StyledContainer from './StyledContainer'
 import HeaderText from './HeaderText'
 import { Grid, Button } from '@chakra-ui/react'
 import GridButton from './CustomGridItem'
-
+import { useQuery } from '@apollo/client'
+import { GET_USER_ROLES } from '../queries/fetch-user-roles'
 import { useAuth0 } from '@auth0/auth0-react'
 import { memberRole } from '../queries/member-types'
 import { useNavigate } from 'react-router-dom'
@@ -18,6 +19,11 @@ const LandingPage = () => {
   const { state }: any = useLocation()
 
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0()
+
+  const { loading, error, data } = useQuery(GET_USER_ROLES)
+
+  if (loading) return <h1>Loading...</h1>
+  if (error) return <h1>Something went wrong! {error.message}</h1>
 
   let bacenta_leader,
     bishop,

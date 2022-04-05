@@ -3,15 +3,16 @@ type ServiceLog @auth(rules: [{ isAuthenticated: true }]) {
   historyRecord: String #leader was transferred to
   created_at: TimeGraph @relationship(type: "RECORDED_ON", direction: OUT)
   loggedBy: Member @relationship(type: "LOGGED_BY", direction: OUT)
-  serviceRecords: [ServiceRecord]
+  serviceRecords: [ServiceRecord!]!
     @relationship(type: "HAS_SERVICE", direction: OUT)
-  leaders: [Member] @relationship(type: "HAS_HISTORY", direction: IN)
-  fellowship: [Fellowship] @relationship(type: "HAS_HISTORY", direction: IN)
-  bacenta: [Bacenta] @relationship(type: "HAS_HISTORY", direction: IN)
-  # bacentaFellowshipRecords(bacentaId: ID!): [BacentaFellowshipServiceRecords]
-  constituency: [Constituency] @relationship(type: "HAS_HISTORY", direction: IN)
-  council: [Council] @relationship(type: "HAS_HISTORY", direction: IN)
-  sonta: [Sonta] @relationship(type: "HAS_HISTORY", direction: IN)
+  leaders: [Member!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  fellowship: [Fellowship!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  bacenta: [Bacenta!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  # bacentaFellowshipRecords(bacentaId: ID!): [BacentaFellowshipServiceRecords!]!
+  constituency: [Constituency!]!
+    @relationship(type: "HAS_HISTORY", direction: IN)
+  council: [Council!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  sonta: [Sonta!]! @relationship(type: "HAS_HISTORY", direction: IN)
 }
 
 type ServiceDay @auth(rules: [{ isAuthenticated: true }]) {
@@ -44,7 +45,27 @@ type ServiceRecord implements Record @auth(rules: [{ isAuthenticated: true }]) {
   servicePicture: String
   treasurerSelfie: String
   bankingSlip: String
-  treasurers: [Member]! @relationship(type: "WAS_TREASURER_FOR", direction: IN)
+  treasurers: [Member!]! @relationship(type: "WAS_TREASURER_FOR", direction: IN)
   serviceLog: ServiceLog @relationship(type: "HAS_SERVICE", direction: IN)
+  attendedMembers: [Member!]!
+    @relationship(type: "ATTENDED_SERVICE", direction: IN)
   noServiceReason: String
+}
+
+extend type Member {
+  attendedServices: [ServiceRecord!]!
+    @relationship(type: "ATTENDED_SERVICE", direction: OUT)
+}
+
+type Mutation {
+  recordMemberAttendance: Member
+    @cypher(
+      statement: """
+      MATCH (member:Member {id: $id})
+      MATCH (service {id: $id}) WHERE service:ServiceRecord OR service:BussingRecord
+      MERGE (member)-[:ATTENDED_SERVICE]->(service)
+
+      RETURN member
+      """
+    )
 }

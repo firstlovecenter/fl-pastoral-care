@@ -7,6 +7,7 @@ export const GET_MEMBERS = gql`
       sheep {
         firstName
         lastName
+        pictureUrl
       }
       goat {
         firstName

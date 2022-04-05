@@ -1,6 +1,7 @@
 export interface member {
   firstName: string
   lastName: string
+  pictureUrl: string
 }
 
 export interface members {
