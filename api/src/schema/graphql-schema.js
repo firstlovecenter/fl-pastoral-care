@@ -25,7 +25,7 @@ const attendance = fs
   .toString('utf-8')
 
 const membership = fs
-  .readFileSync(path.join(__dirname, 'membership.graphql'))
+  .readFileSync(path.join(__dirname, 'directory-membership.graphql'))
   .toString('utf-8')
 
 export default `${schema} ${directory} ${directorySonta} ${attendance} ${membership}`
