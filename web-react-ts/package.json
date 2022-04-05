@@ -15,7 +15,9 @@
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
-    "recharts": "^2.1.6"
+    "recharts": "^2.1.6",
+    "@types/react-loading-overlay": "^1.0.1"
+
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",

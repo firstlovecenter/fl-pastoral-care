@@ -7,6 +7,7 @@ import { GET_USER_ROLES } from '../queries/fetch-user-roles'
 import { useAuth0 } from '@auth0/auth0-react'
 import { memberRole } from '../queries/member-types'
 import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const LandingPage = () => {
   let navigate = useNavigate()
@@ -15,12 +16,8 @@ const LandingPage = () => {
     navigate('/member-list')
   }
 
+  const { state }: any = useLocation()
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0()
-
-  const { loading, error, data } = useQuery(GET_USER_ROLES)
-
-  if (loading) return <h1>Loading...</h1>
-  if (error) return <h1>Something went wrong! {error.message}</h1>
 
   let bacenta_leader,
     bishop,
@@ -30,9 +27,9 @@ const LandingPage = () => {
     super_admin,
     location: string
 
-  if (data.members[0].leadsBacenta.length > 0) {
+  if (state.data.members[0].leadsBacenta.length > 0) {
     location = ''
-    data.members[0].leadsBacenta.map((bacenta: memberRole): void => {
+    state.data.members[0].leadsBacenta.map((bacenta: memberRole): void => {
       location = location.concat(bacenta.name + '  ')
     })
 
@@ -44,25 +41,25 @@ const LandingPage = () => {
       />
     )
   }
-  if (data.members[0].leadsCouncil.length > 0) {
+  if (state.data.members[0].leadsCouncil.length > 0) {
     location = ''
-    data.members[0].leadsCouncil.map((council: memberRole) => {
+    state.data.members[0].leadsCouncil.map((council: memberRole) => {
       location = location.concat(council.name + ' ')
     })
     bishop = <GridButton roleName="Bishop" roleLocation={location} />
   }
-  if (data.members[0].leadsConstituency.length > 0) {
+  if (state.data.members[0].leadsConstituency.length > 0) {
     location = ''
-    data.members[0].leadsConstituency.map((constituency: memberRole) => {
+    state.data.members[0].leadsConstituency.map((constituency: memberRole) => {
       location = location.concat(constituency.name + '  ')
     })
     constituency_overseer = (
       <GridButton roleName="Constituency Overseer" roleLocation={location} />
     )
   }
-  if (data.members[0].leadsGatheringService.length > 0) {
+  if (state.data.members[0].leadsGatheringService.length > 0) {
     location = ''
-    data.members[0].leadsGatheringService.map(
+    state.data.members[0].leadsGatheringService.map(
       (gatheringService: memberRole) => {
         location = location.concat(gatheringService.name + '  ')
       }
@@ -71,20 +68,22 @@ const LandingPage = () => {
       <GridButton roleName="Resident Bishop" roleLocation={location} />
     )
   }
-  if (data.members[0].leadsSonta.length > 0) {
+  if (state.data.members[0].leadsSonta.length > 0) {
     location = ''
-    data.members[0].leadsSonta.map((sonta: memberRole) => {
+    state.data.members[0].leadsSonta.map((sonta: memberRole) => {
       location = location.concat(sonta.name + '  ')
     })
     sheep_seeking = (
       <GridButton roleName="Sheep Seeking Login" roleLocation={location} />
     )
   }
-  if (data.members[0].isAdminForGatheringService.length > 0) {
+  if (state.data.members[0].isAdminForGatheringService.length > 0) {
     location = ''
-    data.members[0].isAdminForGatheringService.map((superAdmin: memberRole) => {
-      location = location.concat(superAdmin.name + '  ')
-    })
+    state.data.members[0].isAdminForGatheringService.map(
+      (superAdmin: memberRole) => {
+        location = location.concat(superAdmin.name + '  ')
+      }
+    )
     super_admin = <GridButton roleName="Super Admin" roleLocation={location} />
   }
 
