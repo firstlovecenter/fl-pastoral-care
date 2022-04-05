@@ -16,7 +16,12 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "recharts": "^2.1.6",
-    "@types/react-loading-overlay": "^1.0.1"
+    "@types/react-loading-overlay": "^1.0.1",
+    "@chakra-ui/icons": "^1.1.7",
+    "@types/react-collapsible": "^2.3.1",
+    "@typescript-eslint/parser": "^5.18.0",
+    "react-collapsible": "^2.8.4",
+    "react-loading-overlay": "^1.0.1"
 
   },
   "devDependencies": {
