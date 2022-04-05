@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Dashboard from './components/Dashboard'
-import MemberList from './components/memberList'
-import LandingPage from './components/LandingPage'
+import Dashboard from './pages/directory/Dashboard'
+import LandingPage from './pages/directory/LandingPage'
+import MemberList from './pages/directory/membership/AllMembers'
 
 export default function App() {
   return (

@@ -17,10 +17,10 @@ import LoadingOverlay from 'react-loading-overlay'
 
 import { SearchIcon } from '@chakra-ui/icons'
 
-import { GET_MEMBERS } from '../queries/fetch-members'
+import { GET_MEMBERS } from '../../../queries/fetch-members'
 import { useQuery } from '@apollo/client'
-import { member } from '../queries/member-types'
-import { transformImage } from '../global-utils'
+import { member } from '../../../queries/member-types'
+import { transformImage } from '../../../utils/global-utils'
 // import CloudinaryImage from './CloudinaryImage'
 
 const MemberList = () => {

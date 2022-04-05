@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { GET_USER_ROLES } from '../queries/fetch-user-roles'
+import { GET_USER_ROLES } from '../../queries/fetch-user-roles'
 
 const Login = () => {
   let navigate = useNavigate()

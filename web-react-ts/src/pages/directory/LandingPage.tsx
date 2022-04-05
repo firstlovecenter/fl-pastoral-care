@@ -1,13 +1,13 @@
-import StyledContainer from './StyledContainer'
-import HeaderText from './HeaderText'
 import { Grid, Button } from '@chakra-ui/react'
-import GridButton from './CustomGridItem'
 import { useQuery } from '@apollo/client'
-import { GET_USER_ROLES } from '../queries/fetch-user-roles'
+import { GET_USER_ROLES } from '../../queries/fetch-user-roles'
 import { useAuth0 } from '@auth0/auth0-react'
-import { memberRole } from '../queries/member-types'
+import { memberRole } from '../../queries/member-types'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import GridButton from '../../components/CustomGridItem'
+import StyledContainer from '../../components/StyledContainer'
+import HeaderText from '../../components/HeaderText'
 
 const LandingPage = () => {
   let navigate = useNavigate()

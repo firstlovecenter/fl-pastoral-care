@@ -1,4 +1,4 @@
-import whitelogo from '../components/assets/img/flclogo.png'
+import whitelogo from '../assets/img/flclogo.png'
 import { Image, Box, Text } from '@chakra-ui/react'
 import { useAuth0 } from '@auth0/auth0-react'
 

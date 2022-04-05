@@ -20,12 +20,12 @@ const directorySonta = fs
   .readFileSync(path.join(__dirname, 'directory-sonta.graphql'))
   .toString('utf-8')
 
-const services = fs
-  .readFileSync(path.join(__dirname, 'services.graphql'))
+const attendance = fs
+  .readFileSync(path.join(__dirname, 'attendance.graphql'))
   .toString('utf-8')
 
 const membership = fs
   .readFileSync(path.join(__dirname, 'membership.graphql'))
   .toString('utf-8')
 
-export default `${schema} ${directory} ${directorySonta} ${services} ${membership}`
+export default `${schema} ${directory} ${directorySonta} ${attendance} ${membership}`

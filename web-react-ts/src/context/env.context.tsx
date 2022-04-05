@@ -1,5 +1,5 @@
 import React from 'react'
-import { Env } from '../models/env'
+import { Env } from '../utils/env'
 
 const domain: string | undefined = process.env.REACT_APP_AUTH0_DOMAIN
 const clientId: string | undefined = process.env.REACT_APP_AUTH0_CLIENT_ID
