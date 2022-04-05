@@ -1,9 +1,9 @@
 type Ministry {
   id: ID @id
   name: String
-  sonta: [Sonta] @relationship(type: "HAS", direction: OUT)
+  sonta: [Sonta!]! @relationship(type: "HAS", direction: OUT)
   leader: Member @relationship(type: "LEADS", direction: IN)
-  members: [Member] @relationship(type: "BELONGS_TO", direction: IN)
+  members: [Member!]! @relationship(type: "BELONGS_TO", direction: IN)
 }
 
 type Sonta {
@@ -18,7 +18,7 @@ type Sonta {
     )
   leader: Member @relationship(type: "LEADS", direction: IN)
   ministry: Ministry @relationship(type: "HAS", direction: IN)
-  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
   constituency: Constituency @relationship(type: "HAS", direction: IN)
-  serviceLogs: [ServiceLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  serviceLogs: [ServiceLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
 }

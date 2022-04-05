@@ -57,8 +57,6 @@
   "version": "0.3.7",
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
-    "@cloudinary/react": "^1.2.2",
-    "@cloudinary/url-gen": "^1.7.0",
     "@types/react-collapsible": "^2.3.1",
     "react-collapsible": "^2.8.4",
     "react-loading-overlay": "^1.0.1"

@@ -5,7 +5,7 @@ interface Person @auth(rules: [{ isAuthenticated: true }]) {
   firstName: String #@search
   middleName: String
   lastName: String
-  fullName: String @ignore
+  fullName: String @computed
   email: String
   phoneNumber: String
   whatsappNumber: String
@@ -16,7 +16,7 @@ interface Person @auth(rules: [{ isAuthenticated: true }]) {
   dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
   ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
   occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
-  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
   fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
 }
 
@@ -26,7 +26,7 @@ type Sheep implements Person {
   firstName: String #@search
   middleName: String
   lastName: String
-  fullName: String @ignore
+  fullName: String @computed
   email: String
   phoneNumber: String
   whatsappNumber: String
@@ -37,7 +37,7 @@ type Sheep implements Person {
   dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
   ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
   occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
-  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
   fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
 }
 
@@ -47,7 +47,7 @@ type Goat implements Person {
   firstName: String #@search
   middleName: String
   lastName: String
-  fullName: String @ignore
+  fullName: String @computed
   email: String
   phoneNumber: String
   whatsappNumber: String
@@ -58,7 +58,7 @@ type Goat implements Person {
   dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
   ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
   occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
-  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
   fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
 }
 
@@ -68,7 +68,7 @@ type Deer implements Person {
   firstName: String #@search
   middleName: String
   lastName: String
-  fullName: String @ignore
+  fullName: String @computed
   email: String
   phoneNumber: String
   whatsappNumber: String
@@ -79,26 +79,26 @@ type Deer implements Person {
   dob: TimeGraph @relationship(type: "WAS_BORN_ON", direction: OUT)
   ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
   occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
-  history: [HistoryLog] @relationship(type: "HAS_HISTORY", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
   fellowship: Fellowship @relationship(type: "BELONGS_TO", direction: OUT)
 }
 
 extend type Member {
-  sheep: [Member]
+  sheep: [Member!]!
     @cypher(
       statement: """
       MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
-  goat: [Member]
+  goat: [Member!]!
     @cypher(
       statement: """
       MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members:Goat)
       RETURN DISTINCT members
       """
     )
-  deer: [Member]
+  deer: [Member!]!
     @cypher(
       statement: """
       MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members:Deer)
@@ -108,21 +108,21 @@ extend type Member {
 }
 
 extend type Bacenta {
-   sheep: [Member]
+  sheep: [Member!]!
     @cypher(
       statement: """
       MATCH (this)-[:HAS]->(:Fellowship)-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
-  goat: [Member]
+  goat: [Member!]!
     @cypher(
       statement: """
       MATCH (this)-[:HAS]->(:Fellowship)-[:BELONGS_TO]-(members:Goat)
       RETURN DISTINCT members
       """
     )
-  deer: [Member]
+  deer: [Member!]!
     @cypher(
       statement: """
       MATCH (this)-[:HAS]->(:Fellowship)-[:BELONGS_TO]-(members:Deer)

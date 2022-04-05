@@ -20,6 +20,8 @@ import { SearchIcon } from '@chakra-ui/icons'
 import { GET_MEMBERS } from '../queries/fetch-members'
 import { useQuery } from '@apollo/client'
 import { member } from '../queries/member-types'
+import { transformImage } from '../global-utils'
+// import CloudinaryImage from './CloudinaryImage'
 
 const MemberList = () => {
   document.body.style.backgroundColor = '#232423'
@@ -110,10 +112,13 @@ const MemberList = () => {
                 {data.members[0].sheep.map((bacenta: member) => (
                   <ListItem style={{ fontSize: '20px', color: 'white' }}>
                     <Avatar
+                      loading="lazy"
                       size="sm"
-                      name={(bacenta.firstName, bacenta.lastName)}
+                      name={bacenta.firstName + ' ' + bacenta.lastName}
                       style={{ marginRight: '10px' }}
+                      src={transformImage(bacenta.pictureUrl)}
                     />
+                    {/* <CloudinaryImage src={bacenta.pictureUrl} /> */}
                     {bacenta.firstName} {bacenta.lastName}
                   </ListItem>
                 ))}
@@ -146,8 +151,10 @@ const MemberList = () => {
                   <ListItem style={{ fontSize: '20px', color: 'white' }}>
                     <Avatar
                       size="sm"
+                      loading="lazy"
                       name={(bacenta.firstName, bacenta.lastName)}
                       style={{ marginRight: '10px' }}
+                      src={transformImage(bacenta.pictureUrl)}
                     />
                     {bacenta.firstName} {bacenta.lastName}
                   </ListItem>
@@ -181,8 +188,10 @@ const MemberList = () => {
                   <ListItem style={{ fontSize: '20px', color: 'white' }}>
                     <Avatar
                       size="sm"
+                      loading="lazy"
                       name={(bacenta.firstName, bacenta.lastName)}
                       style={{ marginRight: '10px' }}
+                      src={transformImage(bacenta.pictureUrl)}
                     />
                     {bacenta.firstName} {bacenta.lastName}
                   </ListItem>
