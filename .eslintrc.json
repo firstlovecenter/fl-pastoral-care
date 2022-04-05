@@ -21,7 +21,6 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "parser": "@typescript-eslint/parser",
   "plugins": ["react", "prettier"],
   "rules": {
     "prettier/prettier": "warn",
