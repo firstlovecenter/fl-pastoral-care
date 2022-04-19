@@ -8,14 +8,40 @@ export const GET_MEMBERS = gql`
         firstName
         lastName
         pictureUrl
+        gender {
+          gender
+        }
+        dob {
+          date
+        }
+        phoneNumber
+        stream_name
       }
       goat {
         firstName
         lastName
+        pictureUrl
+        gender {
+          gender
+        }
+        dob {
+          date
+        }
+        phoneNumber
+        stream_name
       }
       deer {
         firstName
         lastName
+        pictureUrl
+        gender {
+          gender
+        }
+        dob {
+          date
+        }
+        phoneNumber
+        stream_name
       }
     }
   }

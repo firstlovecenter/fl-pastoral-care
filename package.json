@@ -56,7 +56,12 @@
   "license": "Apache-2.0",
   "version": "0.3.7",
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.3.1",
+    "react-loading-overlay": "^1.0.1",
+    "react-loading-overlay-ts": "^2.0.0"
   }
 }
