@@ -1,6 +1,5 @@
 import { Grid, Button } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
-import { GET_USER_ROLES } from '../../queries/fetch-user-roles'
+
 import { useAuth0 } from '@auth0/auth0-react'
 import { memberRole } from '../../queries/member-types'
 import { useNavigate } from 'react-router-dom'
@@ -12,11 +11,16 @@ import HeaderText from '../../components/HeaderText'
 const LandingPage = () => {
   let navigate = useNavigate()
 
+  const { state }: any = useLocation()
+
   function memberPage() {
-    navigate('/member-list')
+    navigate('/bacenta-buttons', {
+      state: {
+        data: state.data,
+      },
+    })
   }
 
-  const { state }: any = useLocation()
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0()
 
   let bacenta_leader,
@@ -109,7 +113,6 @@ const LandingPage = () => {
               backgroundColor: '#a53c35',
               marginTop: '40px',
             }}
-            variantColor="green"
             onClick={() => logout()}
           >
             Log Out

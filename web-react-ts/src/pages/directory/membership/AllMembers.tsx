@@ -13,27 +13,36 @@ import {
   InputLeftElement,
   Input,
 } from '@chakra-ui/react'
-import LoadingOverlay from 'react-loading-overlay'
 
 import { SearchIcon } from '@chakra-ui/icons'
-
+import { useNavigate } from 'react-router-dom'
+import LoadingOverlay from 'react-loading-overlay-ts'
 import { GET_MEMBERS } from '../../../queries/fetch-members'
 import { useQuery } from '@apollo/client'
 import { member } from '../../../queries/member-types'
 import { transformImage } from '../../../utils/global-utils'
+import { useState, useEffect } from 'react'
 // import CloudinaryImage from './CloudinaryImage'
 
 const MemberList = () => {
+  let navigate = useNavigate()
+
+  function memberPage(member: member) {
+    navigate('/profile-page', {
+      state: {
+        data: member,
+      },
+    })
+  }
   document.body.style.backgroundColor = '#232423'
 
   const { loading, error, data } = useQuery(GET_MEMBERS)
+
   if (loading)
     return (
-      <LoadingOverlay
-        active={true}
-        spinner
-        text="Retrieving list"
-      ></LoadingOverlay>
+      <LoadingOverlay active={true} spinner text="Loading your content...">
+        <p>Some content or children or something.</p>
+      </LoadingOverlay>
     )
 
   const memberSize =
@@ -110,13 +119,18 @@ const MemberList = () => {
             >
               <List spacing={3}>
                 {data.members[0].sheep.map((bacenta: member) => (
-                  <ListItem style={{ fontSize: '20px', color: 'white' }}>
+                  <ListItem
+                    onClick={() => {
+                      memberPage(bacenta)
+                    }}
+                    style={{ fontSize: '20px', color: 'white' }}
+                  >
                     <Avatar
                       loading="lazy"
                       size="sm"
                       name={bacenta.firstName + ' ' + bacenta.lastName}
                       style={{ marginRight: '10px' }}
-                      src={transformImage(bacenta.pictureUrl)}
+                      src={bacenta.pictureUrl}
                     />
                     {/* <CloudinaryImage src={bacenta.pictureUrl} /> */}
                     {bacenta.firstName} {bacenta.lastName}
@@ -148,7 +162,12 @@ const MemberList = () => {
             >
               <List spacing={3}>
                 {data.members[0].deer.map((bacenta: member) => (
-                  <ListItem style={{ fontSize: '20px', color: 'white' }}>
+                  <ListItem
+                    onClick={() => {
+                      memberPage(bacenta)
+                    }}
+                    style={{ fontSize: '20px', color: 'white' }}
+                  >
                     <Avatar
                       size="sm"
                       loading="lazy"
@@ -185,7 +204,12 @@ const MemberList = () => {
             >
               <List spacing={3}>
                 {data.members[0].goat.map((bacenta: member) => (
-                  <ListItem style={{ fontSize: '20px', color: 'white' }}>
+                  <ListItem
+                    onClick={() => {
+                      memberPage(bacenta)
+                    }}
+                    style={{ fontSize: '20px', color: 'white' }}
+                  >
                     <Avatar
                       size="sm"
                       loading="lazy"
