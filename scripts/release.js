@@ -71,7 +71,9 @@ switch (process.argv[2]) {
     break
 }
 
-concurrently(versionBump, concurrentOpts)
+const { result } = concurrently(versionBump, concurrentOpts)
+
+result
   .then(() => concurrently(release, concurrentOpts))
   .catch((e) => {
     // eslint-disable-next-line no-console
