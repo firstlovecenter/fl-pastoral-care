@@ -1,3 +1,9 @@
+#### 0.5.1 (2022-04-20)
+
+##### Chores
+
+*  upgraded concurrently ([1339a839](https://github.com/firstlovecenter/fl-pastoral-care/commit/1339a839c66e845595710099880e7a63cd646d3e))
+
 ### 0.5.0 (2022-04-20)
 
 ##### Chores
