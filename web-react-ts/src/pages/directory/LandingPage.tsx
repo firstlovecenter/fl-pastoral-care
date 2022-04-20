@@ -12,7 +12,7 @@ const LandingPage = () => {
   let navigate = useNavigate()
 
   const { state }: any = useLocation()
-
+  console.log(state.data)
   function memberPage() {
     navigate('/bacenta-buttons', {
       state: {
@@ -33,7 +33,7 @@ const LandingPage = () => {
 
   if (state.data.members[0].leadsBacenta.length > 0) {
     location = ''
-    state.data.members[0].leadsBacenta.map((bacenta: memberRole): void => {
+    state.data.members[0].leadsBacenta.forEach((bacenta: memberRole): void => {
       location = location.concat(bacenta.name + '  ')
     })
 
@@ -47,23 +47,25 @@ const LandingPage = () => {
   }
   if (state.data.members[0].leadsCouncil.length > 0) {
     location = ''
-    state.data.members[0].leadsCouncil.map((council: memberRole) => {
+    state.data.members[0].leadsCouncil.forEach((council: memberRole) => {
       location = location.concat(council.name + ' ')
     })
     bishop = <GridButton roleName="Bishop" roleLocation={location} />
   }
   if (state.data.members[0].leadsConstituency.length > 0) {
     location = ''
-    state.data.members[0].leadsConstituency.map((constituency: memberRole) => {
-      location = location.concat(constituency.name + '  ')
-    })
+    state.data.members[0].leadsConstituency.forEach(
+      (constituency: memberRole) => {
+        location = location.concat(constituency.name + '  ')
+      }
+    )
     constituency_overseer = (
       <GridButton roleName="Constituency Overseer" roleLocation={location} />
     )
   }
   if (state.data.members[0].leadsGatheringService.length > 0) {
     location = ''
-    state.data.members[0].leadsGatheringService.map(
+    state.data.members[0].leadsGatheringService.forEach(
       (gatheringService: memberRole) => {
         location = location.concat(gatheringService.name + '  ')
       }

@@ -13,6 +13,7 @@ import {
 
 const BacentaButtons = () => {
   const { state }: any = useLocation()
+  console.log(state.data)
 
   return (
     <StyledContainer>

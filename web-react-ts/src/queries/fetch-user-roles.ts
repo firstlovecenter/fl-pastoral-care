@@ -6,23 +6,29 @@ export const GET_USER_ROLES = gql`
       id
       firstName
       lastName
+      pictureUrl
       leadsBacenta {
+        id
         __typename
         name
       }
       leadsConstituency {
+        id
         __typename
         name
       }
       leadsSonta {
+        id
         __typename
         name
       }
       leadsCouncil {
+        id
         __typename
         name
       }
       leadsFellowship {
+        id
         __typename
         name
       }
@@ -32,6 +38,7 @@ export const GET_USER_ROLES = gql`
         name
       }
       isAdminForGatheringService {
+        id
         __typename
         name
       }

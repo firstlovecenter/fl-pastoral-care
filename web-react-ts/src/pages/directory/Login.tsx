@@ -14,6 +14,7 @@ const Login = () => {
     if (loading) return <h1>Loading...</h1>
     if (error) return <h1>Something went wrong! {error.message}</h1>
   }
+
   function navigateDash() {
     navigate('/landing-page', {
       state: {

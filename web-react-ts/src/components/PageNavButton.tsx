@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon, Text } from '@chakra-ui/react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const PageNavButton = (props: any) => {
   let navigate = useNavigate()

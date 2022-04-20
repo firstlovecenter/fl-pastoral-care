@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*--Global colors*/
+.bg {
+  padding-top: 20px;
+  padding-bottom: 80px;
+  overflow-x: hidden;
+}
+.bg.dark {
+  color: var(--text-primary);
+  background-color: var(--body-bg);
+}
+.bg.light {
+  color: var(--text-primary);
+  background-color: var(--body-bg);
+}

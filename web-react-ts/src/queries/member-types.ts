@@ -2,7 +2,7 @@ export interface member {
   firstName: string
   lastName: string
   pictureUrl: string
-  gender?: string
+  gender: string
   dob?: string
   phoneNumber?: string
   streamName?: string
