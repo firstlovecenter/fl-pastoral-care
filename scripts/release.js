@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const concurrently = require('concurrently')
 const { API_DIR, runner, concurrentOpts, TEMPLATE_DIR } = require('./common')
 
