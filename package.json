@@ -4,7 +4,6 @@
     "@commitlint/config-conventional": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.18.0",
-    "concurrently": "^6.5.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.19.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -23,15 +22,14 @@
     "prettier-eslint-cli": "^5.0.0"
   },
   "scripts": {
-    "seedDb": "node scripts/seed.js",
     "start": "node scripts/start-dev.js",
     "build": "node scripts/build.js",
     "format": "find . -name \"*.js\" | grep -v node_modules | grep -v build | xargs prettier --write",
     "format:log": "find . -name \"*.js\" | grep -v node_modules | grep -v build | xargs prettier",
     "inferschema:write": "node scripts/inferSchema.js",
-    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'docs: updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
-    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'docs: updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
-    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'docs: updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
+    "release:major": "node scripts/release.js major",
+    "release:minor": "node scripts/release.js minor",
+    "release:patch": "node scripts/release.js patch",
     "prepare": "husky install"
   },
   "husky": {
@@ -56,12 +54,6 @@
   "license": "Apache-2.0",
   "version": "0.3.7",
   "dependencies": {
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-icons": "^4.3.1",
-    "react-loading-overlay": "^1.0.1",
-    "react-loading-overlay-ts": "^2.0.0"
+    "concurrently": "^7.1.0"
   }
 }

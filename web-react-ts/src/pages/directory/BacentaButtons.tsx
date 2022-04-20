@@ -36,7 +36,7 @@ const BacentaButtons = () => {
             </Text>
           </span>
           <Avatar
-            src="https://bit.ly/sage-adebayo"
+            src={state.data.members[0].pictureUrl}
             loading="lazy"
             size="xl"
             style={{ marginRight: '10px' }}

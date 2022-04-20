@@ -29,6 +29,10 @@ export const useEnv = () => {
   return context
 }
 
-export const EnvProvider: React.FC = (props) => {
+type EnvProviderProps = {
+  children: React.ReactNode
+}
+
+export const EnvProvider = (props: EnvProviderProps) => {
   return <EnvContext.Provider value={dotenv} {...props} />
 }
