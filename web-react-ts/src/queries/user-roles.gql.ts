@@ -7,37 +7,37 @@ export const GET_USER_ROLES = gql`
       firstName
       lastName
       pictureUrl
-      leadsBacenta {
+      leadsBacenta(options: { limit: 1 }) {
         id
         __typename
         name
       }
-      leadsConstituency {
+      leadsConstituency(options: { limit: 1 }) {
         id
         __typename
         name
       }
-      leadsSonta {
+      leadsSonta(options: { limit: 1 }) {
         id
         __typename
         name
       }
-      leadsCouncil {
+      leadsCouncil(options: { limit: 1 }) {
         id
         __typename
         name
       }
-      leadsFellowship {
+      leadsFellowship(options: { limit: 1 }) {
         id
         __typename
         name
       }
 
-      leadsGatheringService {
+      leadsGatheringService(options: { limit: 1 }) {
         __typename
         name
       }
-      isAdminForGatheringService {
+      isAdminForGatheringService(options: { limit: 1 }) {
         id
         __typename
         name

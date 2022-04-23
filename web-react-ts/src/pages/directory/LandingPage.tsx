@@ -7,9 +7,12 @@ import { useLocation } from 'react-router-dom'
 import GridButton from '../../components/CustomGridItem'
 import StyledContainer from '../../components/StyledContainer'
 import HeaderText from '../../components/HeaderText'
+import useUser from '../../hooks/useUser'
 
 const LandingPage = () => {
   let navigate = useNavigate()
+  const { setUser } = useUser()
+  console.log(setUser)
 
   const { state }: any = useLocation()
   console.log(state.data)

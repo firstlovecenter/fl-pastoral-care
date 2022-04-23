@@ -28,12 +28,35 @@ type Fellowship = {
   bacenta: Bacenta
 }
 
-export type StreamNameType = 'Campus' | 'Town' | 'Anagkazo'
+export enum StreamEnum {
+  Campus = 'Campus',
+  Town = 'Town',
+  Anagkazo = 'Anagkazo',
+}
+
+export enum ChurchEnum {
+  Bacenta = 'Bacenta',
+}
+
+export enum RolesEnum {
+  leaderGatheringService = 'leaderGatheringService',
+  leaderStream = 'leaderStream',
+  leaderCouncil = 'leaderCouncil',
+  leaderConstituency = 'leaderConstituency',
+  leaderBacenta = 'leaderBacenta',
+  leaderFellowship = 'leaderFellowship',
+  adminConstituency = 'adminConstituency',
+  adminCouncil = 'adminCouncil',
+  adminStream = 'adminStream',
+  adminGatheringService = 'adminGatheringService',
+  all = 'all',
+}
+
 export type CardType = {
   __typename: string
   id: string
   link?: string
-  stream_name: StreamNameType
+  stream_name: StreamEnum
   gatheringService?: { id: string }
   stream?: Stream
   council?: Council
