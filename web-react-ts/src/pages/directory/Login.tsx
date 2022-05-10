@@ -13,14 +13,11 @@ const Login = () => {
   const { setUser } = useUser()
 
   // setUser(data.members[0])
+  console.log(data)
 
   if (isAuthenticated) {
     if (loading) return <h1>Loading...</h1>
     if (error) return <h1>Something went wrong! {error.message}</h1>
-  }
-
-  function navigateDash() {
-    navigate('/landing-page')
   }
 
   return (
@@ -28,7 +25,7 @@ const Login = () => {
       {!isAuthenticated ? (
         <Button onClick={() => loginWithRedirect()}>Login</Button>
       ) : (
-        <>{navigateDash()}</>
+        <>{navigate('/landing-page')}</>
       )}
     </div>
   )

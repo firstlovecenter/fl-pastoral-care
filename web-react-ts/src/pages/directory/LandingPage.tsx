@@ -13,11 +13,11 @@ import { GET_USER_ROLES } from '../../queries/user-roles.gql'
 const LandingPage = () => {
   let navigate = useNavigate()
   const { setUser } = useUser()
-  console.log(setUser)
 
   const { data, loading, error } = useQuery(GET_USER_ROLES)
 
-  const user = data.members[0]
+  const user = data?.members[0]
+  if (user) setUser(user)
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0()
 
   let bacenta_leader,
@@ -28,9 +28,9 @@ const LandingPage = () => {
     super_admin,
     location: string
 
-  if (user.leadsBacenta.length > 0) {
+  if (user?.leadsBacenta.length > 0) {
     location = ''
-    user.leadsBacenta.forEach((bacenta: memberRole): void => {
+    user?.leadsBacenta.forEach((bacenta: memberRole): void => {
       location = location.concat(bacenta.name + '  ')
     })
 
@@ -42,49 +42,48 @@ const LandingPage = () => {
       />
     )
   }
-  if (user.leadsCouncil.length > 0) {
+  if (user?.leadsCouncil.length > 0) {
     location = ''
-    user.leadsCouncil.forEach((council: memberRole) => {
+    user?.leadsCouncil.forEach((council: memberRole) => {
       location = location.concat(council.name + ' ')
     })
     bishop = <GridButton roleName="Bishop" roleLocation={location} />
   }
-  if (user.leadsConstituency.length > 0) {
+  if (user?.leadsConstituency.length > 0) {
     location = ''
-    user.leadsConstituency.forEach((constituency: memberRole) => {
+    user?.leadsConstituency.forEach((constituency: memberRole) => {
       location = location.concat(constituency.name + '  ')
     })
     constituency_overseer = (
       <GridButton roleName="Constituency Overseer" roleLocation={location} />
     )
   }
-  if (user.leadsGatheringService.length > 0) {
+  if (user?.leadsGatheringService.length > 0) {
     location = ''
-    user.leadsGatheringService.forEach((gatheringService: memberRole) => {
+    user?.leadsGatheringService.forEach((gatheringService: memberRole) => {
       location = location.concat(gatheringService.name + '  ')
     })
     resident_bishop = (
       <GridButton roleName="Resident Bishop" roleLocation={location} />
     )
   }
-  if (user.leadsSonta.length > 0) {
+  if (user?.leadsSonta.length > 0) {
     location = ''
-    user.leadsSonta.map((sonta: memberRole) => {
+    user?.leadsSonta.map((sonta: memberRole) => {
       location = location.concat(sonta.name + '  ')
     })
     sheep_seeking = (
       <GridButton roleName="Sheep Seeking Login" roleLocation={location} />
     )
   }
-  if (user.isAdminForGatheringService.length > 0) {
+  if (user?.isAdminForGatheringService.length > 0) {
     location = ''
-    user.isAdminForGatheringService.map((superAdmin: memberRole) => {
+    user?.isAdminForGatheringService.map((superAdmin: memberRole) => {
       location = location.concat(superAdmin.name + '  ')
     })
     super_admin = <GridButton roleName="Super Admin" roleLocation={location} />
   }
 
-  // console.log(bacenta_leader)
   return (
     <>
       {isAuthenticated ? (
