@@ -6,7 +6,6 @@ const PageNavButton = (props: any) => {
   let navigate = useNavigate()
 
   function memberPage() {
-    console.log('this is my log')
     navigate('/member-list')
   }
 

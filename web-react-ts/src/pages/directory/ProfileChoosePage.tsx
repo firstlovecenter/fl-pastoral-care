@@ -1,7 +1,7 @@
 import { Grid, Button } from '@chakra-ui/react'
 
 import { useAuth0 } from '@auth0/auth0-react'
-import { memberRole } from '../../queries/member-types'
+import { memberRole } from '../../types/member-types'
 import { useNavigate } from 'react-router-dom'
 import GridButton from '../../components/CustomGridItem'
 import StyledContainer from '../../components/StyledContainer'
@@ -9,16 +9,18 @@ import HeaderText from '../../components/HeaderText'
 import useUser from '../../hooks/useUser'
 import { useQuery } from '@apollo/client'
 import { GET_USER_ROLES } from '../../queries/user-roles.gql'
+import ApolloWrapper from '../../components/ApolloWrapper/ApolloWrapper'
 
-const LandingPage = () => {
+const ProfileChoosePage = () => {
   let navigate = useNavigate()
   const { setUser } = useUser()
-
-  const { data, loading, error } = useQuery(GET_USER_ROLES)
-
-  const user = data?.members[0]
-  if (user) setUser(user)
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0()
+  const { data, loading, error } = useQuery(GET_USER_ROLES, {
+    onCompleted: (data) => {
+      setUser(data?.members[0])
+    },
+  })
+  const user = data?.members[0]
 
   let bacenta_leader,
     bishop,
@@ -36,7 +38,7 @@ const LandingPage = () => {
 
     bacenta_leader = (
       <GridButton
-        onClick={() => navigate('/bacenta-buttons')}
+        onClick={() => navigate('/dashboard')}
         roleName="Bacenta Leader"
         roleLocation={location}
       />
@@ -69,7 +71,7 @@ const LandingPage = () => {
   }
   if (user?.leadsSonta.length > 0) {
     location = ''
-    user?.leadsSonta.map((sonta: memberRole) => {
+    user?.leadsSonta.forEach((sonta: memberRole) => {
       location = location.concat(sonta.name + '  ')
     })
     sheep_seeking = (
@@ -78,14 +80,14 @@ const LandingPage = () => {
   }
   if (user?.isAdminForGatheringService.length > 0) {
     location = ''
-    user?.isAdminForGatheringService.map((superAdmin: memberRole) => {
+    user?.isAdminForGatheringService.forEach((superAdmin: memberRole) => {
       location = location.concat(superAdmin.name + '  ')
     })
     super_admin = <GridButton roleName="Super Admin" roleLocation={location} />
   }
 
   return (
-    <>
+    <ApolloWrapper data={data} loading={loading} error={error}>
       {isAuthenticated ? (
         <StyledContainer>
           <HeaderText />
@@ -113,8 +115,8 @@ const LandingPage = () => {
       ) : (
         <Button onClick={() => loginWithRedirect()}>Login</Button>
       )}
-    </>
+    </ApolloWrapper>
   )
 }
 
-export default LandingPage
+export default ProfileChoosePage

@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Avatar, Text } from '@chakra-ui/react'
 import PageNavButton from '../../components/PageNavButton'
 import StyledContainer from '../../components/StyledContainer'
-import { useLocation } from 'react-router-dom'
 import {
   MdGroups,
   MdDirectionsRun,
@@ -11,9 +10,10 @@ import {
   MdCall,
 } from 'react-icons/md'
 
-const BacentaButtons = () => {
-  const { state }: any = useLocation()
-  console.log(state.data)
+import { UserContext } from '../../context/UserContext'
+
+const BacentaLeaderHomePage = () => {
+  const { currentUser } = useContext(UserContext)
 
   return (
     <StyledContainer>
@@ -27,7 +27,7 @@ const BacentaButtons = () => {
         >
           <span style={{ color: 'white', marginTop: '30px' }}>
             <Text fontSize={'lg'}>
-              {state.data.members[0].firstName} {state.data.members[0].lastName}
+              {currentUser?.firstName} {currentUser?.lastName}
             </Text>
             <Text
               style={{ color: 'grey', textAlign: 'center' }}
@@ -37,7 +37,7 @@ const BacentaButtons = () => {
             </Text>
           </span>
           <Avatar
-            src={state.data.members[0].pictureUrl}
+            src={currentUser?.pictureUrl}
             loading="lazy"
             size="xl"
             style={{ marginRight: '10px' }}
@@ -46,7 +46,9 @@ const BacentaButtons = () => {
 
         <section style={{ marginTop: '30px', marginBottom: '40px' }}>
           <Text fontSize="2xl" style={{ color: 'white', textAlign: 'center' }}>
-            {state.data.members[0].leadsBacenta[0].name} Bacenta
+            {currentUser?.leadsBacenta?.length &&
+              currentUser.leadsBacenta[0].name}
+            Bacenta
           </Text>
           <Text fontSize="xs" style={{ color: 'grey', textAlign: 'center' }}>
             SouthEastern Constituency
@@ -75,4 +77,4 @@ const BacentaButtons = () => {
   )
 }
 
-export default BacentaButtons
+export default BacentaLeaderHomePage

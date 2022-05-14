@@ -2,13 +2,28 @@ import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 
 const useUser = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext) || {}
+  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const setUser = (user: any) => {
+    setCurrentUser &&
+      setCurrentUser({
+        ...currentUser,
+        ...user,
+      })
 
-  const setUser = (church: any) => {
-    // setCurrentUser({
-    //   ...currentUser,
-    //   currentChurch: church,
-    // })
+    sessionStorage.setItem(
+      'currentUser',
+      JSON.stringify({
+        ...currentUser,
+        ...user,
+      })
+    )
+  }
+  const setUserChurch = (church: any) => {
+    setCurrentUser &&
+      setCurrentUser({
+        ...currentUser,
+        currentChurch: church,
+      })
     sessionStorage.setItem(
       'currentUser',
       JSON.stringify({
@@ -18,7 +33,7 @@ const useUser = () => {
     )
   }
 
-  return { currentUser, setCurrentUser, setUser }
+  return { currentUser, setCurrentUser, setUser, setUserChurch }
 }
 
 export default useUser

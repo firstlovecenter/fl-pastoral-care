@@ -3,17 +3,13 @@ import { Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_USER_ROLES } from '../../queries/user-roles.gql'
-import useUser from '../../hooks/useUser'
 
 const Login = () => {
+  const { loginWithRedirect, isAuthenticated } = useAuth0()
+  const { data, loading, error } = useQuery(GET_USER_ROLES)
   let navigate = useNavigate()
 
-  const { loginWithRedirect, isAuthenticated } = useAuth0()
-  const { loading, error, data } = useQuery(GET_USER_ROLES)
-  const { setUser } = useUser()
-
-  // setUser(data.members[0])
-  console.log(data)
+  console.log(data, isAuthenticated)
 
   if (isAuthenticated) {
     if (loading) return <h1>Loading...</h1>
@@ -25,7 +21,7 @@ const Login = () => {
       {!isAuthenticated ? (
         <Button onClick={() => loginWithRedirect()}>Login</Button>
       ) : (
-        <>{navigate('/landing-page')}</>
+        <>{navigate('/profile-choose-page')}</>
       )}
     </div>
   )

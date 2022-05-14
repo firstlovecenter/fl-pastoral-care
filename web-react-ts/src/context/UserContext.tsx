@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { ChurchEnum, RolesEnum, StreamEnum } from '../hooks/useClickCard'
+import { Bacenta } from '../types/church-types'
 import { ContextProviderProps } from './context.types'
 
 export interface UserInterface {
@@ -12,11 +13,13 @@ export interface UserInterface {
   email: string
   constituency: string
   roles: RolesEnum[]
+  pictureUrl?: string | undefined
+  leadsBacenta?: Bacenta[] | undefined
 }
 
 interface UserContextInterface {
   currentUser: UserInterface
-  setCurrentUser?: React.Dispatch<any>
+  setCurrentUser: React.Dispatch<any>
   theme: string
   setTheme?: React.Dispatch<React.SetStateAction<string>>
 }
@@ -36,6 +39,7 @@ const initialCurrentUser = {
 
 export const UserContext = createContext<UserContextInterface>({
   currentUser: initialCurrentUser,
+  setCurrentUser: (state: UserContextInterface) => {},
   theme: 'dark',
 })
 

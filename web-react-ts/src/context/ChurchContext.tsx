@@ -16,7 +16,21 @@ interface ChurchContextInterface {
   ministryId: string
 }
 
-const ChurchContext = createContext<ChurchContextInterface | null>(null)
+export const ChurchContext = createContext<ChurchContextInterface>({
+  clickCard: (card: CardType) => null,
+  church: sessionStorage.getItem('church')
+    ? JSON.parse(sessionStorage.getItem('church') ?? '')
+    : { church: '', subChurch: '' },
+  memberId: '',
+  gatheringServiceId: sessionStorage.getItem('gatheringServiceId') ?? '',
+  streamId: sessionStorage.getItem('streamId') ?? '',
+  councilId: sessionStorage.getItem('councilId') ?? '',
+  constituencyId: sessionStorage.getItem('constituencyId') ?? '',
+  bacentaId: sessionStorage.getItem('bacentaId') ?? '',
+  fellowshipId: sessionStorage.getItem('fellowshipId') ?? '',
+  sontaId: sessionStorage.getItem('sontaId') ?? '',
+  ministryId: sessionStorage.getItem('ministryId') ?? '',
+})
 
 export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
   const {

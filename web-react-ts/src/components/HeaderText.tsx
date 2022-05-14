@@ -27,7 +27,7 @@ const HeaderText = () => {
           <Text fontSize="28px" fontWeight={'semibold'}>
             {' '}
             <span style={{ color: '#a53c35' }}>Welcome </span>
-            {user?.name}!
+            {user?.given_name}!
           </Text>
         </div>
 

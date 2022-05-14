@@ -7,7 +7,7 @@ type ApolloWrapperPropsType = {
   data: any
   loading: boolean
   error: ApolloError | undefined
-  placeholder: boolean
+  placeholder?: boolean
   children: JSX.Element
 }
 

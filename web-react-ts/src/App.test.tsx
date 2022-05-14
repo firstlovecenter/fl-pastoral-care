@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './App'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
@@ -12,12 +12,13 @@ const client = new ApolloClient({
 })
 
 it('renders without crashing', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(
+  const container = document.getElementById('root')
+  const root = createRoot(container!)
+
+  root.render(
     <ApolloProvider client={client}>
       <App />
-    </ApolloProvider>,
-    div
+    </ApolloProvider>
   )
-  ReactDOM.unmountComponentAtNode(div)
+  root.unmount()
 })
