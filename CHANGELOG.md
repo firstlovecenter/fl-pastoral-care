@@ -1,3 +1,10 @@
+#### 0.5.5 (2022-05-14)
+
+##### Chores
+
+*  deleted setup proxy ([d54e0fef](https://github.com/firstlovecenter/fl-pastoral-care/commit/d54e0fef971f2174aa076700bf919132d534e86c))
+*  updated packages ([2c801831](https://github.com/firstlovecenter/fl-pastoral-care/commit/2c8018312d2210a632ff48e4c4c9c1e8d6f77203))
+
 #### 0.5.4 (2022-05-14)
 
 ##### New Features
