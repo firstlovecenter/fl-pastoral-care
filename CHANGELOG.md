@@ -1,3 +1,9 @@
+#### 0.5.6 (2022-05-14)
+
+##### Chores
+
+*  removed pre build commands ([5e03e551](https://github.com/firstlovecenter/fl-pastoral-care/commit/5e03e5516362ebba89bf548366044ea1de0d1dd3))
+
 #### 0.5.5 (2022-05-14)
 
 ##### Chores
