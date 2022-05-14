@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
-import { Avatar, Text } from '@chakra-ui/react'
+import { Avatar, Container, Text } from '@chakra-ui/react'
 import PageNavButton from '../../components/PageNavButton'
-import StyledContainer from '../../components/StyledContainer'
 import {
   MdGroups,
   MdDirectionsRun,
@@ -16,7 +15,7 @@ const BacentaLeaderHomePage = () => {
   const { currentUser } = useContext(UserContext)
 
   return (
-    <StyledContainer>
+    <Container>
       <header style={{ paddingTop: '50px' }}>
         <section
           style={{
@@ -73,7 +72,7 @@ const BacentaLeaderHomePage = () => {
       <PageNavButton icon={MdMenuBook} label="Visitations" />
       <PageNavButton icon={MdBatteryAlert} label="Prayer" />
       <PageNavButton icon={MdCall} label="Telepastoring Calls" />
-    </StyledContainer>
+    </Container>
   )
 }
 

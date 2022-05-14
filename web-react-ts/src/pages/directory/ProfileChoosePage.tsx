@@ -1,10 +1,9 @@
-import { Grid, Button } from '@chakra-ui/react'
+import { Grid, Button, Container } from '@chakra-ui/react'
 
 import { useAuth0 } from '@auth0/auth0-react'
 import { memberRole } from '../../types/member-types'
 import { useNavigate } from 'react-router-dom'
 import GridButton from '../../components/CustomGridItem'
-import StyledContainer from '../../components/StyledContainer'
 import HeaderText from '../../components/HeaderText'
 import useUser from '../../hooks/useUser'
 import { useQuery } from '@apollo/client'
@@ -89,7 +88,7 @@ const ProfileChoosePage = () => {
   return (
     <ApolloWrapper data={data} loading={loading} error={error}>
       {isAuthenticated ? (
-        <StyledContainer>
+        <Container>
           <HeaderText />
           <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             {bacenta_leader}
@@ -111,7 +110,7 @@ const ProfileChoosePage = () => {
           >
             Log Out
           </Button>
-        </StyledContainer>
+        </Container>
       ) : (
         <Button onClick={() => loginWithRedirect()}>Login</Button>
       )}
