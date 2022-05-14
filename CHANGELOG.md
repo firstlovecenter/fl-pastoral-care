@@ -1,3 +1,9 @@
+#### 0.5.4 (2022-05-14)
+
+##### New Features
+
+*  implemented using typescript in the backend ([081a11d0](https://github.com/firstlovecenter/fl-pastoral-care/commit/081a11d0ca1050de1116522d82afa94fe4379cf6))
+
 #### 0.5.3 (2022-05-14)
 
 ##### New Features
