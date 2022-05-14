@@ -1,6 +1,5 @@
-import { Center, Container, Spinner } from '@chakra-ui/react'
+import { Center, Spinner } from '@chakra-ui/react'
 import React from 'react'
-// import LoadingOverlay from 'react-loading-overlay-ts'
 
 const LoadingScreen = () => {
   return (

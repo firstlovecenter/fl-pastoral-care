@@ -1,11 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
+
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 import neo4j from 'neo4j-driver'
 import { Neo4jGraphQL } from '@neo4j/graphql'
 import { Neo4jGraphQLAuthJWTPlugin } from '@neo4j/graphql-plugin-auth'
 import dotenv from 'dotenv'
+// eslint-disable-next-line
 import typeDefs from './schema/graphql-schema'
+// eslint-disable-next-line
+import { resolvers } from './resolvers/resolvers'
 
 // set environment variables from .env
 dotenv.config()
@@ -34,11 +38,11 @@ const driver = neo4j.driver(
 
 const neoSchema = new Neo4jGraphQL({
   typeDefs,
-  // resolvers: { ...resolvers, ...serviceResolvers, ...arrivalsResolvers },
+  resolvers: { ...resolvers },
   driver,
   plugins: {
     auth: new Neo4jGraphQLAuthJWTPlugin({
-      secret: process.env.JWT_SECRET,
+      secret: process.env.JWT_SECRET ?? '',
       rolesPath: 'https://flcadmin\\.netlify\\.app/roles',
     }),
   },
