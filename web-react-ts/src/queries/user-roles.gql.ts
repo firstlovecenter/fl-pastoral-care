@@ -1,45 +1,39 @@
 import { gql } from '@apollo/client'
 
 export const GET_USER_ROLES = gql`
-  {
-    members(where: { email: "jaedagy@gmail.com" }) {
+  query ($id: ID!) {
+    members(where: { id: $id }) {
       id
       firstName
       lastName
       pictureUrl
-      leadsBacenta(options: { limit: 1 }) {
+      leadsBacenta {
         id
-        __typename
         name
       }
-      leadsConstituency(options: { limit: 1 }) {
+      leadsConstituency {
         id
-        __typename
         name
       }
-      leadsSonta(options: { limit: 1 }) {
+      leadsSonta {
         id
-        __typename
         name
       }
-      leadsCouncil(options: { limit: 1 }) {
+      leadsCouncil {
         id
-        __typename
         name
       }
-      leadsFellowship(options: { limit: 1 }) {
+      leadsFellowship {
         id
-        __typename
         name
       }
 
-      leadsGatheringService(options: { limit: 1 }) {
-        __typename
+      leadsGatheringService {
+        id
         name
       }
-      isAdminForGatheringService(options: { limit: 1 }) {
+      isAdminForGatheringService {
         id
-        __typename
         name
       }
     }
