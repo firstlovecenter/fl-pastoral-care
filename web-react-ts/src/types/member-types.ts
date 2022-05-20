@@ -20,6 +20,8 @@ export interface members {
 export interface memberRole {
   __typename: string
   name: string
+  id: string
+  stream_name: StreamEnum
 }
 
 enum GenderEnum {

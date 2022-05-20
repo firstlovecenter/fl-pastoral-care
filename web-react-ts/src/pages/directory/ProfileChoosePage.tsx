@@ -11,11 +11,13 @@ import { GET_USER_ROLES } from '../../queries/user-roles.gql'
 import ApolloWrapper from '../../components/ApolloWrapper/ApolloWrapper'
 import { useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
+import { ChurchContext } from '../../context/ChurchContext'
 
 const ProfileChoosePage = () => {
   let navigate = useNavigate()
   const { setUser } = useUser()
   const { currentUser } = useContext(UserContext)
+  const { clickCard } = useContext(ChurchContext)
   const { logout, loginWithRedirect, isAuthenticated } = useAuth0()
   const { data, loading, error } = useQuery(GET_USER_ROLES, {
     variables: {
@@ -37,7 +39,10 @@ const ProfileChoosePage = () => {
               (bacenta: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => {
+                    clickCard(bacenta)
+                    navigate('/dashboard')
+                  }}
                   roleName="Bacenta Leader"
                   roleLocation={bacenta.name}
                 />
