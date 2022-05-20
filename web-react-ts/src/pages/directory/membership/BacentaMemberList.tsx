@@ -24,9 +24,11 @@ import { ListMemberInterface } from './member-list.types'
 import { useContext } from 'react'
 import { ChurchContext } from '../../../context/ChurchContext'
 
-const MemberList = () => {
-  const { data, loading, error } = useQuery(GET_MEMBERS)
-  const { clickCard } = useContext(ChurchContext)
+const BacentaMemberList = () => {
+  const { clickCard, bacentaId } = useContext(ChurchContext)
+  const { data, loading, error } = useQuery(GET_BACENTA_MEMBERS, {
+    variables: bacentaId,
+  })
   const navigate = useNavigate()
 
   const memberSize =
@@ -229,4 +231,4 @@ const MemberList = () => {
   )
 }
 
-export default MemberList
+export default BacentaMemberList

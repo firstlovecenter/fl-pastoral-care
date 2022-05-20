@@ -46,7 +46,7 @@ const BacentaLeaderHomePage = () => {
         <section style={{ marginTop: '30px', marginBottom: '40px' }}>
           <Text fontSize="2xl" style={{ color: 'white', textAlign: 'center' }}>
             {currentUser?.leadsBacenta?.length &&
-              currentUser.leadsBacenta[0].name}
+              currentUser.leadsBacenta[0].name}{' '}
             Bacenta
           </Text>
           <Text fontSize="xs" style={{ color: 'grey', textAlign: 'center' }}>
