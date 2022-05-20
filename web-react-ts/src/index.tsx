@@ -11,6 +11,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { EnvProvider } from './context/env.context'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Auth0ProviderWithHistory } from './auth0-provider-with-history'
+import theme from './theme'
 
 const AppWithSetUp = () => {
   const [accessToken, setAccessToken] = useState('')
@@ -71,7 +72,7 @@ const root = createRoot(container!)
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <EnvProvider>
         <Router>
           <Auth0ProviderWithHistory>

@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const member = data?.members[0]
 
   return (
-    <ApolloWrapper data={data} loading={loading} error={error}>
+    <ApolloWrapper apolloData={{ data, loading, error }}>
       <>
         <div
           style={{
@@ -62,7 +62,6 @@ const ProfilePage = () => {
             src={member?.pictureUrl}
           />
           <Text fontSize="2xl" style={{ color: 'white' }}>
-            {' '}
             {member?.firstName} {member?.lastName}
           </Text>
 

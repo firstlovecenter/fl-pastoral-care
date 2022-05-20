@@ -4,15 +4,18 @@ import ErrorScreen from './ErrorScreen'
 import LoadingScreen from './LoadingScreen'
 
 type ApolloWrapperPropsType = {
-  data: any
-  loading: boolean
-  error: ApolloError | undefined
   placeholder?: boolean
+  apolloData: {
+    data: any
+    loading: boolean
+    error?: ApolloError | undefined
+  }
   children: JSX.Element
 }
 
 const ApolloWrapper = (props: ApolloWrapperPropsType) => {
-  const { loading, error, data, placeholder } = props
+  const { apolloData, placeholder } = props
+  const { data, loading, error } = apolloData
 
   if (data || placeholder) {
     return <>{props.children}</>

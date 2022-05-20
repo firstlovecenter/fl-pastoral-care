@@ -1,5 +1,5 @@
 import BacentaLeaderHomePage from './BacentaLeaderHomePage'
-import MemberList from './membership/MemberList'
+import BacentaMembers from './membership/BacentaMembers'
 import ProfilePage from './membership/ProfilePage'
 import LandingPage from './ProfileChoosePage'
 
@@ -17,10 +17,11 @@ export const directory: RouteArrayType = [
     roles: ['all'],
   },
   {
-    path: '/member-list',
-    element: MemberList,
+    path: '/bacenta/member-list',
+    element: BacentaMembers,
     roles: ['all'],
   },
+
   {
     path: '/dashboard',
     element: BacentaLeaderHomePage,

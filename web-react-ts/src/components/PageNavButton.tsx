@@ -6,7 +6,7 @@ const PageNavButton = (props: any) => {
   let navigate = useNavigate()
 
   function memberPage() {
-    navigate('/member-list')
+    navigate('/bacenta/member-list')
   }
 
   return (

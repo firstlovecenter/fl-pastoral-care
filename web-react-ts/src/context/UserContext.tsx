@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import { ChurchEnum, RolesEnum, StreamEnum } from '../hooks/useClickCard'
 import { Bacenta } from '../types/church-types'
 import { ContextProviderProps } from './context.types'
@@ -20,8 +20,6 @@ export interface UserInterface {
 interface UserContextInterface {
   currentUser: UserInterface
   setCurrentUser: React.Dispatch<any>
-  theme: string
-  setTheme?: React.Dispatch<React.SetStateAction<string>>
 }
 
 const initialCurrentUser = {
@@ -40,11 +38,9 @@ const initialCurrentUser = {
 export const UserContext = createContext<UserContextInterface>({
   currentUser: initialCurrentUser,
   setCurrentUser: (state: UserContextInterface) => {},
-  theme: 'dark',
 })
 
 export const UserContextProvider = ({ children }: ContextProviderProps) => {
-  const [theme, setTheme] = useState('dark')
   const [currentUser, setCurrentUser] = useState<UserInterface>(
     sessionStorage.getItem('currentUser')
       ? JSON.parse(sessionStorage.getItem('currentUser') ?? '')
@@ -62,16 +58,9 @@ export const UserContextProvider = ({ children }: ContextProviderProps) => {
         }
   )
 
-  useEffect(() => {
-    if (theme === 'dark') document.body.style.backgroundColor = '#121212'
-    else document.body.style.backgroundColor = '#FFFFFF'
-  }, [theme])
-
   return (
-    <UserContext.Provider
-      value={{ currentUser, setCurrentUser, theme, setTheme }}
-    >
-      <div className={`bg ${theme}`}>{children}</div>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+      <div>{children}</div>
     </UserContext.Provider>
   )
 }
