@@ -4,11 +4,13 @@ import Dashboard from './pages/directory/Dashboard'
 import { ChurchContextProvider } from './context/ChurchContext'
 import { UserContextProvider } from './context/UserContext'
 import { directory } from './pages/directory/directoryRoutes'
+import Navigation from './components/Navigation'
 
 export default function App(): JSX.Element {
   return (
     <ChurchContextProvider>
       <UserContextProvider>
+        <Navigation />
         <Routes>
           {[...directory].map((route, i) => (
             <Route
