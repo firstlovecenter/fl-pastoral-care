@@ -12,6 +12,7 @@ import { EnvProvider } from './context/env.context'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Auth0ProviderWithHistory } from './auth0-provider-with-history'
 import theme from './theme'
+import CacheBuster from './CacheBuster'
 
 const AppWithSetUp = () => {
   const [accessToken, setAccessToken] = useState('')
@@ -61,9 +62,28 @@ const AppWithSetUp = () => {
   })
 
   return (
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <CacheBuster>
+      {({
+        loading,
+        isLatestVersion,
+        refreshCacheAndReload,
+      }: {
+        loading: any
+        isLatestVersion: any
+        refreshCacheAndReload: any
+      }) => {
+        if (loading) return null
+        if (!loading && !isLatestVersion) {
+          refreshCacheAndReload()
+        }
+
+        return (
+          <ApolloProvider client={client}>
+            <App />
+          </ApolloProvider>
+        )
+      }}
+    </CacheBuster>
   )
 }
 

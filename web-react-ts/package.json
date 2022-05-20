@@ -38,6 +38,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "generate-build-version": "node generate-build-version",
+    "prebuild": "npm run generate-build-version",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "now-build": "react-scripts build"
