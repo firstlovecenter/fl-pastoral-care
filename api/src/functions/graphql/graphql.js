@@ -2,11 +2,11 @@
 // This module can be used to serve the GraphQL endpoint
 // as a lambda function
 
-import { Neo4jGraphQL } from '@neo4j/graphql'
-import { ApolloServer } from 'apollo-server-lambda'
-import { Neo4jGraphQLAuthJWTPlugin } from '@neo4j/graphql-plugin-auth'
-import neo4j from 'neo4j-driver'
-import { resolvers } from '../../resolvers/resolvers'
+const { Neo4jGraphQL } = require('@neo4j/graphql')
+const { ApolloServer } = require('apollo-server-lambda')
+const { Neo4jGraphQLAuthJWTPlugin } = require('@neo4j/graphql-plugin-auth')
+const neo4j = require('neo4j-driver')
+const { resolvers } = require('../../resolvers/resolvers')
 // This module is copied during the build step
 // Be sure to run `npm run build`
 const { typeDefs } = require('./schema/graphql-schema')
