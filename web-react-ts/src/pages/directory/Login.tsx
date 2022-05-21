@@ -6,7 +6,7 @@ const Login = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0()
 
   let navigate = useNavigate()
-
+  console.log(process.env)
   return (
     <div>
       {!isAuthenticated ? (
