@@ -6,10 +6,10 @@ const { Neo4jGraphQL } = require('@neo4j/graphql')
 const { ApolloServer } = require('apollo-server-lambda')
 const { Neo4jGraphQLAuthJWTPlugin } = require('@neo4j/graphql-plugin-auth')
 const neo4j = require('neo4j-driver')
-const { resolvers } = require('../../resolvers/resolvers')
 // This module is copied during the build step
 // Be sure to run `npm run build`
 const { typeDefs } = require('./schema/graphql-schema')
+const { resolvers } = require('../../resolvers/resolvers.js')
 
 const driver = neo4j.driver(
   process.env.NEO4J_URI || 'bolt://localhost:7687',
@@ -25,7 +25,7 @@ const neoSchema = new Neo4jGraphQL({
   driver,
   plugins: {
     auth: new Neo4jGraphQLAuthJWTPlugin({
-      secret: process.env.JWT_SECRET?.replace(/\\n/gm, '\n') || '',
+      secret: process.env.JWT_SECRET?.replace(/\\n/gm, '\n'),
       rolesPath: 'https://flcadmin\\.netlify\\.app/roles',
     }),
   },
