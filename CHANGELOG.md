@@ -1,3 +1,9 @@
+#### 0.5.11 (2022-05-21)
+
+##### Bug Fixes
+
+*  logging env variables ([393b95e3](https://github.com/firstlovecenter/fl-pastoral-care/commit/393b95e3a1176f82416574723d230ee565ebc3c0))
+
 #### 0.5.10 (2022-05-21)
 
 ##### Bug Fixes

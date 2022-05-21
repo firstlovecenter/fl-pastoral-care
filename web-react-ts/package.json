@@ -1,6 +1,6 @@
 {
   "name": "web-react-ts",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.4.16",
