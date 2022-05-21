@@ -30,4 +30,4 @@ const membership = fs
   .readFileSync(path.join(__dirname, 'directory-membership.graphql'))
   .toString('utf-8')
 
-export default `${schema} ${directory} ${directorySonta} ${attendance} ${membership}`
+exports.typeDefs = `${schema} ${directory} ${directorySonta} ${attendance} ${membership}`
