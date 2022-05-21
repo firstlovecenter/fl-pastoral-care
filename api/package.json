@@ -10,7 +10,6 @@
     "now-build": "babel src --out-dir build && shx cp -r src/schema build",
     "start": "npm run build && node build/index.js"
   },
-  "type": "module",
   "author": "William Lyon",
   "license": "MIT",
   "dependencies": {
