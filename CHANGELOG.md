@@ -1,3 +1,9 @@
+#### 0.5.12 (2022-05-21)
+
+##### Bug Fixes
+
+*  solved issue with apollo client settings ([38a8aad8](https://github.com/firstlovecenter/fl-pastoral-care/commit/38a8aad85fb5b7d78f9f30a30daad09e64e8df40))
+
 #### 0.5.11 (2022-05-21)
 
 ##### Bug Fixes
