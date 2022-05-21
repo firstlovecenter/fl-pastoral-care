@@ -1,3 +1,9 @@
+#### 0.5.21 (2022-05-21)
+
+##### Bug Fixes
+
+*  rewrote api backend as js ([5e92294b](https://github.com/firstlovecenter/fl-pastoral-care/commit/5e92294b9f8a396fd85ade04be720ab4929e866c))
+
 #### 0.5.20 (2022-05-21)
 
 #### 0.5.19 (2022-05-21)
