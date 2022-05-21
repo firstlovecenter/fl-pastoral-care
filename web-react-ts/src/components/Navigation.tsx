@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -7,14 +8,16 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Input,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
+import { useNavigate } from 'react-router'
 
 const Navigation = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef(null)
+  const navigate = useNavigate()
 
   return (
     <>
@@ -30,17 +33,21 @@ const Navigation = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Pastoral Care Menu</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            <Box
+              bg="grey"
+              p="3"
+              borderRadius="lg"
+              onClick={() => navigate('/')}
+            >
+              Home
+            </Box>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
+            <Text>Your face here</Text>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
