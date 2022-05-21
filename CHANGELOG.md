@@ -1,3 +1,9 @@
+#### 0.5.10 (2022-05-21)
+
+##### Bug Fixes
+
+*  set up so that auth0 id is used to get the current user ([953a3e89](https://github.com/firstlovecenter/fl-pastoral-care/commit/953a3e890b0a6242bb6014d80c2136ce99b5c63d))
+
 #### 0.5.9 (2022-05-20)
 
 ##### New Features
