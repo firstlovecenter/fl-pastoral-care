@@ -7,7 +7,6 @@ import { ApolloServer } from 'apollo-server-lambda'
 import { Neo4jGraphQLAuthJWTPlugin } from '@neo4j/graphql-plugin-auth'
 import neo4j from 'neo4j-driver'
 import { resolvers } from '../../resolvers/resolvers'
-import { Handler, HandlerEvent } from '@netlify/functions'
 // This module is copied during the build step
 // Be sure to run `npm run build`
 const { typeDefs } = require('./schema/graphql-schema')
@@ -32,11 +31,7 @@ const neoSchema = new Neo4jGraphQL({
   },
 })
 
-export const handler: Handler = async (
-  event: HandlerEvent,
-  context: any,
-  ...args
-) => {
+export const handler = async (event, context, ...args) => {
   const schema = await neoSchema.getSchema()
 
   const server = new ApolloServer({
@@ -53,7 +48,6 @@ export const handler: Handler = async (
       requestContext: context,
     },
     context,
-    //@ts-ignore
     ...args
   )
 }

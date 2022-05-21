@@ -6,9 +6,7 @@ import neo4j from 'neo4j-driver'
 import { Neo4jGraphQL } from '@neo4j/graphql'
 import { Neo4jGraphQLAuthJWTPlugin } from '@neo4j/graphql-plugin-auth'
 import dotenv from 'dotenv'
-// eslint-disable-next-line
 import typeDefs from './schema/graphql-schema'
-// eslint-disable-next-line
 import { resolvers } from './resolvers/resolvers'
 
 // set environment variables from .env
