@@ -1,5 +1,5 @@
 [build]
-  command = "npm i && cd api && npm i && cd ../web-react-ts && npm i --legacy-peer-deps && cd .. && npm run build && cp -r api/build/schema api/build/functions/graphql/. && cd api/src/functions/graphql && npm i"
+  command = "npm i && cd api && npm i && cd ../web-react-ts && npm i && cd .. && npm run build && cp -r api/build/schema api/build/functions/graphql/. && cd api/src/functions/graphql && npm i"
   publish = "web-react-ts/build"
   functions = "api/build/functions"
 
