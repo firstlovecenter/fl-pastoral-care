@@ -39,7 +39,7 @@ const AppWithSetUp = () => {
   }, [getAccessToken])
 
   const httpLink = createHttpLink({
-    uri: 'http://localhost:4001/graphql', //process.env.REACT_APP_GRAPHQL_URI || '/graphql',
+    uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
   })
 
   const authLink = setContext((_, { headers }) => {
