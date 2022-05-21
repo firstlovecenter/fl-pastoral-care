@@ -1,3 +1,9 @@
+#### 0.5.13 (2022-05-21)
+
+##### Bug Fixes
+
+*  fixing issue with the graphql.js ([f10e7cef](https://github.com/firstlovecenter/fl-pastoral-care/commit/f10e7cef9791ca88845069ad5e5aada07d87e92e))
+
 #### 0.5.12 (2022-05-21)
 
 ##### Bug Fixes
