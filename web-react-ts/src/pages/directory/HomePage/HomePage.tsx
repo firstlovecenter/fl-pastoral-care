@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Avatar, Container, Text } from '@chakra-ui/react'
-import PageNavButton from '../../components/PageNavButton'
+import PageNavButton from '../../../components/PageNavButton'
 import {
   MdGroups,
   MdDirectionsRun,
@@ -9,9 +9,9 @@ import {
   MdCall,
 } from 'react-icons/md'
 
-import { UserContext } from '../../context/UserContext'
+import { UserContext } from '../../../context/UserContext'
 
-const BacentaLeaderHomePage = () => {
+const HomePage = () => {
   const { currentUser } = useContext(UserContext)
 
   return (
@@ -29,6 +29,7 @@ const BacentaLeaderHomePage = () => {
               {currentUser?.firstName} {currentUser?.lastName}
             </Text>
             <Text
+              color={''}
               style={{ color: 'grey', textAlign: 'center' }}
               fontSize={'sm'}
             >
@@ -76,4 +77,4 @@ const BacentaLeaderHomePage = () => {
   )
 }
 
-export default BacentaLeaderHomePage
+export default HomePage

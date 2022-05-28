@@ -1,11 +1,12 @@
-import BacentaLeaderHomePage from './BacentaLeaderHomePage'
+import Navigation from '../../components/Navigation'
+import BacentaLeaderHomePage from './HomePage/HomePage'
 import BacentaMembers from './membership/BacentaMembers'
 import ProfilePage from './membership/ProfilePage'
 import LandingPage from './ProfileChoosePage'
 
 export type RouteArrayType = {
   path: string
-  roles: string[]
+  roles?: string[]
   element: () => JSX.Element
   placeholder?: boolean
 }[]
@@ -15,6 +16,10 @@ export const directory: RouteArrayType = [
     path: '/profile-choose-page',
     element: LandingPage,
     roles: ['all'],
+  },
+  {
+    path: '/nav',
+    element: Navigation,
   },
   {
     path: '/bacenta/member-list',

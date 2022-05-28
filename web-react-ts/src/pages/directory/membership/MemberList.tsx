@@ -12,6 +12,7 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  Center,
 } from '@chakra-ui/react'
 
 import { SearchIcon } from '@chakra-ui/icons'
@@ -42,13 +43,10 @@ const MemberList = (props: MemberListPropType) => {
           flexDirection: 'column',
         }}
       >
-        <Text
-          fontSize={'4xl'}
-          style={{ color: 'white', textAlign: 'center', padding: '10px' }}
-        >
-          {' '}
-          View Membership
-        </Text>
+        <Center>
+          <Text fontSize={'4xl'}>View Membership </Text>
+        </Center>
+
         <InputGroup
           style={{
             width: '300px',
@@ -69,17 +67,12 @@ const MemberList = (props: MemberListPropType) => {
         </InputGroup>
 
         <Text fontSize={'xl'} style={{ alignSelf: 'center', color: '#aeafae' }}>
-          {' '}
           Total Members : {memberSize}
         </Text>
       </div>
 
-      <Accordion
-        style={{ backgroundColor: '#232423' }}
-        defaultIndex={[0]}
-        allowToggle
-      >
-        <AccordionItem style={{ borderStyle: 'none' }}>
+      <Accordion defaultIndex={[0]} allowToggle>
+        <AccordionItem>
           <h2>
             <AccordionButton
               style={{
@@ -93,7 +86,7 @@ const MemberList = (props: MemberListPropType) => {
               <AccordionIcon />
             </AccordionButton>
           </h2>
-          <Box style={{ paddingLeft: '10px', paddingRight: '10px' }}>
+          <Box paddingLeft="10px" paddingRight="10px">
             <AccordionPanel
               pb={4}
               style={{ height: '570px', overflowY: 'scroll' }}

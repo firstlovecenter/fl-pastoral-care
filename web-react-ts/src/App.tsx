@@ -4,6 +4,7 @@ import Dashboard from './pages/directory/Dashboard'
 import { ChurchContextProvider } from './context/ChurchContext'
 import { UserContextProvider } from './context/UserContext'
 import { directory } from './pages/directory/directoryRoutes'
+import ProtectedRoute from './auth/ProtectedRoute'
 import Navigation from './components/Navigation'
 
 export default function App(): JSX.Element {
@@ -17,12 +18,12 @@ export default function App(): JSX.Element {
               key={i}
               path={route.path}
               element={
-                // <ProtectedRoute
+                <ProtectedRoute
                 //   roles={route.roles ?? ['all']}
                 //   placeholder={route.placeholder}
-                // >
-                <route.element />
-                // </ProtectedRoute>
+                >
+                  <route.element />
+                </ProtectedRoute>
               }
             />
           ))}

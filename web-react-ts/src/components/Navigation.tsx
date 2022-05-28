@@ -1,6 +1,6 @@
+import { HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
-  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -8,6 +8,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  IconButton,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -21,12 +22,22 @@ const Navigation = () => {
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-        Open
-      </Button>
+      <IconButton
+        colorScheme="gray"
+        aria-label="Side Nav Toggle"
+        size="lg"
+        position="fixed"
+        bottom={4}
+        right={6}
+        zIndex={2}
+        isRound
+        ref={btnRef}
+        onClick={onOpen}
+        icon={<HamburgerIcon />}
+      />
       <Drawer
         isOpen={isOpen}
-        placement="right"
+        placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
       >

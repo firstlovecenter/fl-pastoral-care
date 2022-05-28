@@ -38,6 +38,13 @@ export enum ChurchEnum {
   Bacenta = 'Bacenta',
 }
 
+export enum ChurchLevelEnum {
+  Bacenta = 'Bacenta',
+  Constituency = 'Constituency',
+  Council = 'Council',
+  GatheringService = 'GatheringService',
+}
+
 export enum RolesEnum {
   leaderGatheringService = 'leaderGatheringService',
   leaderStream = 'leaderStream',
@@ -70,6 +77,9 @@ const useClickCard = () => {
     sessionStorage.getItem('church')
       ? JSON.parse(sessionStorage.getItem('church') ?? '')
       : { church: '', subChurch: '' }
+  )
+  const [churchLevel, setChurchLevel] = useState(
+    sessionStorage.getItem('churchLevel') ?? ''
   )
   const [gatheringServiceId, setGatheringServiceId] = useState(
     sessionStorage.getItem('gatheringServiceId' ?? '')
@@ -354,9 +364,16 @@ const useClickCard = () => {
       card.link = `/${card.__typename.toLowerCase()}/displaydetails`
     }
   }
+
+  const SetChurchLevel = (level: ChurchLevelEnum) => {
+    setChurchLevel(level)
+    sessionStorage.setItem('churchLevel', level)
+  }
+
   return {
     clickCard,
     church,
+    churchLevel,
     memberId,
     gatheringServiceId,
     streamId,
@@ -368,6 +385,7 @@ const useClickCard = () => {
     ministryId,
 
     //Set State
+    SetChurchLevel,
     setGatheringServiceId,
     setChurch,
     setStreamId,

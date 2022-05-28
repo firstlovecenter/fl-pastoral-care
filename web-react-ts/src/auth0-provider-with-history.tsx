@@ -9,7 +9,7 @@ export const Auth0ProviderWithHistory = ({
   const navigate = useNavigate()
   const { domain, clientId, audience } = useEnv()
 
-  const onRedirectCallback = (appState: AppState) => {
+  const onRedirectCallback = (appState: AppState | undefined) => {
     navigate(appState?.returnTo || window.location.pathname)
   }
 

@@ -1,9 +1,11 @@
 import { createContext } from 'react'
-import useClickCard, { CardType } from '../hooks/useClickCard'
+import useClickCard, { CardType, ChurchLevelEnum } from '../hooks/useClickCard'
 import { ContextProviderProps } from './context.types'
 
 interface ChurchContextInterface {
   clickCard: (card: CardType) => void
+  churchLevel: ChurchLevelEnum | string
+  setChurchLevel: (level: ChurchLevelEnum) => void
   church: any
   memberId: string
   gatheringServiceId: string | null
@@ -18,6 +20,8 @@ interface ChurchContextInterface {
 
 export const ChurchContext = createContext<ChurchContextInterface>({
   clickCard: (card: CardType) => null,
+  churchLevel: sessionStorage.getItem('churchLevel') ?? '',
+  setChurchLevel: (level: ChurchLevelEnum) => null,
   church: sessionStorage.getItem('church')
     ? JSON.parse(sessionStorage.getItem('church') ?? '')
     : { church: '', subChurch: '' },
@@ -36,6 +40,8 @@ export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
   const {
     clickCard,
     church,
+    churchLevel,
+    SetChurchLevel,
     memberId,
     gatheringServiceId,
     streamId,
@@ -47,10 +53,14 @@ export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
     ministryId,
   } = useClickCard()
 
+  const setChurchLevel = SetChurchLevel
+
   return (
     <ChurchContext.Provider
       value={{
         clickCard,
+        setChurchLevel,
+        churchLevel,
         church,
         memberId,
         gatheringServiceId,
