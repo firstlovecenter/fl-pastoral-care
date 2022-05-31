@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import { EnvProvider } from './context/env.context'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Auth0ProviderWithHistory } from './auth0-provider-with-history'
@@ -93,6 +93,7 @@ const root = createRoot(container!)
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <EnvProvider>
         <Router>
           <Auth0ProviderWithHistory>

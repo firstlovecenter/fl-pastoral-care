@@ -3,7 +3,7 @@ import Login from './Login'
 
 const Dashboard = () => {
   return (
-    <Container style={{ backgroundColor: 'black' }}>
+    <Container>
       Dashboard
       <Login />
     </Container>

@@ -9,7 +9,7 @@ const HeaderText = () => {
     <Container marginTop="5" marginBottom={10} centerContent>
       <Image style={{ height: '50px' }} src={whitelogo} alt="First Love Logo" />
 
-      <Text fontSize="xl" color="white" fontWeight={'semibold'}>
+      <Text fontSize="xl" fontWeight={'semibold'}>
         <span style={{ color: '#a53c35' }}>Welcome </span>
         {user?.given_name}!
       </Text>

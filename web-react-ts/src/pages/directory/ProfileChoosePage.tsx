@@ -20,7 +20,7 @@ const ProfileChoosePage = () => {
   const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0()
   const { data, loading, error } = useQuery(GET_USER_ROLES, {
     variables: {
-      id: user?.sub,
+      id: user?.sub || '',
     },
     onCompleted: (data) => {
       setUser(data?.members[0])

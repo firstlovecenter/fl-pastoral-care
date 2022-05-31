@@ -1,9 +1,11 @@
-import { Container } from '@chakra-ui/react'
+import { Center, Container, Text } from '@chakra-ui/react'
 
 const ErrorScreen = () => {
   return (
     <Container>
-      <p className="text-center">There seems to be an error loading data</p>
+      <Text>
+        <Center>There seems to be an error loading data</Center>
+      </Text>
     </Container>
   )
 }

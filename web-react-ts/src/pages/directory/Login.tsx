@@ -8,15 +8,16 @@ const Login = () => {
 
   let navigate = useNavigate()
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/profile-choose-page')
-    }
-  }, [isAuthenticated, navigate])
-
   return (
     <div>
-      <Button onClick={() => loginWithRedirect()}>Login</Button>
+      {!isAuthenticated && (
+        <Button onClick={() => loginWithRedirect()}>Login</Button>
+      )}
+      {isAuthenticated && (
+        <Button onClick={() => navigate('/profile-choose-page')}>
+          Go To Dashboard
+        </Button>
+      )}
     </div>
   )
 }

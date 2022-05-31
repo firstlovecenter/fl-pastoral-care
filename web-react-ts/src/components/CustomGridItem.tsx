@@ -23,11 +23,9 @@ const GridButton = (props: ButtonProps) => {
       bg="#292a29"
       onClick={props.onClick}
     >
-      <Text fontSize="sm" style={{ color: 'white' }}>
-        {props.roleName}
-      </Text>
+      <Text fontSize="sm">{props.roleName}</Text>
       <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" size="lg" />
-      <Text fontSize="10px" style={{ color: 'white', textAlign: 'center' }}>
+      <Text fontSize="10px" style={{ textAlign: 'center' }}>
         {props.roleLocation}
       </Text>
     </GridItem>

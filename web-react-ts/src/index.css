@@ -18,11 +18,3 @@ code {
   padding-bottom: 80px;
   overflow-x: hidden;
 }
-.bg.dark {
-  color: var(--text-primary);
-  background-color: var(--body-bg);
-}
-.bg.light {
-  color: var(--text-primary);
-  background-color: var(--body-bg);
-}
