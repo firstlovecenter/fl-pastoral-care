@@ -28,9 +28,14 @@ export const directory: RouteArrayType = [
   },
 
   {
-    path: '/dashboard',
+    path: '/bacenta/dashboard',
     element: BacentaLeaderHomePage,
-    roles: ['all'],
+    roles: ['leaderBacenta'],
+  },
+  {
+    path: '/constituency/dashboard',
+    element: BacentaLeaderHomePage,
+    roles: ['leaderBacenta'],
   },
   {
     path: '/member-profile-page',

@@ -23,14 +23,15 @@ import { useContext } from 'react'
 import { ChurchContext } from '../../../context/ChurchContext'
 
 type MemberListPropType = {
-  data: any
+  church: any
 }
 
 const MemberList = (props: MemberListPropType) => {
   const { clickCard } = useContext(ChurchContext)
   const navigate = useNavigate()
-  const { data } = props
-  const memberSize = data?.sheep.length + data?.deer.length + data?.goat.length
+  const { church } = props
+  const memberSize =
+    church?.sheep.length + church?.deer.length + church?.goat.length
 
   return (
     <>
@@ -92,7 +93,7 @@ const MemberList = (props: MemberListPropType) => {
               style={{ height: '570px', overflowY: 'scroll' }}
             >
               <List spacing={3}>
-                {data?.sheep.map(
+                {church?.sheep.map(
                   (sheep: ListMemberInterface, index: number) => (
                     <ListItem
                       key={index}
@@ -138,25 +139,27 @@ const MemberList = (props: MemberListPropType) => {
               style={{ height: '570px', overflowY: 'scroll' }}
             >
               <List spacing={3}>
-                {data?.deer.map((deer: ListMemberInterface, index: number) => (
-                  <ListItem
-                    key={index}
-                    onClick={() => {
-                      clickCard(deer)
-                      navigate('/member-profile-page')
-                    }}
-                    style={{ fontSize: '20px', color: 'white' }}
-                  >
-                    <Avatar
-                      size="sm"
-                      loading="lazy"
-                      name={(deer.firstName, deer.lastName)}
-                      style={{ marginRight: '10px' }}
-                      src={transformImage(deer.pictureUrl)}
-                    />
-                    {deer.firstName} {deer.lastName}
-                  </ListItem>
-                ))}
+                {church?.deer.map(
+                  (deer: ListMemberInterface, index: number) => (
+                    <ListItem
+                      key={index}
+                      onClick={() => {
+                        clickCard(deer)
+                        navigate('/member-profile-page')
+                      }}
+                      style={{ fontSize: '20px', color: 'white' }}
+                    >
+                      <Avatar
+                        size="sm"
+                        loading="lazy"
+                        name={(deer.firstName, deer.lastName)}
+                        style={{ marginRight: '10px' }}
+                        src={transformImage(deer.pictureUrl)}
+                      />
+                      {deer.firstName} {deer.lastName}
+                    </ListItem>
+                  )
+                )}
               </List>
             </AccordionPanel>
           </Box>
@@ -182,25 +185,27 @@ const MemberList = (props: MemberListPropType) => {
               style={{ height: '570px', overflowY: 'scroll' }}
             >
               <List spacing={3}>
-                {data?.goat.map((goat: ListMemberInterface, index: number) => (
-                  <ListItem
-                    key={index}
-                    onClick={() => {
-                      clickCard(goat)
-                      navigate('/member-profile-page')
-                    }}
-                    style={{ fontSize: '20px', color: 'white' }}
-                  >
-                    <Avatar
-                      size="sm"
-                      loading="lazy"
-                      name={(goat.firstName, goat.lastName)}
-                      style={{ marginRight: '10px' }}
-                      src={transformImage(goat.pictureUrl)}
-                    />
-                    {goat.firstName} {goat.lastName}
-                  </ListItem>
-                ))}
+                {church?.goat.map(
+                  (goat: ListMemberInterface, index: number) => (
+                    <ListItem
+                      key={index}
+                      onClick={() => {
+                        clickCard(goat)
+                        navigate('/member-profile-page')
+                      }}
+                      style={{ fontSize: '20px', color: 'white' }}
+                    >
+                      <Avatar
+                        size="sm"
+                        loading="lazy"
+                        name={(goat.firstName, goat.lastName)}
+                        style={{ marginRight: '10px' }}
+                        src={transformImage(goat.pictureUrl)}
+                      />
+                      {goat.firstName} {goat.lastName}
+                    </ListItem>
+                  )
+                )}
               </List>
             </AccordionPanel>
           </Box>
