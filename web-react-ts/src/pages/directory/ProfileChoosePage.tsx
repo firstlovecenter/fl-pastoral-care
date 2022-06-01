@@ -11,12 +11,11 @@ import { GET_USER_ROLES } from '../../queries/user-roles.gql'
 import ApolloWrapper from '../../components/ApolloWrapper/ApolloWrapper'
 import { useContext } from 'react'
 import { ChurchContext } from '../../context/ChurchContext'
-import { ChurchLevelEnum } from '../../hooks/useClickCard'
 
 const ProfileChoosePage = () => {
   let navigate = useNavigate()
   const { setUser } = useUser()
-  const { clickCard, setChurchLevel } = useContext(ChurchContext)
+  const { clickCard } = useContext(ChurchContext)
   const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0()
   const { data, loading, error } = useQuery(GET_USER_ROLES, {
     variables: {
@@ -40,8 +39,7 @@ const ProfileChoosePage = () => {
                   key={i}
                   onClick={() => {
                     clickCard(bacenta)
-                    setChurchLevel(ChurchLevelEnum.Bacenta)
-                    navigate('/dashboard')
+                    navigate('/bacenta/dashboard')
                   }}
                   roleName="Bacenta Leader"
                   roleLocation={bacenta.name}
@@ -54,8 +52,7 @@ const ProfileChoosePage = () => {
                   key={i}
                   onClick={() => {
                     clickCard(constituency)
-                    setChurchLevel(ChurchLevelEnum.Constituency)
-                    navigate('/dashboard')
+                    navigate('/constituency/dashboard')
                   }}
                   roleName="Constituency Overseer"
                   roleLocation={constituency.name}
@@ -68,8 +65,7 @@ const ProfileChoosePage = () => {
                   key={i}
                   onClick={() => {
                     clickCard(council)
-                    setChurchLevel(ChurchLevelEnum.Council)
-                    navigate('/dashboard')
+                    navigate('/council/dashboard')
                   }}
                   roleName="Bishop"
                   roleLocation={council.name}
@@ -82,8 +78,7 @@ const ProfileChoosePage = () => {
                   key={i}
                   onClick={() => {
                     clickCard(gatheringService)
-                    setChurchLevel(ChurchLevelEnum.GatheringService)
-                    navigate('/dashboard')
+                    navigate('gathering-service/dashboard')
                   }}
                   roleName="Resident Bishop"
                   roleLocation={gatheringService.name}
@@ -94,7 +89,7 @@ const ProfileChoosePage = () => {
               (gatheringService: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/admin/dashboard')}
                   roleName="Super Admin"
                   roleLocation={gatheringService.name}
                 />

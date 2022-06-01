@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Avatar, Container, Text } from '@chakra-ui/react'
+import { Avatar, Container, Text, VStack } from '@chakra-ui/react'
 import PageNavButton from '../../../components/PageNavButton'
 import {
   MdGroups,
@@ -10,9 +10,12 @@ import {
 } from 'react-icons/md'
 
 import { UserContext } from '../../../context/UserContext'
+import { ChurchContext } from '../../../context/ChurchContext'
 
 const HomePage = () => {
   const { currentUser } = useContext(UserContext)
+  const { church } = useContext(ChurchContext)
+  const churchLevel = church.level.toLowerCase()
 
   return (
     <Container>
@@ -24,7 +27,7 @@ const HomePage = () => {
             marginLeft: '40px',
           }}
         >
-          <span style={{ color: 'white', marginTop: '30px' }}>
+          <span style={{ marginTop: '30px' }}>
             <Text fontSize={'lg'}>
               {currentUser?.firstName} {currentUser?.lastName}
             </Text>
@@ -33,46 +36,75 @@ const HomePage = () => {
               style={{ color: 'grey', textAlign: 'center' }}
               fontSize={'sm'}
             >
-              Bacenta Leader
+              {church.level} Leader
             </Text>
           </span>
           <Avatar
             src={currentUser?.pictureUrl}
             loading="lazy"
             size="xl"
-            style={{ marginRight: '10px' }}
+            marginRight="10px"
           />
         </section>
 
-        <section style={{ marginTop: '30px', marginBottom: '40px' }}>
-          <Text fontSize="2xl" style={{ color: 'white', textAlign: 'center' }}>
-            {currentUser?.leadsBacenta?.length &&
-              currentUser.leadsBacenta[0].name}{' '}
-            Bacenta
+        <Container marginTop="30px" marginBottom="40px" centerContent>
+          <Text fontSize="2xl">
+            {church.name} {church.level}
           </Text>
-          <Text fontSize="xs" style={{ color: 'grey', textAlign: 'center' }}>
-            SouthEastern Constituency
-          </Text>
-        </section>
+          <Text fontSize="xs">SouthEastern Constituency</Text>
+        </Container>
       </header>
 
-      <PageNavButton icon={MdGroups} label="Sunday Attendance" />
+      <VStack spacing={3}>
+        <PageNavButton
+          icon={MdGroups}
+          label="Sunday Attendance"
+          to={`/${churchLevel}/sunday-attendance`}
+        />
 
-      <PageNavButton icon={MdGroups} label="Fellowship Attendance" />
-      <PageNavButton
-        icon={MdDirectionsRun}
-        label="First Timers & New Converts"
-      />
-      <PageNavButton icon={MdGroups} label="Membership List" />
+        <PageNavButton
+          icon={MdGroups}
+          label="Fellowship Attendance"
+          to={`/${churchLevel}/fellowship-attendance`}
+        />
+        <PageNavButton
+          icon={MdDirectionsRun}
+          label="First Timers & New Converts"
+          to={`/${churchLevel}/first-timers`}
+        />
+        <PageNavButton
+          icon={MdGroups}
+          label="Membership List"
+          to={`/${churchLevel}/member-list`}
+        />
+      </VStack>
 
-      <Text fontSize="md" color="grey" textAlign="center" marginTop="15px">
+      <Text fontSize="md" color="grey" textAlign="center" marginY="15px">
         Outstanding Work
       </Text>
 
-      <PageNavButton icon={MdDirectionsRun} label="Missing Persons Call List" />
-      <PageNavButton icon={MdMenuBook} label="Visitations" />
-      <PageNavButton icon={MdBatteryAlert} label="Prayer" />
-      <PageNavButton icon={MdCall} label="Telepastoring Calls" />
+      <VStack spacing={3}>
+        <PageNavButton
+          icon={MdDirectionsRun}
+          label="Missing Persons Call List"
+          to={`/${churchLevel}/missing-persons`}
+        />
+        <PageNavButton
+          icon={MdMenuBook}
+          label="Visitations"
+          to={`/${churchLevel}/outstanding-visitations`}
+        />
+        <PageNavButton
+          icon={MdBatteryAlert}
+          label="Prayer"
+          to={`/${churchLevel}/outstanding-prayer`}
+        />
+        <PageNavButton
+          icon={MdCall}
+          label="Telepastoring Calls"
+          to={`/${churchLevel}/outstanding-telepastoring`}
+        />
+      </VStack>
     </Container>
   )
 }

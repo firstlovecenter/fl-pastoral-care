@@ -2,20 +2,22 @@ import { useQuery } from '@apollo/client'
 import { useContext } from 'react'
 import ApolloWrapper from '../../../components/ApolloWrapper/ApolloWrapper'
 import { ChurchContext } from '../../../context/ChurchContext'
-import { GET_BACENTA_MEMBERS } from './member-list.gql'
+import { GET_COUNCIL_MEMBERS } from './member-list.gql'
 import MemberList from './MemberList'
 
-const BacentaMembers = () => {
-  const { bacentaId } = useContext(ChurchContext)
-  const apollo = useQuery(GET_BACENTA_MEMBERS, { variables: { id: bacentaId } })
+const CouncilMembers = () => {
+  const { councilId } = useContext(ChurchContext)
+  const apollo = useQuery(GET_COUNCIL_MEMBERS, {
+    variables: { id: councilId },
+  })
 
-  const bacenta = apollo.data?.bacentas[0]
+  const council = apollo.data?.councils[0]
 
   return (
     <ApolloWrapper apolloData={apollo}>
-      <MemberList church={bacenta} />
+      <MemberList church={council} />
     </ApolloWrapper>
   )
 }
 
-export default BacentaMembers
+export default CouncilMembers

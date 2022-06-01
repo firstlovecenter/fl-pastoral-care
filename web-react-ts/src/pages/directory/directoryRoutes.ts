@@ -1,6 +1,8 @@
 import Navigation from '../../components/Navigation'
-import BacentaLeaderHomePage from './HomePage/HomePage'
+import HomePage from './HomePage/HomePage'
 import BacentaMembers from './membership/BacentaMembers'
+import ConstituencyMembers from './membership/ConsituencyMembers'
+import CouncilMembers from './membership/CouncilMembers'
 import ProfilePage from './membership/ProfilePage'
 import LandingPage from './ProfileChoosePage'
 
@@ -24,18 +26,33 @@ export const directory: RouteArrayType = [
   {
     path: '/bacenta/member-list',
     element: BacentaMembers,
-    roles: ['all'],
+    roles: ['leaderBacenta'],
+  },
+  {
+    path: '/constituency/member-list',
+    element: ConstituencyMembers,
+    roles: ['leaderConstituency'],
+  },
+  {
+    path: '/council/member-list',
+    element: CouncilMembers,
+    roles: ['leaderCouncil'],
   },
 
   {
     path: '/bacenta/dashboard',
-    element: BacentaLeaderHomePage,
+    element: HomePage,
     roles: ['leaderBacenta'],
   },
   {
     path: '/constituency/dashboard',
-    element: BacentaLeaderHomePage,
-    roles: ['leaderBacenta'],
+    element: HomePage,
+    roles: ['leaderConstituency'],
+  },
+  {
+    path: '/council/dashboard',
+    element: HomePage,
+    roles: ['leaderCouncil'],
   },
   {
     path: '/member-profile-page',

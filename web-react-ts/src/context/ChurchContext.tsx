@@ -1,12 +1,18 @@
 import { createContext } from 'react'
-import useClickCard, { CardType, ChurchLevelEnum } from '../hooks/useClickCard'
+import useClickCard, {
+  CardType,
+  ChurchLevelEnum,
+  StreamEnum,
+} from '../hooks/useClickCard'
 import { ContextProviderProps } from './context.types'
 
 interface ChurchContextInterface {
   clickCard: (card: CardType) => void
-  churchLevel: ChurchLevelEnum | string
-  setChurchLevel: (level: ChurchLevelEnum) => void
-  church: any
+  church: {
+    stream: StreamEnum
+    name: string
+    level: ChurchLevelEnum
+  }
   memberId: string
   gatheringServiceId: string | null
   streamId: string
@@ -20,11 +26,9 @@ interface ChurchContextInterface {
 
 export const ChurchContext = createContext<ChurchContextInterface>({
   clickCard: (card: CardType) => null,
-  churchLevel: sessionStorage.getItem('churchLevel') ?? '',
-  setChurchLevel: (level: ChurchLevelEnum) => null,
   church: sessionStorage.getItem('church')
     ? JSON.parse(sessionStorage.getItem('church') ?? '')
-    : { church: '', subChurch: '' },
+    : { church: '', level: '' },
   memberId: '',
   gatheringServiceId: sessionStorage.getItem('gatheringServiceId') ?? '',
   streamId: sessionStorage.getItem('streamId') ?? '',
@@ -40,8 +44,6 @@ export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
   const {
     clickCard,
     church,
-    churchLevel,
-    SetChurchLevel,
     memberId,
     gatheringServiceId,
     streamId,
@@ -53,14 +55,10 @@ export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
     ministryId,
   } = useClickCard()
 
-  const setChurchLevel = SetChurchLevel
-
   return (
     <ChurchContext.Provider
       value={{
         clickCard,
-        setChurchLevel,
-        churchLevel,
         church,
         memberId,
         gatheringServiceId,

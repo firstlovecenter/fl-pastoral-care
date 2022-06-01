@@ -93,8 +93,8 @@ const root = createRoot(container!)
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <EnvProvider>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Router>
           <Auth0ProviderWithHistory>
             <AppWithSetUp />

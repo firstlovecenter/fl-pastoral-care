@@ -1,38 +1,33 @@
-import React from 'react'
-import { Icon, Text } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
+import { Button, Icon, Text } from '@chakra-ui/react'
+import { IconType } from 'react-icons'
+import { useNavigate } from 'react-router'
 
-const PageNavButton = (props: any) => {
-  let navigate = useNavigate()
-
-  function memberPage() {
-    navigate('/bacenta/member-list')
-  }
-
+type PageNavButtonTypes = {
+  icon: IconType
+  label: string
+  to: string
+}
+const PageNavButton = (props: PageNavButtonTypes) => {
+  const navigate = useNavigate()
   return (
-    <section
-      style={{
-        display: 'flex',
-        color: 'white',
-        background: '#292a29',
-        margin: '15px 10px 0 10px',
-        height: '50px',
-        padding: '10px',
-        borderRadius: '5px',
-      }}
-      onClick={memberPage}
+    <Button
+      width={`100%`}
+      size="lg"
+      justifyContent={`flex-start`}
+      onClick={() => navigate(props.to)}
     >
       <Icon
         as={props.icon}
         w={5}
         h={5}
         color="red.500"
-        style={{ margin: '5px 25px 0 10px' }}
+        margin="0px 10px 0 0px"
+        verticalAlign="middle"
       />
-      <Text fontSize="sm" verticalAlign="middle" paddingTop="5px">
+      <Text fontSize="sm" verticalAlign="middle">
         {props.label}
       </Text>
-    </section>
+    </Button>
   )
 }
 

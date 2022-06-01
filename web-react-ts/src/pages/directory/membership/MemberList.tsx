@@ -6,9 +6,7 @@ import {
   AccordionIcon,
   Box,
   List,
-  ListItem,
   Text,
-  Avatar,
   InputGroup,
   InputLeftElement,
   Input,
@@ -16,19 +14,14 @@ import {
 } from '@chakra-ui/react'
 
 import { SearchIcon } from '@chakra-ui/icons'
-import { transformImage } from '../../../utils/global-utils'
-import { useNavigate } from 'react-router'
 import { ListMemberInterface } from './member-list.types'
-import { useContext } from 'react'
-import { ChurchContext } from '../../../context/ChurchContext'
+import MemberListItem from './MemberListItem'
 
 type MemberListPropType = {
   church: any
 }
 
 const MemberList = (props: MemberListPropType) => {
-  const { clickCard } = useContext(ChurchContext)
-  const navigate = useNavigate()
   const { church } = props
   const memberSize =
     church?.sheep.length + church?.deer.length + church?.goat.length
@@ -59,12 +52,7 @@ const MemberList = (props: MemberListPropType) => {
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
           />
-          <Input
-            style={{ backgroundColor: '#333533' }}
-            type="Text"
-            placeholder="Search"
-            color="white"
-          />
+          <Input type="Text" placeholder="Search" color="white" />
         </InputGroup>
 
         <Text fontSize={'xl'} style={{ alignSelf: 'center', color: '#aeafae' }}>
@@ -95,23 +83,7 @@ const MemberList = (props: MemberListPropType) => {
               <List spacing={3}>
                 {church?.sheep.map(
                   (sheep: ListMemberInterface, index: number) => (
-                    <ListItem
-                      key={index}
-                      onClick={() => {
-                        clickCard(sheep)
-                        navigate('/member-profile-page')
-                      }}
-                      style={{ fontSize: '20px', color: 'white' }}
-                    >
-                      <Avatar
-                        loading="lazy"
-                        size="sm"
-                        name={sheep.firstName + ' ' + sheep.lastName}
-                        style={{ marginRight: '10px' }}
-                        src={sheep.pictureUrl}
-                      />
-                      {sheep.firstName} {sheep.lastName}
-                    </ListItem>
+                    <MemberListItem member={sheep} key={index} />
                   )
                 )}
               </List>
@@ -141,23 +113,7 @@ const MemberList = (props: MemberListPropType) => {
               <List spacing={3}>
                 {church?.deer.map(
                   (deer: ListMemberInterface, index: number) => (
-                    <ListItem
-                      key={index}
-                      onClick={() => {
-                        clickCard(deer)
-                        navigate('/member-profile-page')
-                      }}
-                      style={{ fontSize: '20px', color: 'white' }}
-                    >
-                      <Avatar
-                        size="sm"
-                        loading="lazy"
-                        name={(deer.firstName, deer.lastName)}
-                        style={{ marginRight: '10px' }}
-                        src={transformImage(deer.pictureUrl)}
-                      />
-                      {deer.firstName} {deer.lastName}
-                    </ListItem>
+                    <MemberListItem key={index} member={deer} />
                   )
                 )}
               </List>
@@ -187,23 +143,7 @@ const MemberList = (props: MemberListPropType) => {
               <List spacing={3}>
                 {church?.goat.map(
                   (goat: ListMemberInterface, index: number) => (
-                    <ListItem
-                      key={index}
-                      onClick={() => {
-                        clickCard(goat)
-                        navigate('/member-profile-page')
-                      }}
-                      style={{ fontSize: '20px', color: 'white' }}
-                    >
-                      <Avatar
-                        size="sm"
-                        loading="lazy"
-                        name={(goat.firstName, goat.lastName)}
-                        style={{ marginRight: '10px' }}
-                        src={transformImage(goat.pictureUrl)}
-                      />
-                      {goat.firstName} {goat.lastName}
-                    </ListItem>
+                    <MemberListItem key={index} member={goat} />
                   )
                 )}
               </List>
