@@ -5,10 +5,12 @@ import { MdArrowBackIosNew } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { ChurchContext } from '../../../context/ChurchContext'
 import { useQuery } from '@apollo/client'
-import { GET_MEMBER_PROFILE } from './ProfilePage.gql'
+import { GET_MEMBER_PROFILE } from './MemberDetails.gql'
 import ApolloWrapper from '../../../components/ApolloWrapper/ApolloWrapper'
+import { transformImage } from '../../../utils/global-utils'
+import { getHumanReadableDate } from 'jd-date-utils'
 
-const ProfilePage = () => {
+const MemberDetails = () => {
   const { memberId } = useContext(ChurchContext)
   const { data, loading, error } = useQuery(GET_MEMBER_PROFILE, {
     variables: { id: memberId },
@@ -59,14 +61,17 @@ const ProfilePage = () => {
             size="xl"
             name={member?.firstName + ' ' + member?.lastName}
             style={{ marginRight: '10px' }}
-            src={member?.pictureUrl}
+            src={transformImage(member?.pictureUrl)}
           />
           <Text fontSize="2xl" style={{ color: 'white' }}>
             {member?.firstName} {member?.lastName}
           </Text>
 
           <ProfileField Text="Sex" SubText={member?.gender.gender} />
-          <ProfileField Text="Date Of Birth" SubText={member?.dob.date} />
+          <ProfileField
+            Text="Date Of Birth"
+            SubText={getHumanReadableDate(member?.dob.date) || ''}
+          />
           <ProfileField Text="Phone Number" SubText={member?.phoneNumber} />
           <ProfileField Text="Stream" SubText={member?.stream_name} />
           <ProfileField Text="Bacenta Leader" SubText="" />
@@ -82,4 +87,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default MemberDetails

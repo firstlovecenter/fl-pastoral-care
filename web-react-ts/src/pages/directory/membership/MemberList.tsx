@@ -63,12 +63,7 @@ const MemberList = (props: MemberListPropType) => {
       <Accordion defaultIndex={[0]} allowToggle>
         <AccordionItem>
           <h2>
-            <AccordionButton
-              style={{
-                backgroundColor: '#343534',
-                color: 'white',
-              }}
-            >
+            <AccordionButton>
               <Box flex="1" textAlign="left">
                 Sheep
               </Box>
@@ -93,12 +88,7 @@ const MemberList = (props: MemberListPropType) => {
 
         <AccordionItem style={{ borderStyle: 'none' }}>
           <h2>
-            <AccordionButton
-              style={{
-                backgroundColor: '#343534',
-                color: 'white',
-              }}
-            >
+            <AccordionButton>
               <Box flex="1" textAlign="left">
                 Deer
               </Box>
@@ -123,12 +113,7 @@ const MemberList = (props: MemberListPropType) => {
 
         <AccordionItem style={{ borderStyle: 'none' }}>
           <h2>
-            <AccordionButton
-              style={{
-                backgroundColor: '#343534',
-                color: 'white',
-              }}
-            >
+            <AccordionButton>
               <Box flex="1" textAlign="left">
                 Goat
               </Box>
@@ -138,7 +123,8 @@ const MemberList = (props: MemberListPropType) => {
           <Box style={{ paddingLeft: '10px', paddingRight: '10px' }}>
             <AccordionPanel
               pb={4}
-              style={{ height: '570px', overflowY: 'scroll' }}
+              overflowY="scroll"
+              style={{ height: '570px' }}
             >
               <List spacing={3}>
                 {church?.goat.map(

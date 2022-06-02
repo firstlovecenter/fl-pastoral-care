@@ -18,7 +18,7 @@ const MemberListItem = ({
       {...rest}
       onClick={() => {
         clickCard(member)
-        navigate('/member-profile-page')
+        navigate('/member-details')
       }}
       fontSize="20px"
     >
