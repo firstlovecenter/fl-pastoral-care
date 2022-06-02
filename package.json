@@ -55,6 +55,6 @@
   "license": "Apache-2.0",
   "version": "0.5.22",
   "dependencies": {
-    "jd-date-utils": "^1.0.1"
+    "jd-date-utils": "^1.0.3"
   }
 }
