@@ -7,14 +7,29 @@ import { GET_MEMBER_PROFILE } from './MemberDetails.gql'
 import ApolloWrapper from '../../../components/ApolloWrapper/ApolloWrapper'
 import { transformImage } from '../../../utils/global-utils'
 import { getHumanReadableDate } from 'jd-date-utils'
-
+type DetailType = {
+  text: string
+  subText?: string
+}
 const MemberDetails = () => {
   const { memberId } = useContext(ChurchContext)
   const { data, loading, error } = useQuery(GET_MEMBER_PROFILE, {
     variables: { id: memberId },
   })
   const member = data?.members[0]
-
+  const details: DetailType[] = [
+    { text: 'Sex', subText: member?.gender.gender },
+    { text: 'Date of Birth', subText: getHumanReadableDate(member?.dob.date) },
+    { text: 'Phone Number', subText: member?.phoneNumber },
+    { text: 'Stream', subText: member?.stream_name },
+    { text: 'Bacenta Leader' },
+    { text: 'Basonta' },
+    { text: 'Holy Ghost Baptism' },
+    { text: 'Water Baptism' },
+    { text: 'Notes' },
+    { text: 'Invited By' },
+    { text: 'Last Visited' },
+  ]
   return (
     <ApolloWrapper apolloData={{ data, loading, error }}>
       <Container>
@@ -23,9 +38,7 @@ const MemberDetails = () => {
         </Center>
         <div
           style={{
-            // backgroundColor: '#393a39',
             height: 'auto',
-            padding: '20px',
             textAlign: 'center',
             minHeight: '800px',
           }}
@@ -40,21 +53,9 @@ const MemberDetails = () => {
           <Text fontSize="2xl">
             {member?.firstName} {member?.lastName}
           </Text>
-
-          <ProfileField Text="Sex" SubText={member?.gender.gender} />
-          <ProfileField
-            Text="Date Of Birth"
-            SubText={getHumanReadableDate(member?.dob.date)}
-          />
-          <ProfileField Text="Phone Number" SubText={member?.phoneNumber} />
-          <ProfileField Text="Stream" SubText={member?.stream_name} />
-          <ProfileField Text="Bacenta Leader" />
-          <ProfileField Text="Basonta" />
-          <ProfileField Text="Holy Ghost Baptism" />
-          <ProfileField Text="Water Baptism" />
-          <ProfileField Text="Notes" />
-          <ProfileField Text="Invited By" />
-          <ProfileField Text="Last Visited" />
+          {details.map((detail) => (
+            <ProfileField Text={detail.text} SubText={detail.subText} />
+          ))}
         </div>
       </Container>
     </ApolloWrapper>

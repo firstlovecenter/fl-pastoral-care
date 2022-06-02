@@ -14,7 +14,9 @@ const ProfileField = (props: ProfileFieldProps) => {
       textAlign="left"
       bgColor="blackAlpha.500"
     >
-      <Text fontSize="12px">{props.Text}</Text>
+      <Text fontSize="12px" color={`ActiveCaption`}>
+        {props.Text}
+      </Text>
       <Text fontSize="xs" color="CaptionText">
         {props.SubText || ' - '}
       </Text>
