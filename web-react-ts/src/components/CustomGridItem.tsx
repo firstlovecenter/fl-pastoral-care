@@ -1,6 +1,7 @@
 import { GridItem, Avatar, Text } from '@chakra-ui/react'
 
 interface ButtonProps {
+  src: string
   roleName: string
   roleLocation: string
   onClick?: React.MouseEventHandler<HTMLDivElement>
@@ -24,7 +25,7 @@ const GridButton = (props: ButtonProps) => {
       onClick={props.onClick}
     >
       <Text fontSize="sm">{props.roleName}</Text>
-      <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" size="lg" />
+      <Avatar name="Dan Abrahmov" src={props.src} size="lg" />
       <Text fontSize="10px" style={{ textAlign: 'center' }}>
         {props.roleLocation}
       </Text>

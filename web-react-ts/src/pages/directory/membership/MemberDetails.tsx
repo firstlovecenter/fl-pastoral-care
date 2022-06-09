@@ -53,8 +53,12 @@ const MemberDetails = () => {
           <Text fontSize="2xl">
             {member?.firstName} {member?.lastName}
           </Text>
-          {details.map((detail) => (
-            <ProfileField Text={detail.text} SubText={detail.subText} />
+          {details.map((detail, index) => (
+            <ProfileField
+              key={index}
+              Text={detail.text}
+              SubText={detail.subText}
+            />
           ))}
         </div>
       </Container>

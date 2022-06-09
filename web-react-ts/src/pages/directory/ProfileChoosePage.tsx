@@ -11,6 +11,7 @@ import { GET_USER_ROLES } from '../../queries/user-roles.gql'
 import ApolloWrapper from '../../components/ApolloWrapper/ApolloWrapper'
 import { useContext } from 'react'
 import { ChurchContext } from '../../context/ChurchContext'
+import BishopGradient from '../../assets/img/profile-choose/gradient-purple.jpeg'
 
 const ProfileChoosePage = () => {
   let navigate = useNavigate()
@@ -37,6 +38,7 @@ const ProfileChoosePage = () => {
               (bacenta: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
+                  src={BishopGradient}
                   onClick={() => {
                     clickCard(bacenta)
                     navigate('/bacenta/dashboard')
@@ -50,6 +52,7 @@ const ProfileChoosePage = () => {
               (constituency: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
+                  src={BishopGradient}
                   onClick={() => {
                     clickCard(constituency)
                     navigate('/constituency/dashboard')
@@ -63,6 +66,7 @@ const ProfileChoosePage = () => {
               (council: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
+                  src={BishopGradient}
                   onClick={() => {
                     clickCard(council)
                     navigate('/council/dashboard')
@@ -76,6 +80,7 @@ const ProfileChoosePage = () => {
               (gatheringService: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
+                  src={BishopGradient}
                   onClick={() => {
                     clickCard(gatheringService)
                     navigate('gathering-service/dashboard')
@@ -89,6 +94,7 @@ const ProfileChoosePage = () => {
               (gatheringService: memberRole, i: number): JSX.Element => (
                 <GridButton
                   key={i}
+                  src={BishopGradient}
                   onClick={() => navigate('/admin/dashboard')}
                   roleName="Super Admin"
                   roleLocation={gatheringService.name}
