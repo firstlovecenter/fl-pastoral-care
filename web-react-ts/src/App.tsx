@@ -6,6 +6,7 @@ import { UserContextProvider } from './context/UserContext'
 import { directory } from './pages/directory/directoryRoutes'
 import ProtectedRoute from './auth/ProtectedRoute'
 import Navigation from './components/Navigation'
+import { attendance } from './pages/attendance/attendanceRoutes'
 
 export default function App(): JSX.Element {
   return (
@@ -13,7 +14,7 @@ export default function App(): JSX.Element {
       <UserContextProvider>
         <Navigation />
         <Routes>
-          {[...directory].map((route, i) => (
+          {[...directory, ...attendance].map((route, i) => (
             <Route
               key={i}
               path={route.path}

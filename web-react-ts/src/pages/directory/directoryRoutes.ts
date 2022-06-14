@@ -1,17 +1,11 @@
 import Navigation from '../../components/Navigation'
+import { RouteArrayType } from '../../types/global-types'
 import HomePage from './HomePage/HomePage'
 import BacentaMembers from './membership/BacentaMembers'
 import ConstituencyMembers from './membership/ConsituencyMembers'
 import CouncilMembers from './membership/CouncilMembers'
 import ProfilePage from './membership/MemberDetails'
 import LandingPage from './ProfileChoosePage'
-
-export type RouteArrayType = {
-  path: string
-  roles?: string[]
-  element: () => JSX.Element
-  placeholder?: boolean
-}[]
 
 export const directory: RouteArrayType = [
   {

@@ -58,6 +58,7 @@ export const GET_BACENTA_MEMBERS = gql`
         id
         firstName
         lastName
+        fullName
         pictureUrl
         gender {
           gender
@@ -72,6 +73,7 @@ export const GET_BACENTA_MEMBERS = gql`
         id
         firstName
         lastName
+        fullName
         pictureUrl
         gender {
           gender
@@ -86,6 +88,7 @@ export const GET_BACENTA_MEMBERS = gql`
         id
         firstName
         lastName
+        fullName
         pictureUrl
         gender {
           gender
