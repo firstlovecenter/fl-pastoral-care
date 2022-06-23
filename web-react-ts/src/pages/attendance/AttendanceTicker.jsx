@@ -30,7 +30,6 @@ const SundayAttendance = () => {
   })
 
   const bacenta = apollo.data?.bacentas[0]
-  console.log(bacenta)
 
   return (
     <ApolloWrapper apolloData={apollo}>
@@ -50,25 +49,25 @@ const SundayAttendance = () => {
           align="stretch"
           w={'full'}
         >
-          {bacenta.sheep.length && <Heading>Sheep</Heading>}
+          {bacenta?.sheep.length && <Heading>Sheep</Heading>}
           {bacenta?.sheep.map((sheep, i) => (
-            <Flex>
+            <Flex key={i}>
               <Avatar size={'xs'} marginRight="10px" /> {sheep.fullName}
               <Spacer />
               <Checkbox alignSelf={'end'} size="lg" />
             </Flex>
           ))}
-          {bacenta.goat.length && <Heading>Goat</Heading>}
+          {bacenta?.goat.length && <Heading>Goat</Heading>}
           {bacenta?.goat.map((sheep, i) => (
-            <Flex>
+            <Flex key={i}>
               <Avatar size={'xs'} marginRight="10px" /> {sheep.fullName}
               <Spacer />
               <Checkbox alignSelf={'end'} size="lg" />
             </Flex>
           ))}
-          {bacenta.deer.length && <Heading>Deer</Heading>}
+          {bacenta?.deer.length && <Heading>Deer</Heading>}
           {bacenta?.deer.map((sheep, i) => (
-            <Flex>
+            <Flex key={i}>
               <Avatar size={'xs'} marginRight="10px" /> {sheep.fullName}
               <Spacer />
               <Checkbox alignSelf={'end'} size="lg" />

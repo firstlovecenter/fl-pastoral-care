@@ -17,6 +17,8 @@ const ApolloWrapper = (props: ApolloWrapperPropsType) => {
   const { apolloData, placeholder } = props
   const { data, loading, error } = apolloData
 
+  console.log('ApolloWrapper', apolloData)
+
   if (data || placeholder) {
     return <>{props.children}</>
   } else if (loading) {

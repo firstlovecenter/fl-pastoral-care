@@ -4,7 +4,7 @@ import Login from './Login'
 const Dashboard = () => {
   return (
     <Container>
-      Dashboard
+      Dashboards
       <Login />
     </Container>
   )
