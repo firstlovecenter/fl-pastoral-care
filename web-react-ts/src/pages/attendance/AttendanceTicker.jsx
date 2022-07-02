@@ -1,20 +1,18 @@
 import { useQuery } from '@apollo/client'
 import { SearchIcon } from '@chakra-ui/icons'
 import {
-  Avatar,
   Button,
-  Checkbox,
   Container,
   Flex,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
-  Spacer,
-  StackDivider,
   Text,
   VStack,
 } from '@chakra-ui/react'
+import CheckboxGroup from 'components/formik/MemberCheckboxGroup'
+import { Form, Formik } from 'formik'
 import { getHumanReadableDate } from 'jd-date-utils'
 import { useContext } from 'react'
 import ApolloWrapper from '../../components/ApolloWrapper/ApolloWrapper'
@@ -31,64 +29,73 @@ const SundayAttendance = () => {
 
   const bacenta = apollo.data?.bacentas[0]
 
+  const initialValues = {
+    attendance: [],
+    sheep: [],
+  }
+
+  const onSubmit = (values, onSubmitProps) => {
+    console.log(values)
+  }
+
+  const sheep = bacenta?.sheep.map((sheep) => ({
+    key: sheep.firstName + ' ' + sheep.lastName,
+    value: sheep.id,
+  }))
+
+  const goat = bacenta?.goat.map((goat) => ({
+    key: goat.firstName + ' ' + goat.lastName,
+    value: goat.id,
+  }))
+  const deer = bacenta?.deer.map((deer) => ({
+    key: deer.firstName + ' ' + deer.lastName,
+    value: deer.id,
+  }))
+
   return (
     <ApolloWrapper apolloData={apollo}>
-      <Container centerContent>
-        <Heading>Sunday Attendance</Heading>
+      <Formik initialValues={initialValues} onSubmit={onSubmit} validateOnMount>
+        <Form>
+          <Container centerContent>
+            <Heading>Sunday Attendance</Heading>
 
-        <Text>{getHumanReadableDate(date)}</Text>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
-          <Input placeholder="Search" />
-        </InputGroup>
+            <Text>{getHumanReadableDate(date)}</Text>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<SearchIcon />}
+              />
+              <Input placeholder="Search" />
+            </InputGroup>
 
-        <VStack
-          marginTop={10}
-          divider={<StackDivider borderColor="gray.200" />}
-          spacing={3}
-          align="stretch"
-          w={'full'}
-        >
-          {bacenta?.sheep.length && <Heading>Sheep</Heading>}
-          {bacenta?.sheep.map((sheep, i) => (
-            <Flex key={i}>
-              <Avatar size={'xs'} marginRight="10px" /> {sheep.fullName}
-              <Spacer />
-              <Checkbox alignSelf={'end'} size="lg" />
-            </Flex>
-          ))}
-          {bacenta?.goat.length && <Heading>Goat</Heading>}
-          {bacenta?.goat.map((sheep, i) => (
-            <Flex key={i}>
-              <Avatar size={'xs'} marginRight="10px" /> {sheep.fullName}
-              <Spacer />
-              <Checkbox alignSelf={'end'} size="lg" />
-            </Flex>
-          ))}
-          {bacenta?.deer.length && <Heading>Deer</Heading>}
-          {bacenta?.deer.map((sheep, i) => (
-            <Flex key={i}>
-              <Avatar size={'xs'} marginRight="10px" /> {sheep.fullName}
-              <Spacer />
-              <Checkbox alignSelf={'end'} size="lg" />
-            </Flex>
-          ))}
-        </VStack>
-      </Container>
-      <Flex width="100%">
-        <Button
-          size={'lg'}
-          height={94}
-          width="100%"
-          position="fixed"
-          bottom={0}
-          zIndex={3}
-          colorScheme="green"
-          rounded={0}
-        >
-          Submit
-        </Button>
-      </Flex>
+            <VStack marginTop={10} align="stretch" w={'full'}>
+              {bacenta?.sheep.length && <Heading>Sheep</Heading>}
+              <CheckboxGroup name="sheep" options={sheep} />
+
+              {bacenta?.goat.length && <Heading>Goat</Heading>}
+              <CheckboxGroup name="goat" options={goat} />
+
+              {bacenta?.deer.length && <Heading>Deer</Heading>}
+              <CheckboxGroup name="deer" options={deer} />
+            </VStack>
+          </Container>
+          <Flex width="100%">
+            <Button
+              size={'lg'}
+              height={94}
+              width="100%"
+              position="fixed"
+              bottom={0}
+              zIndex={3}
+              colorScheme="green"
+              rounded={0}
+              type="submit"
+            >
+              Submit
+            </Button>
+          </Flex>
+        </Form>
+      </Formik>
     </ApolloWrapper>
   )
 }

@@ -58,14 +58,14 @@ extend type Member {
 }
 
 type Mutation {
-  recordMemberAttendance(id: ID!, churchId: ID!): Member
+  RecordMemberAttendance(id: ID!, churchId: ID!): Member
     @cypher(
       statement: """
       MATCH (member:Member {id: $id})
       MATCH (church {id: $churchId}) WHERE church:Fellowship OR church:Bacenta
       MATCH (church)-[:CURRENT_HISTORY]->(history:ServiceLog)-[:HAS_SERVICE|HAS_BUSSING]->(service) 
       WHERE service:ServiceRecord OR service:BussingRecord
-      
+
       WITH member, service
       MERGE (member)-[:ATTENDED_SERVICE]->(service)
 

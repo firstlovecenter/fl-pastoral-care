@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field, ErrorMessage } from 'formik'
-import TextError from './TextError'
 import './Input.css'
 import './Formik.css'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -20,7 +19,7 @@ function Input(props: { [x: string]: any; label: string; name: string }) {
         </SkeletonLoader>
       ) : null}
       <Field id={name} name={name} className="form-control" {...rest} />
-      <ErrorMessage name={name} component={TextError} />
+      <ErrorMessage name={name} />
     </div>
   )
 }

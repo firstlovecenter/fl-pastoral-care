@@ -13,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Auth0ProviderWithHistory } from './auth0-provider-with-history'
 import theme from './theme'
 import CacheBuster from './CacheBuster'
+import ReactGA from 'react-ga4'
 
 const AppWithSetUp = () => {
   const [accessToken, setAccessToken] = useState('')
@@ -86,6 +87,9 @@ const AppWithSetUp = () => {
     </CacheBuster>
   )
 }
+
+ReactGA.initialize('G-03T0FGSVZN')
+ReactGA.send('pageview')
 
 const container = document.getElementById('root')
 const root = createRoot(container!)
