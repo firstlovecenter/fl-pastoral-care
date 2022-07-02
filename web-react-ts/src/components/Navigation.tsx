@@ -1,6 +1,6 @@
 import { HamburgerIcon } from '@chakra-ui/icons'
 import {
-  Box,
+  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -14,11 +14,21 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useNavigate } from 'react-router'
+import useCustomColor from '../hooks/useCustomColor'
+import ColorModeSwitcher from './ColorModeSwitcher'
 
 const Navigation = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef(null)
   const navigate = useNavigate()
+  const { bg } = useCustomColor()
+
+  const menuItems = [
+    {
+      name: 'Home',
+      link: '/',
+    },
+  ]
 
   return (
     <>
@@ -47,18 +57,26 @@ const Navigation = () => {
           <DrawerHeader>Pastoral Care Menu</DrawerHeader>
 
           <DrawerBody>
-            <Box
-              bg="grey"
-              p="3"
-              borderRadius="lg"
-              onClick={() => navigate('/')}
-            >
-              Home
-            </Box>
+            {menuItems.map((item) => (
+              <Button
+                key={item.name}
+                bg={bg}
+                paddingY={8}
+                marginY={2}
+                width="100%"
+                onClick={() => {
+                  navigate(item.link)
+                  onClose()
+                }}
+              >
+                {item.name}
+              </Button>
+            ))}
           </DrawerBody>
 
           <DrawerFooter>
             <Text>Your face here</Text>
+            <ColorModeSwitcher justifySelf="flex-end" />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

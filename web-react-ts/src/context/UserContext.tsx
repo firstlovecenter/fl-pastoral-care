@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { createContext, useState } from 'react'
 import { ChurchEnum, RolesEnum, StreamEnum } from '../hooks/useClickCard'
 import { Bacenta } from '../types/church-types'
@@ -41,15 +42,16 @@ export const UserContext = createContext<UserContextInterface>({
 })
 
 export const UserContextProvider = ({ children }: ContextProviderProps) => {
+  const { user } = useAuth0()
   const [currentUser, setCurrentUser] = useState<UserInterface>(
     sessionStorage.getItem('currentUser')
       ? JSON.parse(sessionStorage.getItem('currentUser') ?? '')
       : {
           id: '',
-          picture: '',
-          firstName: '',
-          lastName: '',
-          fullName: '',
+          picture: user?.picture,
+          firstName: user?.given_name,
+          lastName: user?.family_name,
+          fullName: user?.given_name + ' ' + user?.family_name,
           bishop: '',
           church: {},
           email: '',
@@ -60,7 +62,7 @@ export const UserContextProvider = ({ children }: ContextProviderProps) => {
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-      <div>{children}</div>
+      {children}
     </UserContext.Provider>
   )
 }

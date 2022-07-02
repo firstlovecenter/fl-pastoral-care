@@ -33,7 +33,7 @@ const useUser = () => {
     )
   }
 
-  return { currentUser, setCurrentUser, setUser, setUserChurch }
+  return { setUser, setUserChurch }
 }
 
 export default useUser

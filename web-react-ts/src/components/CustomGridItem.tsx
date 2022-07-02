@@ -1,4 +1,5 @@
 import { GridItem, Avatar, Text } from '@chakra-ui/react'
+import useCustomColor from '../hooks/useCustomColor'
 
 interface ButtonProps {
   src: string
@@ -8,6 +9,8 @@ interface ButtonProps {
 }
 
 const GridButton = (props: ButtonProps) => {
+  const { bg } = useCustomColor()
+
   return (
     <GridItem
       style={{
@@ -21,7 +24,7 @@ const GridButton = (props: ButtonProps) => {
       }}
       w="95%"
       h="160"
-      bg="#292a29"
+      bg={bg}
       onClick={props.onClick}
     >
       <Text fontSize="sm">{props.roleName}</Text>
