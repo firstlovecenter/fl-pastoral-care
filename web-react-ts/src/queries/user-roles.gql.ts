@@ -7,6 +7,10 @@ export const GET_USER_ROLES = gql`
       firstName
       lastName
       pictureUrl
+      leadsFellowship {
+        id
+        name
+      }
       leadsBacenta {
         id
         name

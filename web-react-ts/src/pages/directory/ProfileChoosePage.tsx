@@ -34,6 +34,20 @@ const ProfileChoosePage = () => {
         <Container>
           <HeaderText />
           <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+            {loggedInUser?.leadsFellowship.map(
+              (fellowship: memberRole, i: number): JSX.Element => (
+                <GridButton
+                  key={i}
+                  src={BishopGradient}
+                  onClick={() => {
+                    clickCard(fellowship)
+                    navigate('/fellowship/dashboard')
+                  }}
+                  roleName="Fellowship Leader"
+                  roleLocation={fellowship.name}
+                />
+              )
+            )}
             {loggedInUser?.leadsBacenta.map(
               (bacenta: memberRole, i: number): JSX.Element => (
                 <GridButton

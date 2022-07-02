@@ -87,21 +87,21 @@ extend type Member {
   sheep: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members:Sheep)
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)<-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
   goat: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members:Goat)
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)<-[:BELONGS_TO]-(members:Goat)
       RETURN DISTINCT members
       """
     )
   deer: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)-[:BELONGS_TO]-(members:Deer)
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)<-[:BELONGS_TO]-(members:Deer)
       RETURN DISTINCT members
       """
     )
@@ -111,21 +111,21 @@ extend type Council {
   sheep: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS*3]->(:Fellowship)-[:BELONGS_TO]-(members:Sheep)
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
   goat: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS*3]->(:Fellowship)-[:BELONGS_TO]-(members:Goat)
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(members:Goat)
       RETURN DISTINCT members
       """
     )
   deer: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS*3]->(:Fellowship)-[:BELONGS_TO]-(members:Deer)
+      MATCH (this)-[:HAS*3]->(:Fellowship)<-[:BELONGS_TO]-(members:Deer)
       RETURN DISTINCT members
       """
     )
@@ -135,21 +135,21 @@ extend type Constituency {
   sheep: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS*2]->(:Fellowship)-[:BELONGS_TO]-(members:Sheep)
+      MATCH (this)-[:HAS*2]->(:Fellowship)<-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
   goat: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS*2]->(:Fellowship)-[:BELONGS_TO]-(members:Goat)
+      MATCH (this)-[:HAS*2]->(:Fellowship)<-[:BELONGS_TO]-(members:Goat)
       RETURN DISTINCT members
       """
     )
   deer: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS*2]->(:Fellowship)-[:BELONGS_TO]-(members:Deer)
+      MATCH (this)-[:HAS*2]->(:Fellowship)<-[:BELONGS_TO]-(members:Deer)
       RETURN DISTINCT members
       """
     )
@@ -159,21 +159,46 @@ extend type Bacenta {
   sheep: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS]->(:Fellowship)-[:BELONGS_TO]-(members:Sheep)
+      MATCH (this)-[:HAS]->(:Fellowship)<-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
   goat: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS]->(:Fellowship)-[:BELONGS_TO]-(members:Goat)
+      MATCH (this)-[:HAS]->(:Fellowship)<-[:BELONGS_TO]-(members:Goat)
       RETURN DISTINCT members
       """
     )
   deer: [Member!]!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS]->(:Fellowship)-[:BELONGS_TO]-(members:Deer)
+      MATCH (this)-[:HAS]->(:Fellowship)<-[:BELONGS_TO]-(members:Deer)
+      RETURN DISTINCT members
+      """
+    )
+}
+
+
+extend type Fellowship {
+  sheep: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Sheep)
+      RETURN DISTINCT members
+      """
+    )
+  goat: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Goat)
+      RETURN DISTINCT members
+      """
+    )
+  deer: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Deer)
       RETURN DISTINCT members
       """
     )
