@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { StreamOptions } from 'types/global-types'
 type GatheringService = {
   id: string
 }
@@ -34,17 +35,6 @@ export enum StreamEnum {
   Anagkazo = 'Anagkazo',
 }
 
-export enum ChurchEnum {
-  Bacenta = 'Bacenta',
-}
-
-export enum ChurchLevelEnum {
-  Bacenta = 'Bacenta',
-  Constituency = 'Constituency',
-  Council = 'Council',
-  GatheringService = 'GatheringService',
-}
-
 export enum RolesEnum {
   leaderGatheringService = 'leaderGatheringService',
   leaderStream = 'leaderStream',
@@ -64,7 +54,7 @@ export type CardType = {
   id: string
   name?: string
   link?: string
-  stream_name: StreamEnum
+  stream_name: StreamOptions
   gatheringService?: { id: string }
   stream?: Stream
   council?: Council
@@ -111,12 +101,25 @@ const useClickCard = () => {
     sessionStorage.getItem('memberId') ?? ''
   )
 
+  // Service Record and Bussing Record
+  const [serviceRecordId, setServiceRecordId] = useState(
+    sessionStorage.getItem('serviceRecordId') ?? ''
+  )
+
+  const [bussingRecordId, setBussingRecordId] = useState(
+    sessionStorage.getItem('bussingRecordId') ?? ''
+  )
+
   const determineStream = (card: CardType) => {
-    setChurch({
-      church: card?.stream_name,
-      name: card.name,
-      level: card.__typename,
-    })
+    if (
+      !['ServiceRecord', 'BussingRecord', 'Member'].includes(card.__typename)
+    ) {
+      setChurch({
+        church: card?.stream_name,
+        name: card.name,
+        level: card.__typename,
+      })
+    }
     sessionStorage.setItem(
       'church',
       JSON.stringify({
@@ -355,7 +358,14 @@ const useClickCard = () => {
         setStreamId(card.id)
         sessionStorage.setItem('streamId', card.id)
         break
-
+      case 'ServiceRecord':
+        setServiceRecordId(card.id)
+        sessionStorage.setItem('serviceRecordId', card.id)
+        break
+      case 'BussingRecord':
+        setBussingRecordId(card.id)
+        sessionStorage.setItem('bussingRecordId', card.id)
+        break
       default:
         break
     }
@@ -381,6 +391,8 @@ const useClickCard = () => {
     fellowshipId,
     sontaId,
     ministryId,
+    serviceRecordId,
+    bussingRecordId,
 
     //Set State
     setGatheringServiceId,

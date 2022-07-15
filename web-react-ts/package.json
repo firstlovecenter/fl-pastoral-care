@@ -12,6 +12,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^6.3.4",
     "graphql": "^16.2.0",
+    "jd-date-utils": "^1.0.7",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-ga4": "^1.4.1",

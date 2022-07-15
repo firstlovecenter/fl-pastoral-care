@@ -51,9 +51,16 @@ export const GET_MEMBERS = gql`
 `
 
 export const GET_FELLOWSHIP_MEMBERS = gql`
-  query getFellowshipMembers($id: ID!) {
+  query getFellowshipMembers($id: ID!, $serviceRecordId: ID!) {
+    serviceRecords(where: { id: $serviceRecordId }) {
+      id
+      serviceDate {
+        date
+      }
+    }
     fellowships(where: { id: $id }) {
       id
+
       sheep {
         id
         firstName
@@ -104,7 +111,13 @@ export const GET_FELLOWSHIP_MEMBERS = gql`
 `
 
 export const GET_BACENTA_MEMBERS = gql`
-  query getBacentaMembers($id: ID!) {
+  query getBacentaMembers($id: ID!, $bussingRecordId: ID!) {
+    bussingRecords(where: { id: $bussingRecordId }) {
+      id
+      serviceDate {
+        date
+      }
+    }
     bacentas(where: { id: $id }) {
       id
       sheep {

@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { createContext, useState } from 'react'
-import { ChurchEnum, RolesEnum, StreamEnum } from '../hooks/useClickCard'
+import { ChurchLevel, Role, StreamOptions } from 'types/global-types'
 import { Bacenta } from '../types/church-types'
 import { ContextProviderProps } from './context.types'
 
@@ -10,10 +10,10 @@ export interface UserInterface {
   firstName: string
   lastName: string
   fullName: string
-  church: { church: StreamEnum; subChurch: ChurchEnum }
+  church: { church: StreamOptions; subChurch: ChurchLevel }
   email: string
   constituency: string
-  roles: RolesEnum[]
+  roles: Role[]
   pictureUrl?: string | undefined
   leadsBacenta?: Bacenta[] | undefined
 }
@@ -23,17 +23,16 @@ interface UserContextInterface {
   setCurrentUser: React.Dispatch<any>
 }
 
-const initialCurrentUser = {
+const initialCurrentUser: UserInterface = {
   id: '',
   picture: '',
   firstName: '',
   lastName: '',
   fullName: '',
-  bishop: '',
-  church: { church: StreamEnum.Campus, subChurch: ChurchEnum.Bacenta },
+  church: { church: 'Campus', subChurch: 'Bacenta' },
   email: '',
   constituency: '',
-  roles: [],
+  roles: ['leaderFellowship'],
 }
 
 export const UserContext = createContext<UserContextInterface>({

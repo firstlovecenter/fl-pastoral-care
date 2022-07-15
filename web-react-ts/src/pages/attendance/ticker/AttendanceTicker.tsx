@@ -15,7 +15,8 @@ import CheckboxGroup from 'components/formik/MemberCheckboxGroup'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { getHumanReadableDate } from 'jd-date-utils'
 import { useNavigate } from 'react-router'
-import { ChurchForAttendance } from './attendance-types'
+import { ServiceRecord } from 'types/global-types'
+import { ChurchForAttendance } from '../attendance-types'
 
 type FormOptions = {
   sheep: string[]
@@ -25,13 +26,15 @@ type FormOptions = {
 
 const AttendanceTicker = ({
   church,
+  service,
   RecordMemberAttendance,
 }: {
   church: ChurchForAttendance
+  service: ServiceRecord
   RecordMemberAttendance: MutationFunction
 }) => {
-  const date = new Date()
   const navigate = useNavigate()
+  const weekday = service?.__typename === 'ServiceRecord'
 
   const initialValues: FormOptions = {
     sheep: [],
@@ -54,7 +57,7 @@ const AttendanceTicker = ({
 
     await RecordMemberAttendance({
       variables: {
-        churchId: church.id,
+        recordId: service.id,
         presentMembers: combinedPresent,
         absentMembers: combinedAbsent,
       },
@@ -86,10 +89,14 @@ const AttendanceTicker = ({
     <Formik initialValues={initialValues} onSubmit={onSubmit} validateOnMount>
       {(formik) => (
         <Form>
-          <Container centerContent>
-            <Heading>Sunday Attendance</Heading>
+          <Container marginTop={10} centerContent>
+            <Heading>{`${
+              weekday ? 'Weekday Serivce' : 'Sunday'
+            } Attendance`}</Heading>
 
-            <Text>{getHumanReadableDate(date.toString())}</Text>
+            <Text>
+              {getHumanReadableDate(service.serviceDate.date.toString())}
+            </Text>
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"

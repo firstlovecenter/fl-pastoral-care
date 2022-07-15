@@ -1,5 +1,4 @@
-import Navigation from '../../components/Navigation'
-import { RouteArrayType } from '../../types/global-types'
+import { RouteArrayType } from 'types/global-types'
 import HomePage from './HomePage/HomePage'
 import BacentaMembers from './membership/BacentaMembers'
 import ConstituencyMembers from './membership/ConsituencyMembers'
@@ -14,10 +13,7 @@ export const directory: RouteArrayType = [
     element: LandingPage,
     roles: ['all'],
   },
-  {
-    path: '/nav',
-    element: Navigation,
-  },
+
   {
     path: '/fellowship/member-list',
     element: FellowshipMembers,

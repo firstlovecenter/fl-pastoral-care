@@ -30,4 +30,17 @@ const membership = fs
   .readFileSync(path.join(__dirname, 'directory-membership.graphql'))
   .toString('utf-8')
 
-exports.typeDefs = `${schema} ${directory} ${directorySonta} ${attendance} ${membership}`
+const services = fs
+  .readFileSync(path.join(__dirname, 'services.graphql'))
+  .toString('utf-8')
+
+const array = [
+  schema,
+  directory,
+  directorySonta,
+  attendance,
+  membership,
+  services,
+]
+
+exports.typeDefs = array.join(' ')

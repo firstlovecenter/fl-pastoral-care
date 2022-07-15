@@ -1,17 +1,34 @@
 import { gql } from '@apollo/client'
 
+export const DISPLAY_FELLOWSHIP_SERVICES = gql`
+  query DisplayFellowshipServices($id: ID!) {
+    fellowships(where: { id: $id }) {
+      id
+      name
+      services(limit: 10) {
+        id
+        attendance
+        markedAttendance
+        serviceDate {
+          date
+        }
+      }
+    }
+  }
+`
+
 export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
   mutation RecordMemberFellowshipAttendance(
     $presentMembers: [ID!]!
     $absentMembers: [ID!]!
-    $churchId: ID!
+    $recordId: ID!
   ) {
     RecordMemberFellowshipPresent(
       presentMembers: $presentMembers
-      churchId: $churchId
+      recordId: $recordId
     ) {
       id
-      membersAttended {
+      membersPresent {
         id
         firstName
         lastName
@@ -19,7 +36,7 @@ export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
     }
     RecordMemberFellowshipAbsent(
       absentMembers: $absentMembers
-      churchId: $churchId
+      recordId: $recordId
     ) {
       id
       membersAbsent {
@@ -42,10 +59,11 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
       churchId: $churchId
     ) {
       id
-      membersAttended {
+      membersPresent {
         id
         firstName
         lastName
+        pictureUrl
       }
     }
     RecordMemberBacentaAbsent(
@@ -57,6 +75,7 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
         id
         firstName
         lastName
+        pictureUrl
       }
     }
   }

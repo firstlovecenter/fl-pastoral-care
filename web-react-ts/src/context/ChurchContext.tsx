@@ -1,9 +1,6 @@
 import { createContext } from 'react'
-import useClickCard, {
-  CardType,
-  ChurchLevelEnum,
-  StreamEnum,
-} from '../hooks/useClickCard'
+import { ChurchLevel } from 'types/global-types'
+import useClickCard, { CardType, StreamEnum } from '../hooks/useClickCard'
 import { ContextProviderProps } from './context.types'
 
 interface ChurchContextInterface {
@@ -11,7 +8,7 @@ interface ChurchContextInterface {
   church: {
     stream: StreamEnum
     name: string
-    level: ChurchLevelEnum
+    level: ChurchLevel
   }
   memberId: string
   gatheringServiceId: string | null
@@ -22,6 +19,8 @@ interface ChurchContextInterface {
   fellowshipId: string
   sontaId: string
   ministryId: string
+  serviceRecordId: string
+  bussingRecordId: string
 }
 
 export const ChurchContext = createContext<ChurchContextInterface>({
@@ -38,6 +37,8 @@ export const ChurchContext = createContext<ChurchContextInterface>({
   fellowshipId: sessionStorage.getItem('fellowshipId') ?? '',
   sontaId: sessionStorage.getItem('sontaId') ?? '',
   ministryId: sessionStorage.getItem('ministryId') ?? '',
+  serviceRecordId: sessionStorage.getItem('serviceRecordId') ?? '',
+  bussingRecordId: sessionStorage.getItem('bussingRecordId') ?? '',
 })
 
 export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
@@ -53,6 +54,8 @@ export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
     fellowshipId,
     sontaId,
     ministryId,
+    serviceRecordId,
+    bussingRecordId,
   } = useClickCard()
 
   return (
@@ -69,6 +72,8 @@ export const ChurchContextProvider = ({ children }: ContextProviderProps) => {
         fellowshipId,
         sontaId,
         ministryId,
+        serviceRecordId,
+        bussingRecordId,
       }}
     >
       {children}
