@@ -11,8 +11,21 @@
     "now-build": "babel src --out-dir build && shx cp -r src/schema build",
     "start": "npm run build && node build/index.js"
   },
-  "author": "William Lyon",
+  "author": "John-Dag Addy",
   "license": "MIT",
+  "eslintConfig": {
+    "plugins": [
+      "@typescript-eslint",
+      "no-relative-import-paths",
+      "import"
+    ],
+    "rules": {
+      "import/no-unresolved": "off",
+      "no-console": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "no-relative-import-paths/no-relative-import-paths": "off"
+    }
+  },
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@neo4j/graphql": "^3.5.0",
@@ -23,8 +36,7 @@
     "dotenv": "^10.0.0",
     "graphql": "^16.3.0",
     "neo4j-driver": "^4.3.1",
-    "node-fetch": "^2.6.0",
-    "react": "^16.13.1"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

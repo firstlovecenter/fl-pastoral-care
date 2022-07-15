@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_MEMBER_PROFILE = gql`
-  query ($id: ID!) {
+  query getMemberProfile($id: ID!) {
     members(where: { id: $id }) {
       id
       firstName

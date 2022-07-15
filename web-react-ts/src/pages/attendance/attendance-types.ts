@@ -1,7 +1,9 @@
 import { ListMemberInterface } from 'pages/directory/membership/member-list.types'
+import { Church } from 'types/global-types'
 
-export type Church = {
+export interface ChurchForAttendance extends Church {
   id: string
+
   sheep: ListMemberInterface[]
   goat: ListMemberInterface[]
   deer: ListMemberInterface[]

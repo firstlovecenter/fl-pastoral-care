@@ -7,8 +7,7 @@ import { Neo4jGraphQL } from '@neo4j/graphql'
 import { Neo4jGraphQLAuthJWTPlugin } from '@neo4j/graphql-plugin-auth'
 import dotenv from 'dotenv'
 import { typeDefs } from './schema/graphql-schema'
-// eslint-disable-next-line import/extensions, import/no-unresolved
-import { resolvers } from './resolvers/resolvers'
+import resolvers from './resolvers/resolvers'
 
 // set environment variables from .env
 dotenv.config()
@@ -37,7 +36,7 @@ const driver = neo4j.driver(
 
 const neoSchema = new Neo4jGraphQL({
   typeDefs,
-  resolvers: { ...resolvers },
+  resolvers,
   driver,
   plugins: {
     auth: new Neo4jGraphQLAuthJWTPlugin({

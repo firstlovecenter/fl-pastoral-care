@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_USER_ROLES = gql`
-  query ($id: String!) {
+  query getUserRoles($id: String!) {
     members(where: { auth_id: $id }) {
       id
       firstName

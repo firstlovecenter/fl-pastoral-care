@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_MEMBERS = gql`
-  query ($id: ID!) {
+  query getMembers($id: ID!) {
     members(where: { id: $id }) {
       id
       sheep {
@@ -51,7 +51,7 @@ export const GET_MEMBERS = gql`
 `
 
 export const GET_FELLOWSHIP_MEMBERS = gql`
-  query ($id: ID!) {
+  query getFellowshipMembers($id: ID!) {
     fellowships(where: { id: $id }) {
       id
       sheep {
@@ -104,7 +104,7 @@ export const GET_FELLOWSHIP_MEMBERS = gql`
 `
 
 export const GET_BACENTA_MEMBERS = gql`
-  query ($id: ID!) {
+  query getBacentaMembers($id: ID!) {
     bacentas(where: { id: $id }) {
       id
       sheep {
@@ -157,7 +157,7 @@ export const GET_BACENTA_MEMBERS = gql`
 `
 
 export const GET_CONSTITUENCY_MEMBERS = gql`
-  query ($id: ID!) {
+  query getConstituencyMembers($id: ID!) {
     constituencies(where: { id: $id }) {
       id
       sheep {
@@ -207,7 +207,7 @@ export const GET_CONSTITUENCY_MEMBERS = gql`
 `
 
 export const GET_COUNCIL_MEMBERS = gql`
-  query ($id: ID!) {
+  query getCouncilMembers($id: ID!) {
     councils(where: { id: $id }) {
       id
       sheep {

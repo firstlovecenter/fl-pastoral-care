@@ -6,7 +6,7 @@ export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
     $absentMembers: [ID!]!
     $churchId: ID!
   ) {
-    RecordMemberFellowshipAttendance(
+    RecordMemberFellowshipPresent(
       presentMembers: $presentMembers
       churchId: $churchId
     ) {
@@ -17,7 +17,7 @@ export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
         lastName
       }
     }
-    RecordMemberFellowshipAbsentees(
+    RecordMemberFellowshipAbsent(
       absentMembers: $absentMembers
       churchId: $churchId
     ) {
@@ -37,9 +37,8 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
     $absentMembers: [ID!]!
     $churchId: ID!
   ) {
-    RecordMemberBacentaAttendance(
+    RecordMemberBacentaPresent(
       presentMembers: $presentMembers
-      absentMembers: $absentMembers
       churchId: $churchId
     ) {
       id
@@ -48,6 +47,12 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
         firstName
         lastName
       }
+    }
+    RecordMemberBacentaAbsent(
+      absentMembers: $absentMembers
+      churchId: $churchId
+    ) {
+      id
       membersAbsent {
         id
         firstName

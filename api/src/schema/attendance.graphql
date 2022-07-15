@@ -91,7 +91,6 @@ type BussingRecord implements Record @auth(rules: [{ isAuthenticated: true }]) {
   arrival_confirmed_by: Member
     @relationship(type: "ARRIVAL_CONFIRMED_BY", direction: OUT)
 
-
   serviceLog: ServiceLog @relationship(type: "HAS_BUSSING", direction: IN)
   membersAttended: [Member!]!
     @relationship(type: "ATTENDED_SERVICE", direction: IN)
@@ -105,7 +104,7 @@ extend type Member {
 }
 
 type Mutation {
-  RecordMemberFellowshipAttendance(
+  RecordMemberFellowshipPresent(
     presentMembers: [ID!]!
     churchId: ID!
   ): ServiceRecord
@@ -121,7 +120,7 @@ type Mutation {
       RETURN service
       """
     )
-  RecordMemberFellowshipAbsentees(
+  RecordMemberFellowshipAbsent(
     absentMembers: [ID!]!
     churchId: ID!
   ): ServiceRecord
@@ -137,8 +136,8 @@ type Mutation {
       RETURN service
       """
     )
-  RecordMemberBacentaAttendance(
-    absentMembers: [ID!]!
+  RecordMemberBacentaPresent(
+    presentMembers: [ID!]!
     churchId: ID!
   ): BussingRecord
     @cypher(
@@ -146,14 +145,14 @@ type Mutation {
       MATCH (church:Bacenta {id: $churchId})
       MATCH (church)-[:CURRENT_HISTORY]->(history:ServiceLog)-[:HAS_BUSSING]->(service:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph {date: date()})
 
-      UNWIND $presentMembers AS presentMemberId 
+      UNWIND $presentMembers AS presentMemberId
       MATCH (member:Member {id: presentMemberId})
       MERGE (member)-[:ATTENDED_SERVICE]->(service)
 
       RETURN service
       """
     )
-  RecordMemberBacentaAbsentees(
+  RecordMemberBacentaAbsent(
     absentMembers: [ID!]!
     churchId: ID!
   ): BussingRecord

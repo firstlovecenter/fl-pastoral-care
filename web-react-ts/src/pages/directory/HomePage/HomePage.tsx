@@ -65,7 +65,7 @@ const HomePage = () => {
         <PageNavButton
           icon={MdGroups}
           label="Fellowship Attendance"
-          to={`/${churchLevel}/fellowship-attendance`}
+          to={`/${churchLevel}/weekday-attendance`}
         />
         <PageNavButton
           icon={MdDirectionsRun}
