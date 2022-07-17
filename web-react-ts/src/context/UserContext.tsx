@@ -10,6 +10,7 @@ export interface UserInterface {
   firstName: string
   lastName: string
   fullName: string
+  stream_name: StreamOptions
   church: { church: StreamOptions; subChurch: ChurchLevel }
   email: string
   constituency: string
@@ -29,6 +30,7 @@ const initialCurrentUser: UserInterface = {
   firstName: '',
   lastName: '',
   fullName: '',
+  stream_name: 'Campus',
   church: { church: 'Campus', subChurch: 'Bacenta' },
   email: '',
   constituency: '',

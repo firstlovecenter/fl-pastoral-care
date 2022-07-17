@@ -17,6 +17,23 @@ export const DISPLAY_FELLOWSHIP_SERVICES = gql`
   }
 `
 
+export const DISPLAY_BACENTA_SERVICES = gql`
+  query DisplayBacentaServices($id: ID!) {
+    bacentas(where: { id: $id }) {
+      id
+      name
+      services(limit: 10) {
+        id
+        attendance
+        markedAttendance
+        serviceDate {
+          date
+        }
+      }
+    }
+  }
+`
+
 export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
   mutation RecordMemberFellowshipAttendance(
     $presentMembers: [ID!]!

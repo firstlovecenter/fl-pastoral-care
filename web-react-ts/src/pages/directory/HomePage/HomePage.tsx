@@ -56,17 +56,20 @@ const HomePage = () => {
       </header>
 
       <VStack spacing={3}>
-        <PageNavButton
-          icon={MdGroups}
-          label="Sunday Attendance"
-          to={`/${churchLevel}/sunday-attendance`}
-        />
-
-        <PageNavButton
-          icon={MdGroups}
-          label="Fellowship Attendance"
-          to={`/${churchLevel}/services-list`}
-        />
+        {church.level === 'Bacenta' && (
+          <PageNavButton
+            icon={MdGroups}
+            label="Sunday Attendance"
+            to={`/${churchLevel}/sunday-attendance`}
+          />
+        )}
+        {church.level === 'Fellowship' && (
+          <PageNavButton
+            icon={MdGroups}
+            label="Fellowship Attendance"
+            to={`/${churchLevel}/services-list`}
+          />
+        )}
         <PageNavButton
           icon={MdDirectionsRun}
           label="First Timers & New Converts"

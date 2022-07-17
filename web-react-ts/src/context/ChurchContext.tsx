@@ -1,15 +1,16 @@
 import { createContext } from 'react'
-import { ChurchLevel } from 'types/global-types'
-import useClickCard, { CardType, StreamEnum } from '../hooks/useClickCard'
+import { ChurchLevel, StreamOptions } from 'types/global-types'
+import useClickCard, { CardType } from '../hooks/useClickCard'
 import { ContextProviderProps } from './context.types'
 
 interface ChurchContextInterface {
   clickCard: (card: CardType) => void
   church: {
-    stream: StreamEnum
+    stream: StreamOptions
     name: string
     level: ChurchLevel
   }
+
   memberId: string
   gatheringServiceId: string | null
   streamId: string

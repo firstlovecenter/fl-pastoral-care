@@ -48,6 +48,7 @@ export interface Fellowship extends Church {
 
 export interface Bacenta extends Church {
   __typename: 'Bacenta'
+  services: ServiceRecord[]
 }
 
 export type ChurchIdAndName = {
