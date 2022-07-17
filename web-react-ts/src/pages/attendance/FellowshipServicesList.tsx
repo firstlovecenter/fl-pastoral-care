@@ -30,6 +30,7 @@ const FellowshipServicesList = () => {
         {services?.map((service) => (
           <Box
             key={service.id}
+            marginBottom={5}
             onClick={() => {
               clickCard(service)
 

@@ -26,7 +26,7 @@ type Mutation {
 
       UNWIND $presentMembers AS presentMemberId
       MATCH (present:Member {id: presentMemberId})
-      MERGE (present)-[:ATTENDED_SERVICE]->(service)
+      MERGE (present)-[:PRESENT_AT_SERVICE]->(service)
 
       RETURN service
       """
@@ -57,7 +57,7 @@ type Mutation {
 
       UNWIND $presentMembers AS presentMemberId
       MATCH (member:Member {id: presentMemberId})
-      MERGE (member)-[:ATTENDED_SERVICE]->(service)
+      MERGE (member)-[:PRESENT_AT_SERVICE]->(service)
 
       RETURN service
       """

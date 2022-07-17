@@ -40,7 +40,7 @@ const AttendanceReport = ({
         Summary for {`${getHumanReadableDate(service.serviceDate.date, true)}`}
       </Text>
       <Text fontSize="lg" marginBottom={4}>
-        Absent
+        Absent: {service?.membersAbsent.length}
       </Text>
       <VStack align="stretch" width="full">
         {service?.membersAbsent.map((member) => (
@@ -69,7 +69,7 @@ const AttendanceReport = ({
       </VStack>
 
       <Text fontSize="lg" marginY={4}>
-        Present
+        Present: {service?.membersPresent.length}
       </Text>
       <VStack align="stretch" width="full">
         {service?.membersPresent.map((member) => (
