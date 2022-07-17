@@ -51,7 +51,7 @@ export const GET_MEMBERS = gql`
 `
 
 export const GET_FELLOWSHIP_MEMBERS = gql`
-  query getFellowshipMembers($id: ID!, $serviceRecordId: ID!) {
+  query getFellowshipMembers($id: ID!, $serviceRecordId: ID) {
     serviceRecords(where: { id: $serviceRecordId }) {
       id
       serviceDate {
