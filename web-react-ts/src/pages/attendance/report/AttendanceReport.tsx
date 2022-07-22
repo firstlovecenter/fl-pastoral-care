@@ -3,6 +3,7 @@ import {
   Center,
   Container,
   Heading,
+  Image,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -34,6 +35,8 @@ const AttendanceReport = ({
       <Text fontWeight="bold" marginBottom={4}>
         Summary for {`${getHumanReadableDate(service.serviceDate.date, true)}`}
       </Text>
+
+      <Image src={service?.membersPicture} />
       <Text fontSize="lg" marginBottom={4}>
         Absent: {service?.membersAbsent.length}
       </Text>

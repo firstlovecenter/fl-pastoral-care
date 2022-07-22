@@ -21,7 +21,7 @@ import { ServiceRecord } from 'types/global-types'
 import { ChurchForAttendance } from '../attendance-types'
 
 type FormOptions = {
-  memberPicture: string
+  membersPicture: string
   sheep: string[]
   deer: string[]
   goat: string[]
@@ -40,14 +40,14 @@ const AttendanceTicker = ({
   const weekday = service?.__typename === 'ServiceRecord'
 
   const initialValues: FormOptions = {
-    memberPicture: '',
+    membersPicture: '',
     sheep: [],
     deer: [],
     goat: [],
   }
 
   const validationSchema = Yup.object({
-    memberPicture: Yup.string().required(`Please upload a picture`),
+    membersPicture: Yup.string().required(`Please upload a picture`),
   })
 
   const onSubmit = async (
@@ -66,6 +66,7 @@ const AttendanceTicker = ({
     await RecordMemberAttendance({
       variables: {
         recordId: service.id,
+        membersPicture: values.membersPicture,
         presentMembers: combinedPresent,
         absentMembers: combinedAbsent,
       },
@@ -119,11 +120,11 @@ const AttendanceTicker = ({
             </InputGroup>
             <VStack marginTop={10} align="stretch" w={'full'}>
               <ImageUpload
-                name="memberPicture"
+                name="membersPicture"
                 uploadPreset="developer-tests"
-                initialValue={initialValues.memberPicture}
+                initialValue={initialValues.membersPicture}
                 setFieldValue={formik.setFieldValue}
-                error={formik.errors.memberPicture}
+                error={formik.errors.membersPicture}
                 placeholder="Upload A Picture of Your Members"
               />
 

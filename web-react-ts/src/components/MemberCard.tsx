@@ -24,22 +24,17 @@ const MemberCard = ({ member }: { member: MemberCardType }) => {
 
   const navigate = useNavigate()
   return (
-    <Flex
-      onClick={() => {
-        clickCard(member)
-        navigate('/member-details')
-      }}
-      key={member.id}
-      background={bg}
-      borderRadius={20}
-      padding={5}
-    >
+    <Flex key={member.id} background={bg} borderRadius={20} padding={5}>
       <Avatar
         loading="lazy"
         name={member?.fullName}
         marginRight="10px"
         src={transformImage(member?.pictureUrl)}
         size={'lg'}
+        onClick={() => {
+          clickCard(member)
+          navigate('/member-details')
+        }}
       />
 
       <Text alignSelf="center" fontWeight="bold">

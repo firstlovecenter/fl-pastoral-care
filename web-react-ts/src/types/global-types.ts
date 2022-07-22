@@ -181,6 +181,7 @@ interface Record {
   attendance: number
   week: number
   serviceDate: TimeGraph
+  membersPicture: string
   markedAttendance: boolean
   membersPresent: MemberWithoutBioData[]
   membersAbsent: MemberWithoutBioData[]

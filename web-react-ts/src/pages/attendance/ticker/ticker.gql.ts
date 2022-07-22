@@ -22,24 +22,7 @@ export const DISPLAY_BACENTA_SERVICES = gql`
     bacentas(where: { id: $id }) {
       id
       name
-      serviceLogs {
-        serviceRecordsConnection(first: 10) {
-          edges {
-            node {
-              id
-              attendance
-              markedAttendance
-              serviceDate {
-                date
-              }
-            }
-          }
-          pageInfo {
-            endCursor
-            hasNextPage
-          }
-        }
-      }
+
       services(limit: 10) {
         id
         attendance
@@ -54,15 +37,19 @@ export const DISPLAY_BACENTA_SERVICES = gql`
 
 export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
   mutation RecordMemberFellowshipAttendance(
+    $membersPicture: String!
     $presentMembers: [ID!]!
     $absentMembers: [ID!]!
     $recordId: ID!
   ) {
     RecordMemberFellowshipPresent(
       presentMembers: $presentMembers
+      membersPicture: $membersPicture
       recordId: $recordId
     ) {
       id
+      markedAttendance
+      membersPicture
       membersPresent {
         id
         firstName
@@ -74,6 +61,7 @@ export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
       recordId: $recordId
     ) {
       id
+      markedAttendance
       membersAbsent {
         id
         firstName

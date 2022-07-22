@@ -11,6 +11,7 @@ export const GET_FELLOWSHIP_SERVICE_REPORT = gql`
       serviceDate {
         date
       }
+      membersPicture
       membersPresent {
         id
         firstName

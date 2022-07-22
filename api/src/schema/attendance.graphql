@@ -1,5 +1,6 @@
 extend type ServiceRecord {
   markedAttendance: Boolean!
+  membersPicture: String
   membersPresent: [Member!]!
     @relationship(type: "PRESENT_AT_SERVICE", direction: IN)
   membersAbsent: [Member!]!
@@ -8,6 +9,7 @@ extend type ServiceRecord {
 
 extend type BussingRecord {
   markedAttendance: Boolean!
+  membersPicture: String
   membersPresent: [Member!]!
     @relationship(type: "PRESENT_AT_SERVICE", direction: IN)
   membersAbsent: [Member!]!
@@ -16,6 +18,7 @@ extend type BussingRecord {
 
 type Mutation {
   RecordMemberFellowshipPresent(
+    membersPicture: String!
     presentMembers: [ID!]!
     recordId: ID!
   ): ServiceRecord
@@ -23,7 +26,9 @@ type Mutation {
       statement: """
       MATCH (service {id: $recordId})
       WHERE service:ServiceRecord OR service:BussingRecord
+      SET  service.membersPicture = $membersPicture
 
+      WITH service
       UNWIND $presentMembers AS presentMemberId
       MATCH (present:Member {id: presentMemberId})
       MERGE (present)-[:PRESENT_AT_SERVICE]->(service)

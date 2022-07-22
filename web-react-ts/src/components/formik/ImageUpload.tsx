@@ -7,7 +7,7 @@ type ImageUploadProps = {
   label?: string
   name: string
   initialValue: string
-  setFieldValue: (fieldName: string, value: string) => void
+  setFieldValue: (field: string, value: string) => void
   uploadPreset: 'membership-attendance' | 'developer-tests'
   placeholder: string
   error?: string

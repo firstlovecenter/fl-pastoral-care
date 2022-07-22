@@ -37,18 +37,17 @@ const FellowshipServicesList = () => {
             background={bg}
             padding={5}
             marginBottom={5}
-          >
-            <Box
-              onClick={() => {
-                clickCard(service)
+            onClick={() => {
+              clickCard(service)
 
-                if (service.markedAttendance) {
-                  navigate('/fellowship/attendance-report')
-                } else {
-                  navigate('/fellowship/weekday-attendance')
-                }
-              }}
-            >
+              if (service.markedAttendance) {
+                navigate('/fellowship/attendance-report')
+              } else {
+                navigate('/fellowship/weekday-attendance')
+              }
+            }}
+          >
+            <Box>
               <Text fontWeight="semibold">
                 {parseDate(service.serviceDate.date)}
               </Text>
