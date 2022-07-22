@@ -5,7 +5,7 @@ import FellowshipAttendanceTicker from './ticker/FellowshipAttendanceTicker'
 import FellowshipServicesList from './FellowshipServicesList'
 
 export const attendance: RouteArrayType = [
-  { path: '/bacenta/sunday-attendance', element: BacentaAttendanceTicker },
+  { path: '/bacenta/bacenta-attendance', element: BacentaAttendanceTicker },
   { path: '/fellowship/services-list', element: FellowshipServicesList },
   {
     path: '/fellowship/attendance-report',

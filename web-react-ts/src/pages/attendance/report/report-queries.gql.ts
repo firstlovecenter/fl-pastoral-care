@@ -16,6 +16,8 @@ export const GET_FELLOWSHIP_SERVICE_REPORT = gql`
         firstName
         lastName
         fullName
+        phoneNumber
+        whatsappNumber
         pictureUrl
       }
       membersAbsent {
@@ -23,6 +25,8 @@ export const GET_FELLOWSHIP_SERVICE_REPORT = gql`
         firstName
         lastName
         fullName
+        phoneNumber
+        whatsappNumber
         pictureUrl
       }
     }

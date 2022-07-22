@@ -1,4 +1,5 @@
 import { ApolloError } from '@apollo/client'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 import ErrorScreen from './ErrorScreen'
 import LoadingScreen from './LoadingScreen'
@@ -18,7 +19,7 @@ const ApolloWrapper = (props: ApolloWrapperPropsType) => {
   const { data, loading, error } = apolloData
 
   if (data || placeholder) {
-    return <>{props.children}</>
+    return <Box paddingBottom={100}>{props.children}</Box>
   } else if (loading) {
     return <LoadingScreen />
   } else if (error) {

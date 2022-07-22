@@ -10,12 +10,16 @@ import {
 } from 'react-icons/md'
 
 import { UserContext } from '../../../context/UserContext'
-import { ChurchContext } from '../../../context/ChurchContext'
+import { Church } from 'types/global-types'
 
-const HomePage = () => {
+type HomePageProps = {
+  church: Church
+  higherChurch: Church
+}
+
+const HomePage = ({ church, higherChurch }: HomePageProps) => {
   const { currentUser } = useContext(UserContext)
-  const { church } = useContext(ChurchContext)
-  const churchLevel = church.level.toLowerCase()
+  const churchLevel = church.__typename.toLowerCase()
 
   return (
     <Container>
@@ -36,7 +40,7 @@ const HomePage = () => {
               style={{ color: 'grey', textAlign: 'center' }}
               fontSize={'sm'}
             >
-              {church.level} Leader
+              {church.__typename} Leader
             </Text>
           </span>
           <Avatar
@@ -49,21 +53,23 @@ const HomePage = () => {
 
         <Container marginTop="30px" marginBottom="40px" centerContent>
           <Text fontSize="2xl">
-            {church.name} {church.level}
+            {church.name} {church.__typename}
           </Text>
-          <Text fontSize="xs">SouthEastern Constituency</Text>
+          <Text fontSize="xs">
+            {higherChurch.name} {higherChurch.__typename}
+          </Text>
         </Container>
       </header>
 
       <VStack spacing={3}>
-        {church.level === 'Bacenta' && (
+        {church.__typename === 'Bacenta' && (
           <PageNavButton
             icon={MdGroups}
-            label="Sunday Attendance"
-            to={`/${churchLevel}/sunday-attendance`}
+            label="Bacenta Attendance"
+            to={`/${churchLevel}/bacenta-attendance`}
           />
         )}
-        {church.level === 'Fellowship' && (
+        {church.__typename === 'Fellowship' && (
           <PageNavButton
             icon={MdGroups}
             label="Fellowship Attendance"

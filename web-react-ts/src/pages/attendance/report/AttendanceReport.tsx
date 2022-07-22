@@ -1,20 +1,16 @@
 import {
-  Avatar,
   Button,
   Center,
   Container,
-  Flex,
   Heading,
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { ChurchContext } from 'context/ChurchContext'
+import MemberCard from 'components/MemberCard'
 import useCustomColor from 'hooks/useCustomColor'
 import { getHumanReadableDate } from 'jd-date-utils'
-import React, { useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { ServiceRecord, BussingRecord, Church } from 'types/global-types'
-import { transformImage } from 'utils/global-utils'
 
 const AttendanceReport = ({
   service,
@@ -23,8 +19,7 @@ const AttendanceReport = ({
   church: Church
   service: ServiceRecord | BussingRecord
 }) => {
-  const { clickCard } = useContext(ChurchContext)
-  const { brand, bg } = useCustomColor()
+  const { brand } = useCustomColor()
   const navigate = useNavigate()
 
   return (
@@ -44,27 +39,7 @@ const AttendanceReport = ({
       </Text>
       <VStack align="stretch" width="full">
         {service?.membersAbsent.map((member) => (
-          <Flex
-            key={member.id}
-            onClick={() => {
-              clickCard(member)
-              navigate('/member-details')
-            }}
-            background={bg}
-            borderRadius={20}
-            padding={5}
-          >
-            <Avatar
-              loading="lazy"
-              name={member?.fullName}
-              marginRight="10px"
-              src={transformImage(member?.pictureUrl)}
-              size={'lg'}
-            />
-            <Text alignSelf="center" fontWeight="bold">
-              {member.fullName}
-            </Text>
-          </Flex>
+          <MemberCard key={member.id} member={member} />
         ))}
       </VStack>
 
@@ -73,18 +48,7 @@ const AttendanceReport = ({
       </Text>
       <VStack align="stretch" width="full">
         {service?.membersPresent.map((member) => (
-          <Flex key={member.id} background={bg} borderRadius={20} padding={5}>
-            <Avatar
-              loading="lazy"
-              name={member?.fullName}
-              marginRight="10px"
-              src={transformImage(member?.pictureUrl)}
-              size={'lg'}
-            />
-            <Text alignSelf="center" fontWeight="bold">
-              {member.fullName}
-            </Text>
-          </Flex>
+          <MemberCard key={member.id} member={member} />
         ))}
       </VStack>
       <Center>

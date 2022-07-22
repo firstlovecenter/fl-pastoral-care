@@ -1,5 +1,8 @@
 import { RouteArrayType } from 'types/global-types'
-import HomePage from './HomePage/HomePage'
+import BacentaLeader from './HomePage/BacentaLeader'
+import ConstituencyLeader from './HomePage/ConstituencyLeader'
+import CouncilLeader from './HomePage/CouncilLeader'
+import FellowshipLeader from './HomePage/FellowshipLeader'
 import BacentaMembers from './membership/BacentaMembers'
 import ConstituencyMembers from './membership/ConsituencyMembers'
 import CouncilMembers from './membership/CouncilMembers'
@@ -37,22 +40,22 @@ export const directory: RouteArrayType = [
 
   {
     path: '/fellowship/dashboard',
-    element: HomePage,
+    element: FellowshipLeader,
     roles: ['leaderFellowship'],
   },
   {
     path: '/bacenta/dashboard',
-    element: HomePage,
+    element: BacentaLeader,
     roles: ['leaderBacenta'],
   },
   {
     path: '/constituency/dashboard',
-    element: HomePage,
+    element: ConstituencyLeader,
     roles: ['leaderConstituency'],
   },
   {
     path: '/council/dashboard',
-    element: HomePage,
+    element: CouncilLeader,
     roles: ['leaderCouncil'],
   },
   {

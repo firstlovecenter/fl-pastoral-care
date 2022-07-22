@@ -73,6 +73,8 @@ export interface MemberWithoutBioData {
   lastName: string
   fullName: string
   pictureUrl: string
+  phoneNumber: string
+  whatsappNumber: string
   __typename: 'Member'
   stream_name: StreamOptions
 }
