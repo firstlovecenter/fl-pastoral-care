@@ -34,6 +34,7 @@ const Navigation = () => {
     <>
       <IconButton
         colorScheme="gray"
+        boxShadow="lg"
         aria-label="Side Nav Toggle"
         size="lg"
         position="fixed"

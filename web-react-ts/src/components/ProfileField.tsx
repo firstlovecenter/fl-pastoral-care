@@ -1,26 +1,42 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Flex, Spacer, Text } from '@chakra-ui/react'
+import useCustomColor from 'hooks/useCustomColor'
+import PhoneButton from './button/PhoneButton'
+import WhatsappButton from './button/WhatsappButton'
 interface ProfileFieldProps {
   Text: string
   SubText?: string
 }
+
 const ProfileField = (props: ProfileFieldProps) => {
+  const { bg } = useCustomColor()
+
   return (
-    <Box
+    <Flex
       marginTop={`10px`}
       borderRadius="8px"
-      paddingBottom="5px"
+      paddingY="8px"
       paddingLeft="10px"
-      paddingTop={`3px`}
       textAlign="left"
-      bgColor="blackAlpha.500"
+      bgColor={bg}
     >
-      <Text fontSize="12px" color={`ActiveCaption`}>
-        {props.Text}
-      </Text>
-      <Text fontSize="xs" color="CaptionText">
-        {props.SubText || ' - '}
-      </Text>
-    </Box>
+      <Box>
+        <Text fontSize="12px" color={`ActiveCaption`}>
+          {props.Text}
+        </Text>
+        <Text fontWeight="bold" color="CaptionText">
+          {props.SubText ?? <Text color={bg}>No Data</Text>}
+        </Text>
+      </Box>
+      <Spacer />
+      <Box marginRight={5}>
+        {props.Text === 'Phone Number' && (
+          <PhoneButton number={props.SubText || ''} />
+        )}
+        {props.Text === 'Whatsapp Number' && (
+          <WhatsappButton number={props.SubText || ''} />
+        )}
+      </Box>
+    </Flex>
   )
 }
 

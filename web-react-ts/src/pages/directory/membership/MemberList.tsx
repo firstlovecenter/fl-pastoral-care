@@ -65,16 +65,13 @@ const MemberList = (props: MemberListPropType) => {
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left">
-                Sheep
+                Sheep: {church?.sheep.length}
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <Box paddingLeft="10px" paddingRight="10px">
-            <AccordionPanel
-              pb={4}
-              style={{ height: '570px', overflowY: 'scroll' }}
-            >
+            <AccordionPanel pb={4} overflowY="scroll">
               <List spacing={3}>
                 {church?.sheep.map(
                   (sheep: ListMemberInterface, index: number) => (
@@ -90,16 +87,13 @@ const MemberList = (props: MemberListPropType) => {
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left">
-                Deer
+                Deer: {church?.deer.length}
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <Box style={{ paddingLeft: '10px', paddingRight: '10px' }}>
-            <AccordionPanel
-              pb={4}
-              style={{ height: '570px', overflowY: 'scroll' }}
-            >
+            <AccordionPanel pb={4} overflowY="scroll">
               <List spacing={3}>
                 {church?.deer.map(
                   (deer: ListMemberInterface, index: number) => (
@@ -115,17 +109,13 @@ const MemberList = (props: MemberListPropType) => {
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left">
-                Goat
+                Goat: {church?.goat.length}
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <Box style={{ paddingLeft: '10px', paddingRight: '10px' }}>
-            <AccordionPanel
-              pb={4}
-              overflowY="scroll"
-              style={{ height: '570px' }}
-            >
+            <AccordionPanel pb={4} overflowY="scroll">
               <List spacing={3}>
                 {church?.goat.map(
                   (goat: ListMemberInterface, index: number) => (

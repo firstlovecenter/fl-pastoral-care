@@ -14,7 +14,21 @@ export const GET_MEMBER_PROFILE = gql`
         date
       }
       phoneNumber
+      whatsappNumber
       stream_name
+      ministry {
+        id
+        name
+      }
+      fellowship {
+        id
+        leader {
+          id
+          firstName
+          lastName
+          fullName
+        }
+      }
     }
   }
 `

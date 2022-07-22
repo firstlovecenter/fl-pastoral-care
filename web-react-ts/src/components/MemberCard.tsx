@@ -1,12 +1,12 @@
-import { PhoneIcon } from '@chakra-ui/icons'
-import { Avatar, Button, Flex, Spacer, Text } from '@chakra-ui/react'
+import { Avatar, Flex, Spacer, Text } from '@chakra-ui/react'
 import { ChurchContext } from 'context/ChurchContext'
 import useCustomColor from 'hooks/useCustomColor'
-import React, { useContext } from 'react'
-import { FaWhatsapp } from 'react-icons/fa'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { StreamOptions } from 'types/global-types'
 import { transformImage } from 'utils/global-utils'
+import PhoneButton from './button/PhoneButton'
+import WhatsappButton from './button/WhatsappButton'
 
 type MemberCardType = {
   __typename: string
@@ -46,25 +46,8 @@ const MemberCard = ({ member }: { member: MemberCardType }) => {
         {member.fullName}
       </Text>
       <Spacer />
-      <Button
-        as="a"
-        href={`tel:${member.phoneNumber}`}
-        colorScheme="twitter"
-        alignSelf="center"
-        rounded="full"
-        marginRight="5px"
-      >
-        <PhoneIcon />
-      </Button>
-      <Button
-        as="a"
-        href={`https://wa.me/${member.whatsappNumber}`}
-        colorScheme="whatsapp"
-        alignSelf="center"
-        rounded="full"
-      >
-        <FaWhatsapp size={25} />
-      </Button>
+      <PhoneButton number={member.phoneNumber} />
+      <WhatsappButton number={member.whatsappNumber} />
     </Flex>
   )
 }
