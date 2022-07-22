@@ -22,6 +22,24 @@ export const DISPLAY_BACENTA_SERVICES = gql`
     bacentas(where: { id: $id }) {
       id
       name
+      serviceLogs {
+        serviceRecordsConnection(first: 10) {
+          edges {
+            node {
+              id
+              attendance
+              markedAttendance
+              serviceDate {
+                date
+              }
+            }
+          }
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
+        }
+      }
       services(limit: 10) {
         id
         attendance

@@ -11,14 +11,17 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import ImageUpload from 'components/formik/ImageUpload'
 import CheckboxGroup from 'components/formik/MemberCheckboxGroup'
 import { Form, Formik, FormikHelpers } from 'formik'
+import * as Yup from 'yup'
 import { getHumanReadableDate } from 'jd-date-utils'
 import { useNavigate } from 'react-router'
 import { ServiceRecord } from 'types/global-types'
 import { ChurchForAttendance } from '../attendance-types'
 
 type FormOptions = {
+  memberPicture: string
   sheep: string[]
   deer: string[]
   goat: string[]
@@ -37,10 +40,15 @@ const AttendanceTicker = ({
   const weekday = service?.__typename === 'ServiceRecord'
 
   const initialValues: FormOptions = {
+    memberPicture: '',
     sheep: [],
     deer: [],
     goat: [],
   }
+
+  const validationSchema = Yup.object({
+    memberPicture: Yup.string().required(`Please upload a picture`),
+  })
 
   const onSubmit = async (
     values: FormOptions,
@@ -86,7 +94,12 @@ const AttendanceTicker = ({
     })) ?? []
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validateOnMount>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+      validateOnMount
+    >
       {(formik) => (
         <Form>
           <Container marginTop={10} centerContent>
@@ -104,8 +117,16 @@ const AttendanceTicker = ({
               />
               <Input placeholder="Search" />
             </InputGroup>
-
             <VStack marginTop={10} align="stretch" w={'full'}>
+              <ImageUpload
+                name="memberPicture"
+                uploadPreset="developer-tests"
+                initialValue={initialValues.memberPicture}
+                setFieldValue={formik.setFieldValue}
+                error={formik.errors.memberPicture}
+                placeholder="Upload A Picture of Your Members"
+              />
+
               {church?.sheep.length && <Heading>Sheep</Heading>}
               <CheckboxGroup name="sheep" options={sheep} />
 

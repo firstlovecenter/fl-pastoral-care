@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { Box, Container, Heading, Text } from '@chakra-ui/react'
+import { CheckCircleIcon } from '@chakra-ui/icons'
+import { Box, Container, Flex, Heading, Spacer, Text } from '@chakra-ui/react'
 import ApolloWrapper from 'components/ApolloWrapper/ApolloWrapper'
 import { ChurchContext } from 'context/ChurchContext'
 import useCustomColor from 'hooks/useCustomColor'
@@ -28,28 +29,45 @@ const FellowshipServicesList = () => {
           {`${fellowship?.name} ${fellowship?.__typename}`}
         </Heading>
         {services?.map((service) => (
-          <Box
+          <Flex
             key={service.id}
-            marginBottom={5}
-            onClick={() => {
-              clickCard(service)
-
-              if (service.markedAttendance) {
-                navigate('/fellowship/attendance-report')
-              } else {
-                navigate('/fellowship/weekday-attendance')
-              }
-            }}
+            alignContent="center"
             borderRadius="md"
+            boxShadow="md"
             background={bg}
             padding={5}
+            marginBottom={5}
           >
-            <Text fontWeight="bold">{parseDate(service.serviceDate.date)}</Text>
-            <Text
-              fontSize="2xl"
-              fontWeight="bold"
-            >{`Attendance: ${service.attendance}`}</Text>
-          </Box>
+            <Box
+              onClick={() => {
+                clickCard(service)
+
+                if (service.markedAttendance) {
+                  navigate('/fellowship/attendance-report')
+                } else {
+                  navigate('/fellowship/weekday-attendance')
+                }
+              }}
+            >
+              <Text fontWeight="semibold">
+                {parseDate(service.serviceDate.date)}
+              </Text>
+              <Text
+                fontSize="xl"
+                fontWeight="bold"
+              >{`Attendance: ${service.attendance}`}</Text>
+            </Box>
+            <Spacer />
+            {service.markedAttendance && (
+              <Box marginRight={5} marginTop={5} alignSelf="center">
+                <CheckCircleIcon
+                  fontSize={25}
+                  color="whatsapp.500"
+                  boxShadow="lg"
+                />
+              </Box>
+            )}
+          </Flex>
         ))}
       </Container>
     </ApolloWrapper>

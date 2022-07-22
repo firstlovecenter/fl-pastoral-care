@@ -56,9 +56,9 @@ const AttendanceReport = ({
           marginTop={10}
           size="lg"
           colorScheme="teal"
-          onClick={() => navigate(`/${church?.__typename}/dashboard`)}
+          onClick={() => navigate(`/${church?.__typename}/services-list`)}
         >
-          Go To Dashboard
+          Go To Services List
         </Button>
       </Center>
     </Container>
