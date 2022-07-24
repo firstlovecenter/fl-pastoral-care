@@ -12,6 +12,7 @@ const PageNavButton = (props: PageNavButtonTypes) => {
   return (
     <Button
       width={`100%`}
+      paddingY="30px"
       size="lg"
       justifyContent={`flex-start`}
       onClick={() => navigate(props.to)}
@@ -24,9 +25,7 @@ const PageNavButton = (props: PageNavButtonTypes) => {
         margin="0px 10px 0 0px"
         verticalAlign="middle"
       />
-      <Text fontSize="sm" verticalAlign="middle">
-        {props.label}
-      </Text>
+      <Text verticalAlign="middle">{props.label}</Text>
     </Button>
   )
 }

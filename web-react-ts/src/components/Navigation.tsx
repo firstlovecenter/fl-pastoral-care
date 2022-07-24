@@ -26,7 +26,7 @@ const Navigation = () => {
   const menuItems = [
     {
       name: 'Home',
-      link: '/',
+      link: '/profile-choose-page',
     },
   ]
 

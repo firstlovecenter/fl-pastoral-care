@@ -111,7 +111,7 @@ export const GET_FELLOWSHIP_MEMBERS = gql`
 `
 
 export const GET_BACENTA_MEMBERS = gql`
-  query getBacentaMembers($id: ID!, $bussingRecordId: ID!) {
+  query getBacentaMembers($id: ID!, $bussingRecordId: ID) {
     bussingRecords(where: { id: $bussingRecordId }) {
       id
       serviceDate {

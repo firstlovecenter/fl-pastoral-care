@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { useContext } from 'react'
 import ApolloWrapper from '../../../components/ApolloWrapper/ApolloWrapper'
 import { ChurchContext } from '../../../context/ChurchContext'
-import { GET_COUNCIL_MEMBERS } from './member-list.gql'
+import { GET_COUNCIL_MEMBERS } from './memberList.gql'
 import MemberList from './MemberList'
 
 const CouncilMembers = () => {

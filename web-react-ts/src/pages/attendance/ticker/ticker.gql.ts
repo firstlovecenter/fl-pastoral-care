@@ -82,6 +82,7 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
       churchId: $churchId
     ) {
       id
+      markedAttendance
       membersPresent {
         id
         firstName
@@ -94,6 +95,7 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
       churchId: $churchId
     ) {
       id
+      markedAttendance
       membersAbsent {
         id
         firstName

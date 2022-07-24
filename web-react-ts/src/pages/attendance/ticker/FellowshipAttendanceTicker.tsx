@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import ApolloWrapper from 'components/ApolloWrapper/ApolloWrapper'
 import { ChurchContext } from 'context/ChurchContext'
-import { GET_FELLOWSHIP_MEMBERS } from 'pages/directory/membership/member-list.gql'
+import { GET_FELLOWSHIP_MEMBERS } from 'pages/directory/membership/memberList.gql'
 import React, { useContext } from 'react'
 import { RECORD_MEMBER_FELLOWSHIP_ATTENDANCE } from './ticker.gql'
 import AttendanceTicker from './AttendanceTicker'

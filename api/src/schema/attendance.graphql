@@ -53,13 +53,16 @@ type Mutation {
       """
     )
   RecordMemberBacentaPresent(
+    membersPicture: String!
     presentMembers: [ID!]!
     churchId: ID!
   ): BussingRecord
     @cypher(
       statement: """
       MATCH (service:BussingRecord {id: $recordId})
+      SET  service.membersPicture = $membersPicture
 
+      WITH service
       UNWIND $presentMembers AS presentMemberId
       MATCH (member:Member {id: presentMemberId})
       MERGE (member)-[:PRESENT_AT_SERVICE]->(service)
