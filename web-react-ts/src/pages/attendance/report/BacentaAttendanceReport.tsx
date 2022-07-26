@@ -16,7 +16,7 @@ const BacentaAttendanceReport = () => {
   const serviceRecord = apollo.data?.bussingRecords[0]
 
   return (
-    <ApolloWrapper apolloData={apollo}>
+    <ApolloWrapper apolloResponse={apollo}>
       <AttendanceReport church={bacenta} service={serviceRecord} />
     </ApolloWrapper>
   )

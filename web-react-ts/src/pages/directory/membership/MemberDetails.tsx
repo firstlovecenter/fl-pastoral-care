@@ -33,7 +33,7 @@ const MemberDetails = () => {
     { text: 'Last Visited' },
   ]
   return (
-    <ApolloWrapper apolloData={{ data, loading, error }}>
+    <ApolloWrapper apolloResponse={{ data, loading, error }}>
       <Container>
         <Center marginTop="40px">
           <Text fontSize="xl" paddingBottom={10}>

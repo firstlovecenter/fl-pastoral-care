@@ -7,17 +7,17 @@ import { DISPLAY_COUNCIL_HOMEPAGE } from './Queries'
 
 const CouncilLeader = () => {
   const { councilId } = useContext(ChurchContext)
-  const apolloData = useQuery(DISPLAY_COUNCIL_HOMEPAGE, {
+  const apolloResponse = useQuery(DISPLAY_COUNCIL_HOMEPAGE, {
     variables: {
       id: councilId,
     },
   })
 
-  const council = apolloData.data?.councils[0]
+  const council = apolloResponse.data?.councils[0]
   const stream = council?.stream
 
   return (
-    <ApolloWrapper apolloData={apolloData}>
+    <ApolloWrapper apolloResponse={apolloResponse}>
       <HomePage church={council} higherChurch={stream} />
     </ApolloWrapper>
   )

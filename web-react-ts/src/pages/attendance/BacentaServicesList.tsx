@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Box, Container, Heading, Text } from '@chakra-ui/react'
 import ApolloWrapper from 'components/ApolloWrapper/ApolloWrapper'
+import Notice from 'components/Notice'
 import { ChurchContext } from 'context/ChurchContext'
 import useCustomColor from 'hooks/useCustomColor'
 import { parseDate } from 'jd-date-utils'
@@ -14,15 +15,15 @@ const BacentaServicesList = () => {
   const { bg } = useCustomColor()
   const navigate = useNavigate()
 
-  const apolloData = useQuery(DISPLAY_BACENTA_SERVICES, {
+  const apolloResponse = useQuery(DISPLAY_BACENTA_SERVICES, {
     variables: { id: bacentaId },
   })
 
-  const bacenta: Bacenta = apolloData.data?.bacentas[0]
+  const bacenta: Bacenta = apolloResponse.data?.bacentas[0]
   const bussing = bacenta?.bussing
 
   return (
-    <ApolloWrapper apolloData={apolloData}>
+    <ApolloWrapper apolloResponse={apolloResponse}>
       <Container marginTop={10}>
         <Heading marginBottom={10}>
           {`${bacenta?.name} ${bacenta?.__typename}`}
@@ -50,6 +51,11 @@ const BacentaServicesList = () => {
             }`}</Text>
           </Box>
         ))}
+        {!bussing?.length && (
+          <Notice>
+            <Text>No Bussing Records Found</Text>
+          </Notice>
+        )}
       </Container>
     </ApolloWrapper>
   )

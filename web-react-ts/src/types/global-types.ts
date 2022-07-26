@@ -39,6 +39,7 @@ export interface Church {
   }
   vacationStatus: 'Vacation' | 'Active'
   __typename: ChurchLevel
+  idls: Member[]
 }
 
 export interface Fellowship extends Church {

@@ -6,7 +6,7 @@ import LoadingScreen from './LoadingScreen'
 
 type ApolloWrapperPropsType = {
   placeholder?: boolean
-  apolloData: {
+  apolloResponse: {
     data: any
     loading: boolean
     error?: ApolloError | undefined
@@ -15,8 +15,8 @@ type ApolloWrapperPropsType = {
 }
 
 const ApolloWrapper = (props: ApolloWrapperPropsType) => {
-  const { apolloData, placeholder } = props
-  const { data, loading, error } = apolloData
+  const { apolloResponse, placeholder } = props
+  const { data, loading, error } = apolloResponse
 
   if (data || placeholder) {
     return <Box paddingBottom={100}>{props.children}</Box>

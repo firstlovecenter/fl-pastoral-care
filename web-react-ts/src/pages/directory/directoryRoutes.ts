@@ -8,9 +8,11 @@ import ConstituencyMembers from './membership/ConsituencyMembers'
 import CouncilMembers from './membership/CouncilMembers'
 import FellowshipMembers from './membership/FellowshipMembers'
 import ProfilePage from './membership/MemberDetails'
+import { membershipRoutes } from './membership/membershipRoutes'
 import LandingPage from './ProfileChoosePage'
 
 export const directory: RouteArrayType = [
+  ...membershipRoutes,
   {
     path: '/profile-choose-page',
     element: LandingPage,

@@ -16,7 +16,7 @@ const FellowshipAttendanceReport = () => {
   const serviceRecord = apollo.data?.serviceRecords[0]
 
   return (
-    <ApolloWrapper apolloData={apollo}>
+    <ApolloWrapper apolloResponse={apollo}>
       <AttendanceReport church={fellowship} service={serviceRecord} />
     </ApolloWrapper>
   )

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { CheckCircleIcon } from '@chakra-ui/icons'
 import { Box, Container, Flex, Heading, Spacer, Text } from '@chakra-ui/react'
 import ApolloWrapper from 'components/ApolloWrapper/ApolloWrapper'
+import Notice from 'components/Notice'
 import { ChurchContext } from 'context/ChurchContext'
 import useCustomColor from 'hooks/useCustomColor'
 import { parseDate } from 'jd-date-utils'
@@ -15,15 +16,15 @@ const FellowshipServicesList = () => {
   const { bg } = useCustomColor()
   const navigate = useNavigate()
 
-  const apolloData = useQuery(DISPLAY_FELLOWSHIP_SERVICES, {
+  const apolloResponse = useQuery(DISPLAY_FELLOWSHIP_SERVICES, {
     variables: { id: fellowshipId },
   })
 
-  const fellowship: Fellowship = apolloData.data?.fellowships[0]
+  const fellowship: Fellowship = apolloResponse.data?.fellowships[0]
   const services = fellowship?.services
 
   return (
-    <ApolloWrapper apolloData={apolloData}>
+    <ApolloWrapper apolloResponse={apolloResponse}>
       <Container marginTop={10}>
         <Heading marginBottom={10}>
           {`${fellowship?.name} ${fellowship?.__typename}`}
@@ -68,6 +69,11 @@ const FellowshipServicesList = () => {
             )}
           </Flex>
         ))}
+        {!services?.length && (
+          <Notice>
+            <Text>No Services Found</Text>
+          </Notice>
+        )}
       </Container>
     </ApolloWrapper>
   )

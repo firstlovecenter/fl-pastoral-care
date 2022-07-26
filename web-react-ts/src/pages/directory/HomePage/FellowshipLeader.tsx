@@ -7,17 +7,17 @@ import { DISPLAY_FELLOWSHIP_HOMEPAGE } from './Queries'
 
 const FellowshipLeader = () => {
   const { fellowshipId } = useContext(ChurchContext)
-  const apolloData = useQuery(DISPLAY_FELLOWSHIP_HOMEPAGE, {
+  const apolloResponse = useQuery(DISPLAY_FELLOWSHIP_HOMEPAGE, {
     variables: {
       id: fellowshipId,
     },
   })
 
-  const fellowship = apolloData.data?.fellowships[0]
+  const fellowship = apolloResponse.data?.fellowships[0]
   const constituency = fellowship?.bacenta.constituency
 
   return (
-    <ApolloWrapper apolloData={apolloData}>
+    <ApolloWrapper apolloResponse={apolloResponse}>
       <HomePage church={fellowship} higherChurch={constituency} />
     </ApolloWrapper>
   )

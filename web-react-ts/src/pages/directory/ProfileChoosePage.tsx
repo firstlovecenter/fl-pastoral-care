@@ -29,7 +29,7 @@ const ProfileChoosePage = () => {
   const loggedInUser = data?.members[0]
 
   return (
-    <ApolloWrapper apolloData={{ data, loading, error }}>
+    <ApolloWrapper apolloResponse={{ data, loading, error }}>
       {isAuthenticated ? (
         <Container>
           <HeaderText />

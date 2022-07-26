@@ -12,7 +12,7 @@ const BacentaMembers = () => {
   const bacenta = apollo.data?.bacentas[0]
 
   return (
-    <ApolloWrapper apolloData={apollo}>
+    <ApolloWrapper apolloResponse={apollo}>
       <MemberList church={bacenta} />
     </ApolloWrapper>
   )

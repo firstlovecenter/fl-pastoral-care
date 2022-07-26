@@ -3,7 +3,6 @@ import { ChurchContext } from 'context/ChurchContext'
 import useCustomColor from 'hooks/useCustomColor'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router'
-import { StreamOptions } from 'types/global-types'
 import { transformImage } from 'utils/global-utils'
 import PhoneButton from './button/PhoneButton'
 import WhatsappButton from './button/WhatsappButton'
@@ -11,7 +10,6 @@ import WhatsappButton from './button/WhatsappButton'
 type MemberCardType = {
   __typename: string
   id: string
-  stream_name: StreamOptions
   fullName: string
   pictureUrl: string
   phoneNumber: string

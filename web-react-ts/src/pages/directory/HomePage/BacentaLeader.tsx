@@ -7,17 +7,17 @@ import { DISPLAY_BACENTA_HOMEPAGE } from './Queries'
 
 const BacentaLeader = () => {
   const { bacentaId } = useContext(ChurchContext)
-  const apolloData = useQuery(DISPLAY_BACENTA_HOMEPAGE, {
+  const apolloResponse = useQuery(DISPLAY_BACENTA_HOMEPAGE, {
     variables: {
       id: bacentaId,
     },
   })
 
-  const bacenta = apolloData.data?.bacentas[0]
+  const bacenta = apolloResponse.data?.bacentas[0]
   const constituency = bacenta?.constituency
 
   return (
-    <ApolloWrapper apolloData={apolloData}>
+    <ApolloWrapper apolloResponse={apolloResponse}>
       <HomePage church={bacenta} higherChurch={constituency} />
     </ApolloWrapper>
   )

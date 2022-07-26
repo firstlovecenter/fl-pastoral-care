@@ -10,6 +10,18 @@ const resolvers = {
   Member: {
     fullName: (source: Member) => `${source.firstName} ${source.lastName}`,
   },
+  Sheep: {
+    fullName: (source: Member) => `${source.firstName} ${source.lastName}`,
+  },
+  Goat: {
+    fullName: (source: Member) => `${source.firstName} ${source.lastName}`,
+  },
+  Deer: {
+    fullName: (source: Member) => `${source.firstName} ${source.lastName}`,
+  },
+  idl: {
+    fullName: (source: Member) => `${source.firstName} ${source.lastName}`,
+  },
 }
 
 export default resolvers

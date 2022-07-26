@@ -105,14 +105,14 @@ type idl implements Person {
 }
 
 extend type Member {
-  sheep: [Member!]!
+  sheep: [Sheep!]!
     @cypher(
       statement: """
       MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)<-[:BELONGS_TO]-(members:Sheep)
       RETURN DISTINCT members
       """
     )
-  goats: [Member!]!
+  goats: [Goat!]!
     @cypher(
       statement: """
       MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..6]->(:Fellowship)<-[:BELONGS_TO]-(members:Goat)

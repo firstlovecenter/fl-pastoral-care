@@ -14,7 +14,7 @@ const ConstituencyMembers = () => {
   const constituency = apollo.data?.constituencies[0]
 
   return (
-    <ApolloWrapper apolloData={apollo}>
+    <ApolloWrapper apolloResponse={apollo}>
       <MemberList church={constituency} />
     </ApolloWrapper>
   )

@@ -16,9 +16,8 @@ export const GET_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
-      goat {
+      goats {
         id
         firstName
         lastName
@@ -30,7 +29,6 @@ export const GET_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
       deer {
         id
@@ -44,7 +42,6 @@ export const GET_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
     }
   }
@@ -74,9 +71,8 @@ export const GET_FELLOWSHIP_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
-      goat {
+      goats {
         id
         firstName
         lastName
@@ -89,7 +85,6 @@ export const GET_FELLOWSHIP_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
       deer {
         id
@@ -104,7 +99,6 @@ export const GET_FELLOWSHIP_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
     }
   }
@@ -133,9 +127,8 @@ export const GET_BACENTA_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
-      goat {
+      goats {
         id
         firstName
         lastName
@@ -148,7 +141,6 @@ export const GET_BACENTA_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
       deer {
         id
@@ -163,7 +155,6 @@ export const GET_BACENTA_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
     }
   }
@@ -185,9 +176,8 @@ export const GET_CONSTITUENCY_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
-      goat {
+      goats {
         id
         firstName
         lastName
@@ -199,7 +189,6 @@ export const GET_CONSTITUENCY_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
       deer {
         id
@@ -213,7 +202,6 @@ export const GET_CONSTITUENCY_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
     }
   }
@@ -235,9 +223,8 @@ export const GET_COUNCIL_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
-      goat {
+      goats {
         id
         firstName
         lastName
@@ -249,7 +236,6 @@ export const GET_COUNCIL_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
       deer {
         id
@@ -263,7 +249,6 @@ export const GET_COUNCIL_MEMBERS = gql`
           date
         }
         phoneNumber
-        stream_name
       }
     }
   }

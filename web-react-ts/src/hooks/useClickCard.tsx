@@ -54,7 +54,7 @@ export type CardType = {
   id: string
   name?: string
   link?: string
-  stream_name: StreamOptions
+  stream_name?: StreamOptions
   gatheringService?: { id: string }
   stream?: Stream
   council?: Council
