@@ -1,3 +1,26 @@
+extend type Fellowship {
+  services(limit: Int!): [ServiceRecord!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT records,date WHERE NOT (records:NoService)
+      WITH records, date LIMIT $limit
+      RETURN records ORDER BY date.date DESC
+      """
+    )
+}
+
+extend type Bacenta {
+  bussing(limit: Int!): [BussingRecord!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(records:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date LIMIT $limit
+      RETURN records ORDER BY date.date DESC
+      """
+    )
+}
+
 extend type ServiceRecord {
   markedAttendance: Boolean!
   membersPicture: String
@@ -55,7 +78,7 @@ type Mutation {
   RecordMemberBacentaPresent(
     membersPicture: String!
     presentMembers: [ID!]!
-    churchId: ID!
+    recordId: ID!
   ): BussingRecord
     @cypher(
       statement: """
@@ -72,7 +95,7 @@ type Mutation {
     )
   RecordMemberBacentaAbsent(
     absentMembers: [ID!]!
-    churchId: ID!
+    recordId: ID!
   ): BussingRecord
     @cypher(
       statement: """

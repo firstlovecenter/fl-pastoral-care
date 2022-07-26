@@ -23,7 +23,7 @@ export const DISPLAY_BACENTA_SERVICES = gql`
       id
       name
 
-      services(limit: 10) {
+      bussing(limit: 10) {
         id
         attendance
         markedAttendance
@@ -73,13 +73,15 @@ export const RECORD_MEMBER_FELLOWSHIP_ATTENDANCE = gql`
 
 export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
   mutation RecordMemberBacentaAttendance(
+    $membersPicture: String!
     $presentMembers: [ID!]!
     $absentMembers: [ID!]!
-    $churchId: ID!
+    $recordId: ID!
   ) {
     RecordMemberBacentaPresent(
       presentMembers: $presentMembers
-      churchId: $churchId
+      membersPicture: $membersPicture
+      recordId: $recordId
     ) {
       id
       markedAttendance
@@ -92,7 +94,7 @@ export const RECORD_MEMBER_BACENTA_ATTENDANCE = gql`
     }
     RecordMemberBacentaAbsent(
       absentMembers: $absentMembers
-      churchId: $churchId
+      recordId: $recordId
     ) {
       id
       markedAttendance

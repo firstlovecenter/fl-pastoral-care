@@ -66,7 +66,7 @@ const HomePage = ({ church, higherChurch }: HomePageProps) => {
           <PageNavButton
             icon={MdGroups}
             label="Bacenta Attendance"
-            to={`/${churchLevel}/bacenta-attendance`}
+            to={`/${churchLevel}/services-list`}
           />
         )}
         {church.__typename === 'Fellowship' && (

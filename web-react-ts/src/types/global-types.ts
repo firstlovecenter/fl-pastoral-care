@@ -48,7 +48,8 @@ export interface Fellowship extends Church {
 
 export interface Bacenta extends Church {
   __typename: 'Bacenta'
-  services: ServiceRecord[]
+
+  bussing: BussingRecord[]
 }
 
 export type ChurchIdAndName = {
@@ -178,6 +179,7 @@ export type VerbTypes =
 
 interface Record {
   id: string
+  stream_name: StreamOptions
   attendance: number
   week: number
   serviceDate: TimeGraph
@@ -188,7 +190,6 @@ interface Record {
 }
 export interface ServiceRecord extends Record {
   __typename: 'ServiceRecord' | 'RehearsalRecord'
-  stream_name: StreamOptions
   noServiceReason: string
 }
 

@@ -19,7 +19,7 @@ const BacentaServicesList = () => {
   })
 
   const bacenta: Bacenta = apolloData.data?.bacentas[0]
-  const services = bacenta?.services
+  const bussing = bacenta?.bussing
 
   return (
     <ApolloWrapper apolloData={apolloData}>
@@ -27,28 +27,27 @@ const BacentaServicesList = () => {
         <Heading marginBottom={10}>
           {`${bacenta?.name} ${bacenta?.__typename}`}
         </Heading>
-        {services?.map((service) => (
+        {bussing?.map((record) => (
           <Box
-            key={service.id}
+            key={record.id}
             marginBottom={5}
             onClick={() => {
-              clickCard(service)
+              clickCard(record)
 
-              if (service.markedAttendance) {
+              if (record.markedAttendance) {
                 navigate('/bacenta/attendance-report')
               } else {
-                navigate('/bacenta/weekday-attendance')
+                navigate('/bacenta/tick-attendance')
               }
             }}
             borderRadius="md"
             background={bg}
             padding={5}
           >
-            <Text fontWeight="bold">{parseDate(service.serviceDate.date)}</Text>
-            <Text
-              fontSize="2xl"
-              fontWeight="bold"
-            >{`Attendance: ${service.attendance}`}</Text>
+            <Text fontWeight="bold">{parseDate(record.serviceDate.date)}</Text>
+            <Text fontSize="2xl" fontWeight="bold">{`Attendance: ${
+              record.attendance ?? '-'
+            }`}</Text>
           </Box>
         ))}
       </Container>
