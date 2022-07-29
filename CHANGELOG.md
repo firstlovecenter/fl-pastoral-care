@@ -1,3 +1,48 @@
+#### 0.5.23 (2022-07-29)
+
+##### Chores
+
+*  update app description in package.json ([3a367d01](https://github.com/firstlovecenter/fl-pastoral-care/commit/3a367d010a1c9fd7cea45171c6c476d8e83edeae))
+*  testing pre-commit ([8c8da2ab](https://github.com/firstlovecenter/fl-pastoral-care/commit/8c8da2ab10b783dbc6a2289985ccd70d1ff2af42))
+
+##### New Features
+
+*  created a 404 page ([788fb484](https://github.com/firstlovecenter/fl-pastoral-care/commit/788fb4841f58f458ca87f358506f11fa9c255224))
+*  implement idl(new members) view in the front end poimen-26 ([8cffcfe9](https://github.com/firstlovecenter/fl-pastoral-care/commit/8cffcfe92a6a60db5b991dea93a3ae3b994c79ad))
+*  implement idl(new members) in the backend ([f89349c8](https://github.com/firstlovecenter/fl-pastoral-care/commit/f89349c810ae469cc0675c3dea483f59639efeb1))
+*  implement bus attendance ticking ([13bd0e34](https://github.com/firstlovecenter/fl-pastoral-care/commit/13bd0e34e12baab5cdd825f4f55f2879305b1614))
+*  increased the size of the home page buttons ([988a1107](https://github.com/firstlovecenter/fl-pastoral-care/commit/988a1107787229e994061e36f6caab3a78eec0de))
+*  implement image upload button in the attendance ticker ([630b17e7](https://github.com/firstlovecenter/fl-pastoral-care/commit/630b17e72245415dfd891a600b19095158b6806c))
+*  implements phone and whatsapp call buttons ([f5a826c2](https://github.com/firstlovecenter/fl-pastoral-care/commit/f5a826c202ea93faa9dc8bb571d33c6644bd294f))
+*  implemented RoleView component and other auth utils ([a1f3dd0d](https://github.com/firstlovecenter/fl-pastoral-care/commit/a1f3dd0d7bb355f663fe07b856f06b1f5904289b))
+*  implemented functionality to tick attendance of members on fellowship service day ([88c103c4](https://github.com/firstlovecenter/fl-pastoral-care/commit/88c103c4f2ac56759bbf721ee5b90e338fbe5092))
+*  implemented attendance ticker with formik without mutation ([404d4d5f](https://github.com/firstlovecenter/fl-pastoral-care/commit/404d4d5f80f02cf0d8be6087855a2c0149bc79a7))
+*  implemented attendance ticker in the front end ([5ba66174](https://github.com/firstlovecenter/fl-pastoral-care/commit/5ba6617439f4df77cda1ec026962c3c991527f93))
+*  implemented membership list for council, constituency and bacenta ([74268655](https://github.com/firstlovecenter/fl-pastoral-care/commit/742686559dedcf9e4e3b21ae27b0788ce13686f2))
+*  implemented modularity in the display of members ([523aaede](https://github.com/firstlovecenter/fl-pastoral-care/commit/523aaedeabe7a79e922b76a5d265e6c5ed6a0e09))
+*  improved error handling in the ui ([239b5542](https://github.com/firstlovecenter/fl-pastoral-care/commit/239b55427f1f0245cb882b340bac4d06c9530a8f))
+* **attendance:**
+  *  display attendance  picture in attendance report ([b763ec48](https://github.com/firstlovecenter/fl-pastoral-care/commit/b763ec48fbc00631373154191fbbf4bea52c2ff0))
+  *  poimen-23 implemented feature for leaders to tick attendance for weekday services ([2d1bbbff](https://github.com/firstlovecenter/fl-pastoral-care/commit/2d1bbbff5245c4c3426c0b8df1338b8a30c4a95c))
+
+##### Bug Fixes
+
+*  fixed bug preventing member list from showing ([13b2fbe4](https://github.com/firstlovecenter/fl-pastoral-care/commit/13b2fbe470e229aef95f60188c942aac8da0e957))
+*  improved api mutation for recording attendance ([c7250645](https://github.com/firstlovecenter/fl-pastoral-care/commit/c7250645d3bd063929c2b5becb8f8fe46f083c0f))
+*  imported my own date utils file and used 😄 ([01c4371e](https://github.com/firstlovecenter/fl-pastoral-care/commit/01c4371e2eee6a48424a1916b5e626b335a192f2))
+* **attendance:**  fixes small bugs with reporting fellowship attendance ([b61423e8](https://github.com/firstlovecenter/fl-pastoral-care/commit/b61423e87972aae30acb3cabc0c4981d035d05e8))
+
+##### Performance Improvements
+
+*  finally figured out how to get DEBUG logs working again ([ac8b866a](https://github.com/firstlovecenter/fl-pastoral-care/commit/ac8b866a9b17eda48c7c2e3520b97d37fead22a6))
+*  implemented apolloconfig.js for vscode tooling ([0ea50c9e](https://github.com/firstlovecenter/fl-pastoral-care/commit/0ea50c9ee4f7d94a60d4096e575f076e12ded369))
+
+##### Refactors
+
+*  implements better routing for homepages ([f69a0dfc](https://github.com/firstlovecenter/fl-pastoral-care/commit/f69a0dfcc7762fc7f94e0e4e72b6e6f06d07841f))
+*  refactore member details to use an array ([6f76185e](https://github.com/firstlovecenter/fl-pastoral-care/commit/6f76185ec374cbda70ad432becd4bf802b16b388))
+*  refactored the member details ([669eca93](https://github.com/firstlovecenter/fl-pastoral-care/commit/669eca932b6f9ca956bbb78893495281e825adee))
+
 #### 0.5.22 (2022-05-28)
 
 ##### New Features
