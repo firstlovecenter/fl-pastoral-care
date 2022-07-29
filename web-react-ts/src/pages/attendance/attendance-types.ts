@@ -5,6 +5,6 @@ export interface ChurchForAttendance extends Church {
   id: string
 
   sheep: ListMemberInterface[]
-  goat: ListMemberInterface[]
+  goats: ListMemberInterface[]
   deer: ListMemberInterface[]
 }

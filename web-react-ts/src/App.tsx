@@ -7,6 +7,7 @@ import { directory } from './pages/directory/directoryRoutes'
 import ProtectedRoute from './auth/ProtectedRoute'
 import Navigation from './components/Navigation'
 import { attendance } from './pages/attendance/attendanceRoutes'
+import PageNotFound from 'pages/PageNotFound'
 
 export default function App(): JSX.Element {
   return (
@@ -29,6 +30,7 @@ export default function App(): JSX.Element {
             />
           ))}
           <Route path="/" element={<Dashboard />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </UserContextProvider>
     </ChurchContextProvider>

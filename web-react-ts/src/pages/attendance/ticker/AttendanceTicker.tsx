@@ -24,7 +24,7 @@ type FormOptions = {
   membersPicture: string
   sheep: string[]
   deer: string[]
-  goat: string[]
+  goats: string[]
 }
 
 const AttendanceTicker = ({
@@ -43,7 +43,7 @@ const AttendanceTicker = ({
     membersPicture: '',
     sheep: [],
     deer: [],
-    goat: [],
+    goats: [],
   }
 
   const validationSchema = Yup.object({
@@ -55,10 +55,10 @@ const AttendanceTicker = ({
     onSubmitProps: FormikHelpers<FormOptions>
   ) => {
     onSubmitProps.setSubmitting(true)
-    const combinedMembership = [...sheep, ...deer, ...goat].map(
+    const combinedMembership = [...sheep, ...deer, ...goats].map(
       (member) => member.value
     )
-    const combinedPresent = [...values.sheep, ...values.deer, ...values.goat]
+    const combinedPresent = [...values.sheep, ...values.deer, ...values.goats]
     const combinedAbsent = combinedMembership.filter(
       (member) => !combinedPresent.includes(member)
     )
@@ -82,8 +82,8 @@ const AttendanceTicker = ({
       value: sheep.id,
     })) ?? []
 
-  const goat =
-    church?.goat.map((goat) => ({
+  const goats =
+    church?.goats.map((goat) => ({
       key: goat.firstName + ' ' + goat.lastName,
       value: goat.id,
     })) ?? []
@@ -131,8 +131,8 @@ const AttendanceTicker = ({
               {church?.sheep.length && <Heading>Sheep</Heading>}
               <CheckboxGroup name="sheep" options={sheep} />
 
-              {church?.goat.length && <Heading>Goat</Heading>}
-              <CheckboxGroup name="goat" options={goat} />
+              {church?.goats.length && <Heading>Goat</Heading>}
+              <CheckboxGroup name="goats" options={goats} />
 
               {church?.deer.length && <Heading>Deer</Heading>}
               <CheckboxGroup name="deer" options={deer} />

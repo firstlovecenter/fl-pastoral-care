@@ -8,6 +8,7 @@ const Notice = ({ children }: { children: JSX.Element }) => {
   return (
     <Box
       padding={10}
+      marginTop="5"
       background={bg}
       rounded="lg"
       boxShadow="2xl"
